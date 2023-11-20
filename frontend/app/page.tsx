@@ -7,10 +7,12 @@ import BottomNavBar from "./components/navBarComponent/NavBarComponent";
 
 export default function Home() {
 
+  console.log('Auth0 Domain:', process.env.AUTH0_DOMAIN);
+  console.log('Auth0 Client ID:', process.env.AUTH0_CLIENT_ID);
   return (
     <Auth0Provider
-      domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN!}
-      clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID!}
+      domain={process.env.AUTH0_DOMAIN!}
+      clientId={process.env.AUTH0_CLIENT_ID!}
       authorizationParams={{
         redirect_uri: 'https://wardrobe-wiz.vercel.app/'
       }}
