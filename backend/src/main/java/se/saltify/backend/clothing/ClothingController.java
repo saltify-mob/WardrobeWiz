@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,5 +27,11 @@ public class ClothingController {
      @GetMapping("/{id}")
     ResponseEntity<ClothingResponseDto> findById(@PathVariable String id) {
         return ResponseEntity.ok(clothingService.findById(id));
+     }
+
+     @PostMapping
+    ResponseEntity<ClothingResponseDto> createClothing(@RequestBody ClothingRequestDto dto) {
+        ClothingResponseDto clothing = clothingService.createClothing(dto);
+        return ResponseEntity.created(URI.create("/api/clothings" + clothing.id())).body(clothing);
      }
 }

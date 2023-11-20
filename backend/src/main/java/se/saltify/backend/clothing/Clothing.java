@@ -15,9 +15,8 @@ public class Clothing {
     public Clothing() {
     }
 
-    public Clothing(User user, String id, String type, String season, String color, String dateOfPurchase, String timeLastUsed) {
+    public Clothing(User user, String type, String season, String color, String dateOfPurchase, String timeLastUsed) {
         this.user = user;
-        this.id = id;
         this.type = type;
         this.season = season;
         this.color = color;
