@@ -21,5 +21,5 @@ export default function Home() {
         <BottomNavBar />
       </main>
     </Auth0Provider>
-  );
+  ); 
 }
