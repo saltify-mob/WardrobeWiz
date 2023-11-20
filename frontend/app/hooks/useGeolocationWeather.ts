@@ -1,4 +1,3 @@
-// useGeolocationWeather.ts
 import { useState, useEffect } from 'react';
 import { fetchWeather } from '../utils/weather';
 
@@ -8,8 +7,8 @@ interface Location {
 }
 
 interface WeatherData {
-    // Define the structure according to the API response
-    [key: string]: any; // Temporary placeholder
+    
+    [key: string]: any; 
 }
 
 interface Error {

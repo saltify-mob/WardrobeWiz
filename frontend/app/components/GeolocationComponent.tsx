@@ -5,7 +5,7 @@ interface LocationState {
         lat: number;
         lng: number;
     };
-    weather?: any; // You can define a more specific type for weather data
+    weather?: any;
     error?: {
         code: number;
         message: string;
@@ -16,7 +16,7 @@ const GeolocationComponent: React.FC = () => {
     const [location, setLocation] = useState<LocationState>({});
 
     const fetchWeather = async (lat: number, lon: number) => {
-        const apiKey = '63520229f6b76bb7ab50efa7b41e2ee5&units=metric'; // Replace with your actual API key
+        const apiKey = '63520229f6b76bb7ab50efa7b41e2ee5&units=metric'; // needs to be changed
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
         try {
