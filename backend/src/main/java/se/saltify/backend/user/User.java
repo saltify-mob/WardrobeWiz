@@ -1,10 +1,20 @@
 package se.saltify.backend.user;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
+import se.saltify.backend.clothing.Clothing;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "users")
 public class User {
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = ALL)
+    private List<Clothing> clothings = new ArrayList<>();
 
     public User() {
     }
@@ -16,6 +26,7 @@ public class User {
     }
 
     @Id
+    @UuidGenerator
     @Column
     private String id;
 
