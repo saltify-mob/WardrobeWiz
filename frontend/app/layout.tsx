@@ -1,3 +1,5 @@
+// layout.tsx
+import { Auth0Provider } from "@auth0/auth0-react";
 import './globals.css';
 
 export const metadata = {
@@ -11,10 +13,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="w-full flex justify-center">{children}</div>
-      </body>
-    </html>
+    <Auth0Provider
+      domain={process.env.AUTH0_DOMAIN}
+      clientId={process.env.AUTH0_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
+      <html lang="en">
+        <body>
+          <div className="w-full flex justify-center">{children}</div>
+        </body>
+      </html>
+    </Auth0Provider>
   );
 }
