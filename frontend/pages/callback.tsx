@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
-const LoginCallback = () => {
+const Callback = () => {
   const { handleRedirectCallback, isAuthenticated } = useAuth0();
   const router = useRouter();
   const [authHandled, setAuthHandled] = useState(false);
@@ -23,7 +23,7 @@ const LoginCallback = () => {
     }
   }, [authHandled, isAuthenticated, router]);
 
-  return <div>Loading...</div>;
+  return "Hello"
 };
 
-export default LoginCallback;
+export default Callback;
