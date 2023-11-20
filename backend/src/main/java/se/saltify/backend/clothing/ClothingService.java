@@ -52,4 +52,8 @@ public class ClothingService {
                 c.getDateOfPurchase(),
                 c.getTimeLastUsed());
     }
+
+    public void deleteById(String id) {
+        clothingRepository.deleteById(id);
+    }
 }
