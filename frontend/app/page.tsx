@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import GeolocationComponent from './components/GeolocationComponent';
+import GeolocationComponent from './components/WeatherCardComponent';
 
 const Page: React.FC = () => {
     return (
