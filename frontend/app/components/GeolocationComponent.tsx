@@ -94,3 +94,4 @@ const GeolocationComponent: React.FC = () => {
 };
 
 export default GeolocationComponent;
+
