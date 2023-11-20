@@ -32,6 +32,17 @@ public class ClothingService {
         return mapToDto(cloth);
     }
 
+    public ClothingResponseDto updateClothing(String id, ClothingRequestDto dto) {
+        Clothing clothing = clothingRepository.findById(id).orElseThrow();
+        clothing.setColor(dto.color());
+        clothing.setSeason(dto.season());
+        clothing.setType(dto.type());
+        clothing.setDateOfPurchase(dto.dateOfPurchase());
+        clothing.setTimeLastUsed(dto.timeLastUsed());
+        clothingRepository.save(clothing);
+        return mapToDto(clothing);
+    }
+
     private ClothingResponseDto mapToDto(Clothing c) {
         return new ClothingResponseDto(
                 c.getId(),
