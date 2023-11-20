@@ -84,4 +84,8 @@ public class Clothing {
     public void setTimeLastUsed(String timeLastUsed) {
         this.timeLastUsed = timeLastUsed;
     }
+
+    public String getId() {
+        return id;
+    }
 }
