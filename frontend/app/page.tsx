@@ -1,8 +1,15 @@
 "use client";
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p>Hello WardrobeWiz!</p>
-    </main>
-  );
-}
+
+import React from 'react';
+import GeolocationComponent from './components/WeatherCardComponent';
+
+const Page: React.FC = () => {
+    return (
+        <div>
+            <h1>My Page</h1>
+            <GeolocationComponent />
+        </div>
+    );
+};
+
+export default Page;
