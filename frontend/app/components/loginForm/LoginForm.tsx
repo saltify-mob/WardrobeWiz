@@ -1,23 +1,17 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-
 const LoginForm = () => {
-  const { loginWithRedirect } = useAuth0();
-
-  const handleSocialLogin = (connection: string) => {
-    loginWithRedirect({
-      appState: { connection }
-    });
+  const buildAuthUrl = (connection: string) => {
+    const domain = process.env.AUTH0_DOMAIN;
+    const clientId = process.env.AUTH0_CLIENT_ID;
+    const redirectUri = encodeURIComponent('https://wardrobe-wiz.vercel.app/');
+    const responseType = 'code';
+  
+    return `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}`;
   };
 
   return (
     <div>
-      <button onClick={() => handleSocialLogin('google-oauth2')}>
-        Login with Google
-      </button>
-      <button onClick={() => handleSocialLogin('facebook')}>
-        Login with Facebook
-      </button>
+      <a href={buildAuthUrl('google-oauth2')} className="login-button">Login with Google</a>
+      <a href={buildAuthUrl('facebook')} className="login-button">Login with Facebook</a>
     </div>
   );
 };

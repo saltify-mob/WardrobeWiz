@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
+    "@auth0/nextjs-auth0": "^3.3.0",
+    "auth0-js": "^9.23.3",
     "next": "14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
