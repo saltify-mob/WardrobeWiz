@@ -1,7 +1,7 @@
 const LoginForm = () => {
   const buildAuthUrl = (connection: string) => {
-    const domain = 'dev-zhqvuxtn6agalo22.us.auth0.com';
-    const clientId = 'OiNGCIMzk5ofiQJd1V7xbtQAMS042QZR';
+    const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
+    const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
     const redirectUri = encodeURIComponent('https://wardrobe-wiz.vercel.app/');
     const responseType = 'code';
   
