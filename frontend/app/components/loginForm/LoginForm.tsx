@@ -1,3 +1,5 @@
+"use client"
+
 const LoginForm = () => {
   const handleLogin = (connection: string) => {
     const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
