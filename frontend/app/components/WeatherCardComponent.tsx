@@ -78,7 +78,7 @@ const GeolocationComponent: React.FC = () => {
     return () => {
       navigator.geolocation.clearWatch(watcher);
     };
-  }, []);
+  });
 
   return (
     <div>
