@@ -1,5 +1,7 @@
 package se.saltify.backend.clothing;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +40,11 @@ public class ClothingController {
      @PutMapping("/{id}")
     ResponseEntity<ClothingResponseDto> updateClothing(@PathVariable String id, @RequestBody ClothingRequestDto dto) {
         return ResponseEntity.ok(clothingService.updateClothing(id, dto));
+     }
+
+     @DeleteMapping("/{id}")
+    ResponseEntity<String> deleteClothingById(@PathVariable String id) {
+        clothingService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
      }
 }
