@@ -12,14 +12,13 @@ const LoginCallback = () => {
   useEffect(() => {
     const handleAuth0Callback = async () => {
       await handleRedirectCallback();
-      setAuthHandled(true); // Indicate that Auth0 callback has been handled
+      setAuthHandled(true);
     };
     handleAuth0Callback();
   }, [handleRedirectCallback, router]);
 
   useEffect(() => {
     if (authHandled) {
-      // Redirect based on updated isAuthenticated state
       router.push(isAuthenticated ? '/' : '/login');
     }
   }, [authHandled, isAuthenticated, router]);
