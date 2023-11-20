@@ -1,6 +1,7 @@
 package se.saltify.backend.clothing;
 
 import org.springframework.stereotype.Service;
+
 import se.saltify.backend.user.UserRepository;
 
 import java.util.List;
@@ -17,6 +18,14 @@ public class ClothingService {
     }
 
     public List<ClothingResponseDto> findAll() {
+
+    public ClothingService(ClothingRepository clothingRepository) {
+        this.clothingRepository = clothingRepository;
+    }
+
+
+   public List<ClothingResponseDto> findAll() {
+
         return clothingRepository.findAll().stream().map(c -> new ClothingResponseDto(
                 c.getId(),
                 c.getType(),
