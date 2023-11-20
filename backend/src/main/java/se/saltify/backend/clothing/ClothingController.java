@@ -34,4 +34,9 @@ public class ClothingController {
         ClothingResponseDto clothing = clothingService.createClothing(dto);
         return ResponseEntity.created(URI.create("/api/clothings" + clothing.id())).body(clothing);
      }
+
+     @PutMapping("/{id}")
+    ResponseEntity<ClothingResponseDto> updateClothing(@PathVariable String id, @RequestBody ClothingRequestDto dto) {
+        return ResponseEntity.ok(clothingService.updateClothing(id, dto));
+     }
 }
