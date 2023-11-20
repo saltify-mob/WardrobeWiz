@@ -16,13 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Change to the backend directory
+        run: cd backend
+
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-
-      - name: Change to the backend directory
-        run: cd backend
 
       - name: Build with Maven
         run: mvn clean install
@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: 'backend/target/*.jar'
+          path: '/backend/target/*.jar'
 
   deploy:
     runs-on: windows-latest
