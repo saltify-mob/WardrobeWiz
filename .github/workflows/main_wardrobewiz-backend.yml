@@ -15,10 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Change to the backend directory
-        run: cd backend
-
+      
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
@@ -31,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '/backend/target/*.jar'
+          path: '${{ github.workspace }}/backend/target/*.jar'
 
   deploy:
     runs-on: windows-latest
