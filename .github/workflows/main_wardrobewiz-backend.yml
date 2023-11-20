@@ -20,7 +20,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-
+          
+      - name: Change to the backend directory
+        run: cd backend
+      
       - name: Build with Maven
         run: mvn clean install
 
