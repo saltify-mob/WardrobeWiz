@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 
 const LoginCallback = () => {

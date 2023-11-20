@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useAuth0 } from '@auth0/auth0-react';
 import GeolocationComponent from './components/WeatherCardComponent';
 import BottomNavBar from './components/navBarComponent/NavBarComponent';
