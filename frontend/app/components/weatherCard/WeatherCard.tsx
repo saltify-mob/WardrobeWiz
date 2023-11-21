@@ -18,7 +18,7 @@ interface ErrorData {
 }
 
 interface LocationState {
-  coordinates?: Coordinates;
+  // coordinates?: Coordinates;
   weather?: WeatherData;
   error?: ErrorData;
 }
@@ -69,6 +69,9 @@ const GeolocationComponent: React.FC = () => {
       onError({
         code: 0,
         message: 'Geolocation not supported',
+        PERMISSION_DENIED: 1,
+        POSITION_UNAVAILABLE: 2,
+        TIMEOUT: 3
       });
       return;
     }
