@@ -9,13 +9,6 @@ import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/api/auth/login')
-    }
-  },[isAuthenticated, router])
    
   return isAuthenticated && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
