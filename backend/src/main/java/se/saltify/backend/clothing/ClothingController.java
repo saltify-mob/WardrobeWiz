@@ -14,6 +14,7 @@ import se.saltify.backend.clothing.dto.ClothingResponseDto;
 import se.saltify.backend.clothing.service.ClothingService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @CrossOrigin
@@ -58,5 +59,10 @@ public class ClothingController {
         ClothingCreateRequestDto dto = new ClothingCreateRequestDto(image, userId, type, season, color, dateOfPurchase, timeLastUsed);
 
         return ResponseEntity.ok().body(clothingService.createClothing(dto));
+    }
+
+    @ExceptionHandler({NoSuchElementException.class})
+    protected ResponseEntity<String> handleNoSuchElementExceptionException(NoSuchElementException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
