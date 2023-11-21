@@ -3,8 +3,8 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth0 } from '@auth0/auth0-react';
-import GeolocationComponent from '../app/components/weatherCard/WeatherCard';
-import BottomNavBar from '../app/components/navBar/NavBar';
+import GeolocationComponent from './components/weatherCard/WeatherCard';
+import BottomNavBar from './components/navBar/NavBar';
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
