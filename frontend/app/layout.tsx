@@ -14,9 +14,7 @@ export default function RootLayout({
   return (
       <html lang="en">
         <UserProvider>
-          <body>
-            <div className="w-full flex justify-center">{children}</div>
-          </body>
+          <body>{children}</body>
         </UserProvider>
       </html>
   );
