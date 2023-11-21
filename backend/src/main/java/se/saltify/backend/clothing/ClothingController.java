@@ -62,7 +62,7 @@ public class ClothingController {
     }
 
     @ExceptionHandler({NoSuchElementException.class})
-    protected ResponseEntity<String> handleNoSuchElementExceptionException(NoSuchElementException ex) {
+    private ResponseEntity<String> handleNoSuchElementExceptionException(NoSuchElementException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
