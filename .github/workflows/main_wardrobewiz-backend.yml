@@ -23,6 +23,10 @@ jobs:
 
       - name: Build with Maven
         working-directory: ./backend
+        env: # Or as an environment variable
+          AZURESQLUSERNAME: ${{ secrets.AZURESQLUSERNAME }}
+          AZURESQLPASSWORD: ${{ secrets.AZURESQLPASSWORD }}
+          AZUREBLOBKEY: ${{ secrets.AZUREBLOBKEY }}
         run: mvn clean install
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
