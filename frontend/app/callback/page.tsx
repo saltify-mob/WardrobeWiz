@@ -1,3 +1,5 @@
+"use client"
+
 const Callback = () => {
   return <div>{window.location.hash}</div>;
 };
