@@ -14,7 +14,7 @@ export default function Home() {
     if (!isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [router]);
 
   return isAuthenticated && (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

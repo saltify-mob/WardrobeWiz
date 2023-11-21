@@ -7,7 +7,6 @@ const Callback = () => {
   const [userInfo, setUserInfo] = useState(null);
   const router = useRouter();
 
-
   useEffect(() => {
     const hash = window.location.hash;
     const params = new URLSearchParams(hash.substring(1));
