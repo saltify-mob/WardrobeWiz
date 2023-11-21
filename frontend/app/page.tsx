@@ -12,9 +12,10 @@ export default function Home() {
 
   useEffect(() => {
     if (!isAuthenticated) {
+      console.log("Im here!!")
       router.push('/login');
     }
-  }, []);
+  }, [router]);
 
   return isAuthenticated && (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
