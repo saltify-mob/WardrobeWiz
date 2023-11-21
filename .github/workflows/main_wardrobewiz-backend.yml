@@ -5,6 +5,8 @@ name: Build and deploy JAR app to Azure Web App - wardrobewiz-backend
 
 on:
   push:
+    paths:
+      - backend
     branches:
       - main
   workflow_dispatch:
