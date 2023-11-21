@@ -1,3 +1,4 @@
+
 package se.saltify.backend.clothing.service;
 
 import org.springframework.stereotype.Service;
@@ -6,10 +7,17 @@ import se.saltify.backend.clothing.ClothingRepository;
 import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
 import se.saltify.backend.clothing.dto.ClothingRequestDto;
 import se.saltify.backend.clothing.dto.ClothingResponseDto;
+
+package se.saltify.backend.clothing;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
 import java.util.List;
+
 import java.util.UUID;
 
 @Service
@@ -42,6 +50,11 @@ public class ClothingService {
         String imageUrl = azureBlobStorageService.uploadImage(dto.image(), imageKey);
 
         Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey);
+
+        String imageUrl = azureBlobStorageService.uploadFile(dto.image());
+
+        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl);
+
         clothingRepository.save(cloth);
         return mapToDto(cloth);
     }
@@ -70,6 +83,7 @@ public class ClothingService {
     }
 
     public void deleteById(String id) {
+
         Clothing clothing = clothingRepository.findById(id).orElseThrow();
 
         String imageKey = clothing.getimageKey();

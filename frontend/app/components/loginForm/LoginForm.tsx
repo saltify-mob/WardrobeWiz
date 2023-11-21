@@ -10,6 +10,8 @@ const LoginForm = () => {
     window.location.href = authUrl;
   };
 
+  
+
   return (
     <div>
       <button onClick={() => handleLogin('google-oauth2')} className="login-button">
