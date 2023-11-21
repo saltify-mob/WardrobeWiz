@@ -36,6 +36,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-storage-blob</artifactId>
+			<version>12.25.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.azure.spring</groupId>
 			<artifactId>spring-cloud-azure-dependencies</artifactId>
 			<version>4.13.0</version>
