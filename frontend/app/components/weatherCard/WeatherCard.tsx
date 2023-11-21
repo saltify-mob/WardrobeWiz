@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-interface Coordinates {
-  lat: number;
-  lng: number;
+interface WeatherCondition {
+  main: string;
+  description: string;
+  icon: string;
 }
 
 interface WeatherData {
   name?: string;
-  weather?: { main: string }[];
+  weather?: WeatherCondition[];
   main?: { temp: number };
 }
 
@@ -31,7 +32,7 @@ const GeolocationComponent: React.FC = () => {
 
     try {
       const response = await fetch(url);
-      const data = await response.json();
+      const data: WeatherData = await response.json();
       setLocation((prevState) => ({
         ...prevState,
         weather: data,
@@ -43,22 +44,24 @@ const GeolocationComponent: React.FC = () => {
 
   const onSuccess = (position: GeolocationPosition) => {
     const { latitude, longitude } = position.coords;
-    setLocation({
+    setLocation((prevState) => ({
+      ...prevState,
       coordinates: {
         lat: latitude,
         lng: longitude,
       },
-    });
+    }));
     fetchWeather(latitude, longitude);
   };
 
   const onError = (error: GeolocationPositionError) => {
-    setLocation({
+    setLocation((prevState) => ({
+      ...prevState,
       error: {
         code: error.code,
         message: error.message,
       },
-    });
+    }));
   };
 
   useEffect(() => {
@@ -66,9 +69,6 @@ const GeolocationComponent: React.FC = () => {
       onError({
         code: 0,
         message: 'Geolocation not supported',
-        PERMISSION_DENIED: 1,
-        POSITION_UNAVAILABLE: 2,
-        TIMEOUT: 3
       });
       return;
     }
@@ -78,28 +78,27 @@ const GeolocationComponent: React.FC = () => {
     return () => {
       navigator.geolocation.clearWatch(watcher);
     };
-  },[]); 
+  }, []);
+
+  const WeatherIcon = ({ code }: { code: string }) => {
+    const iconUrl = `http://openweathermap.org/img/wn/${code}.png`;
+    return <img src={iconUrl} alt="Weather icon" className="mx-auto" />;
+  };
 
   return (
-    <div>
-      {location.coordinates ? (
+    <div className="rounded-xl p-36 text-center" style={{ background: 'linear-gradient(180deg, rgba(	135, 206, 235) 0%, rgba(235, 254, 255, 0) 100%)' }}>
+      {location.weather ? (
         <div>
-          {location.weather ? (
-            <div>
-              {location.weather.name && <p>City: {location.weather.name}</p>}
-              {location.weather.weather && location.weather.weather.length > 0 ? (
-                <p>Weather: {location.weather.weather[0].main}</p>
-              ) : <p>Weather data not available.</p>}
-              {location.weather.main && location.weather.main.temp !== undefined ? (
-                <p>Temperature: {location.weather.main.temp}°C</p>
-              ) : <p>Temperature data not available.</p>}
-            </div>
-          ) : <p>Loading weather...</p>}
+          <div className="text-3xl font-bold">{location.weather.main?.temp}°C</div>
+          <div className="text-xl">{location.weather.name}</div>
+          {location.weather.weather && location.weather.weather.length > 0 && (
+            <WeatherIcon code={location.weather.weather[0].icon} />
+          )}
         </div>
       ) : location.error ? (
-        <p>Error: {location.error.message}</p>
+        <div className="text-red-600">{location.error.message}</div>
       ) : (
-        <p>Waiting for location...</p>
+        <div>Loading weather...</div>
       )}
     </div>
   );
