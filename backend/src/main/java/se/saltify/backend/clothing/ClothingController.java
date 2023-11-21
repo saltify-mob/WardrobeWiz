@@ -47,7 +47,7 @@ public class ClothingController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<ClothingResponseDto> createClothing(@RequestPart("image") MultipartFile image,
                                                @RequestPart("season") String season,
                                                @RequestPart("color") String color,
