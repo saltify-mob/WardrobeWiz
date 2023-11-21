@@ -1,12 +1,15 @@
 "use client"
 
+import { randomUUID } from "crypto";
+
 const LoginForm = () => {
   const handleLogin = (connection: string) => {
     const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
     const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
     const redirectUri = encodeURIComponent('https://wardrobe-wiz.vercel.app/callback');
     const responseType = 'token';
-    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}&state=STATE`;
+    const state = randomUUID();
+    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}&state=${state}`;
     window.location.href = authUrl;
   };
 
