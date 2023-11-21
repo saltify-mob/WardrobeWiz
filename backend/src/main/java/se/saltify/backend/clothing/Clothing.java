@@ -15,13 +15,15 @@ public class Clothing {
     public Clothing() {
     }
 
-    public Clothing(User user, String type, String season, String color, String dateOfPurchase, String timeLastUsed) {
+    public Clothing(User user, String type, String season, String color, String dateOfPurchase, String timeLastUsed, String imageUrl, String imageKey) {
         this.user = user;
         this.type = type;
         this.season = season;
         this.color = color;
         this.dateOfPurchase = dateOfPurchase;
         this.timeLastUsed = timeLastUsed;
+        this.imageUrl = imageUrl;
+        this.imageKey = imageKey;
     }
 
     @Id
@@ -43,6 +45,17 @@ public class Clothing {
 
     @Column
     String timeLastUsed;
+
+    @Column
+    String imageUrl;
+
+    @Column
+    String imageKey;
+
+    public String getImageUrl() {return imageUrl;}
+
+    public String getimageKey() {return imageKey;}
+
 
     public String getType() {
         return type;

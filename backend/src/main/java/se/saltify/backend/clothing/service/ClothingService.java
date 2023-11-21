@@ -1,11 +1,16 @@
-package se.saltify.backend.clothing;
+package se.saltify.backend.clothing.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import se.saltify.backend.clothing.Clothing;
+import se.saltify.backend.clothing.ClothingRepository;
+import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
+import se.saltify.backend.clothing.dto.ClothingRequestDto;
+import se.saltify.backend.clothing.dto.ClothingResponseDto;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClothingService {
@@ -32,9 +37,11 @@ public class ClothingService {
     public ClothingResponseDto createClothing(ClothingCreateRequestDto dto) {
         User user = userRepository.findById(dto.userId()).orElseThrow();
 
-        String imageUrl = azureBlobStorageService.uploadFile(dto.image());
+        String imageKey = "clothing-image-" +  UUID.randomUUID();
+        System.out.println("YO" + imageKey);
+        String imageUrl = azureBlobStorageService.uploadImage(dto.image(), imageKey);
 
-        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl);
+        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey);
         clothingRepository.save(cloth);
         return mapToDto(cloth);
     }
@@ -63,6 +70,12 @@ public class ClothingService {
     }
 
     public void deleteById(String id) {
+        Clothing clothing = clothingRepository.findById(id).orElseThrow();
+
+        String imageKey = clothing.getimageKey();
+
+        azureBlobStorageService.deleteImage(imageKey);
+
         clothingRepository.deleteById(id);
     }
 }
