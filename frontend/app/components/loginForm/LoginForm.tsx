@@ -1,12 +1,14 @@
 "use client"
 
+
 const LoginForm = () => {
   const handleLogin = (connection: string) => {
     const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
     const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
     const redirectUri = encodeURIComponent('https://wardrobe-wiz.vercel.app/callback');
-    const responseType = 'code';
-    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}`;
+    const responseType = 'token';
+    const scope = encodeURIComponent('openid profile email');
+    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}&scope=${scope}`;
     window.location.href = authUrl;
   };
 

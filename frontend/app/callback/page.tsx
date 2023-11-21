@@ -1,29 +1,40 @@
-"use client"
+"use client";
 
-import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const Callback = () => {
-  const { handleRedirectCallback, isAuthenticated } = useAuth0();
+  const [userInfo, setUserInfo] = useState(null);
   const router = useRouter();
-  const [authHandled, setAuthHandled] = useState(false);
 
   useEffect(() => {
-    const handleAuth0Callback = async () => {
-      await handleRedirectCallback();
-      setAuthHandled(true);
-    };
-    handleAuth0Callback();
-  }, [handleRedirectCallback, router]);
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.substring(1));
+    const accessToken = params.get('access_token');
 
-  useEffect(() => {
-    if (authHandled) {
-      router.push(isAuthenticated ? '/' : '/login');
+    if (accessToken) {
+      fetch('https://dev-zhqvuxtn6agalo22.us.auth0.com/userinfo', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        setUserInfo(data);
+        router.push('/');
+      })
+      .catch(error => {
+        console.error('Error fetching user info:', error);
+        router.push('/login');
+      });
+    } else {
+      router.push('/login');
     }
-  }, [authHandled, isAuthenticated, router]);
+  }, [router]);
 
-  return "Hello"
+  if (!userInfo) return <div>Loading user info...</div>;
+
+  return <div>{JSON.stringify(userInfo)}</div>;
 };
 
 export default Callback;

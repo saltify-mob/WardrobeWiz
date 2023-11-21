@@ -5,6 +5,8 @@ name: Build and deploy JAR app to Azure Web App - wardrobewiz-backend
 
 on:
   push:
+    paths:
+      - backend
     branches:
       - main
   workflow_dispatch:
@@ -23,13 +25,16 @@ jobs:
 
       - name: Build with Maven
         working-directory: ./backend
+        env: # Or as an environment variable
+          AZURESQLUSERNAME: ${{ secrets.AZURESQLUSERNAME }}
+          AZURESQLPASSWORD: ${{ secrets.AZURESQLPASSWORD }}
+          AZUREBLOBKEY: ${{ secrets.AZUREBLOBKEY }}
         run: mvn clean install
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/backend/target/*.jar'
 
   deploy:
     runs-on: windows-latest
@@ -43,12 +48,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-      
+          path: '${{ github.workspace }}/backend/target/backend-0.0.1-SNAPSHOT.jar'
+          
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wardrobewiz-backend'
           slot-name: 'Production'
-          package: '*.jar'
+          package: "*.jar"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BBB35F00E5E44AEAA0EF72AA30E5D28 }}
