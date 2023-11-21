@@ -1,11 +1,5 @@
-"use client"
-
-import { useUser } from "@auth0/nextjs-auth0/client";
-
 const Callback = () => {
-  const { user, error, isLoading } = useUser();
-  
-  return user?.name;
+  return <div>window.location.hash</div>;
 };
 
 export default Callback;

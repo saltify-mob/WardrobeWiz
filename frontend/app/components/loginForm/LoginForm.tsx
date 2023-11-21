@@ -5,8 +5,8 @@ const LoginForm = () => {
     const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
     const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
     const redirectUri = encodeURIComponent('https://wardrobe-wiz.vercel.app/callback');
-    const responseType = 'code';
-    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}`;
+    const responseType = 'token';
+    const authUrl = `https://${domain}/authorize?response_type=${responseType}&client_id=${clientId}&connection=${connection}&redirect_uri=${redirectUri}&state=STATE`;
     window.location.href = authUrl;
   };
 
