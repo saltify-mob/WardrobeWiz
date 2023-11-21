@@ -54,5 +54,5 @@ jobs:
         with:
           app-name: 'wardrobewiz-backend'
           slot-name: 'Production'
-          package: '*.jar'
+          package: 'backend-0.0.1-SNAPSHOT.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BBB35F00E5E44AEAA0EF72AA30E5D28 }}
