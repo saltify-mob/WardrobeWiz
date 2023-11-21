@@ -28,7 +28,6 @@ const Callback = () => {
         router.push('/login');
       });
     } else {
-      console.log("or here")
       router.push('/login');
     }
   }, [router]);
