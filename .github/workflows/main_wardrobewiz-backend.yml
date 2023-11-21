@@ -23,7 +23,7 @@ jobs:
 
       - name: Build with Maven
         working-directory: ./backend
-        run: mvn clean install
+        run: mvn clean install -Dazure_sql.username=${{ secrets.AZURESQLUSERNAME }} -Dazure_sql.password=${{ secrets.AZURESQLPASSWORD }} -Dazure_blob.account-key=${{ secrets.AZUREBLOBKEY }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
