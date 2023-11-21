@@ -5,6 +5,8 @@ name: Build and deploy JAR app to Azure Web App - wardrobewiz-backend
 
 on:
   push:
+    paths:
+      - backend
     branches:
       - main
   workflow_dispatch:
@@ -54,5 +56,5 @@ jobs:
         with:
           app-name: 'wardrobewiz-backend'
           slot-name: 'Production'
-          package: '*.jar'
+          package: "*.jar"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BBB35F00E5E44AEAA0EF72AA30E5D28 }}
