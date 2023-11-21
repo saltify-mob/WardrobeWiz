@@ -47,6 +47,9 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/backend/target/backend-0.0.1-SNAPSHOT.jar'
+
+      - name: Move JAR file
+        run: mv '${{ github.workspace }}/backend/target/backend-0.0.1-SNAPSHOT.jar' '${{ github.workspace }}/backend/target/deployable.jar'
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -54,5 +57,5 @@ jobs:
         with:
           app-name: 'wardrobewiz-backend'
           slot-name: 'Production'
-          package: 'backend-0.0.1-SNAPSHOT.jar'
+          package: '${{ github.workspace }}/backend/target/deployable.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BBB35F00E5E44AEAA0EF72AA30E5D28 }}
