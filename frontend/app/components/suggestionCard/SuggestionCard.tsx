@@ -27,9 +27,9 @@ const TodaysOutfit = () => {
     <div className="flex flex-col items-center bg-white p-36 rounded-lg shadow-lg my-8">
       <h2 className="text-2xl font-semibold my-4">Today's Outfit</h2>
       <div className="flex flex-col items-center mb-6 space-y-4">
-        <img src={outfit.headwear} alt="Headwear" className="w-24 h-24 object-cover" />
+        {/* <img src={outfit.headwear} alt="Headwear" className="w-24 h-24 object-cover" />
         <img src={outfit.shirt} alt="Shirt" className="w-32 h-32 object-cover" />
-        <img src={outfit.pants} alt="Pants" className="w-24 h-32 object-cover" />
+        <img src={outfit.pants} alt="Pants" className="w-24 h-32 object-cover" /> */}
       </div>
       <button
         onClick={fetchOutfit}
