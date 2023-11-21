@@ -41,16 +41,16 @@ public class ClothingService {
         System.out.println("YO" + imageKey);
         String imageUrl = azureBlobStorageService.uploadImage(dto.image(), imageKey);
 
-        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey);
+        Clothing cloth = new Clothing(user, dto.type(), dto.season(), dto.color(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey);
         clothingRepository.save(cloth);
         return mapToDto(cloth);
     }
 
     public ClothingResponseDto updateClothing(String id, ClothingRequestDto dto) {
         Clothing clothing = clothingRepository.findById(id).orElseThrow();
-        clothing.setColor(dto.color());
-        clothing.setSeason(dto.season());
         clothing.setType(dto.type());
+        clothing.setSeason(dto.season());
+        clothing.setColor(dto.color());
         clothing.setDateOfPurchase(dto.dateOfPurchase());
         clothing.setTimeLastUsed(dto.timeLastUsed());
         clothingRepository.save(clothing);
