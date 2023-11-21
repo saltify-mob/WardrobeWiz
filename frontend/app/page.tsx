@@ -22,6 +22,7 @@ export default function Home() {
       {/* <GeolocationComponent /> */}
       <TodaysOutfit/>
       <BottomNavBar />
+      <h1>whaaat??</h1>
     </main>
   );
 }
