@@ -15,13 +15,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
           java-version: '17'
 
       - name: Build with Maven
+        working-directory: ./backend
         run: mvn clean install
 
       - name: Upload artifact for deployment job
@@ -49,5 +50,5 @@ jobs:
         with:
           app-name: 'wardrobewiz-backend'
           slot-name: 'Production'
-          package: 'java-app/*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E603C36C171049C49D583F795F5CC1DE }}
+          package: '*.jar'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BBB35F00E5E44AEAA0EF72AA30E5D28 }}
