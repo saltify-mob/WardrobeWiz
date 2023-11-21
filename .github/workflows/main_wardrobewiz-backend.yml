@@ -5,8 +5,6 @@ name: Build and deploy JAR app to Azure Web App - wardrobewiz-backend
 
 on:
   push:
-    paths:
-      - backend
     branches:
       - main
   workflow_dispatch:
@@ -34,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/backend/target/*.jar'
 
   deploy:
     runs-on: windows-latest
@@ -48,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/backend/target/backend-0.0.1-SNAPSHOT.jar'
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
