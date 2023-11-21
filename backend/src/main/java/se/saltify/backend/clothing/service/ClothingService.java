@@ -1,6 +1,7 @@
 package se.saltify.backend.clothing;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
@@ -12,9 +13,12 @@ public class ClothingService {
 
     private final UserRepository userRepository;
 
-    public ClothingService(ClothingRepository clothingRepository, UserRepository userRepository) {
+    private final AzureBlobStorageService azureBlobStorageService;
+
+    public ClothingService(ClothingRepository clothingRepository, UserRepository userRepository, AzureBlobStorageService azureBlobStorageService) {
         this.clothingRepository = clothingRepository;
         this.userRepository = userRepository;
+        this.azureBlobStorageService = azureBlobStorageService;
     }
 
     public List<ClothingResponseDto> findAll() {
@@ -25,9 +29,12 @@ public class ClothingService {
         return clothingRepository.findById(id).map(this::mapToDto).orElseThrow();
     }
 
-    public ClothingResponseDto createClothing(ClothingRequestDto dto) {
+    public ClothingResponseDto createClothing(ClothingCreateRequestDto dto) {
         User user = userRepository.findById(dto.userId()).orElseThrow();
-        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed());
+
+        String imageUrl = azureBlobStorageService.uploadFile(dto.image());
+
+        Clothing cloth = new Clothing(user, dto.color(), dto.type(), dto.season(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl);
         clothingRepository.save(cloth);
         return mapToDto(cloth);
     }
@@ -50,7 +57,9 @@ public class ClothingService {
                 c.getSeason(),
                 c.getColor(),
                 c.getDateOfPurchase(),
-                c.getTimeLastUsed());
+                c.getTimeLastUsed(),
+        c.getImageUrl());
+
     }
 
     public void deleteById(String id) {
