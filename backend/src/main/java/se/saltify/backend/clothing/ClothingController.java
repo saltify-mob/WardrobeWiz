@@ -52,11 +52,12 @@ public class ClothingController {
                                                @RequestPart("season") String season,
                                                @RequestPart("color") String color,
                                                @RequestPart("userId") String userId,
+                                               @RequestPart("category") String category,
                                                @RequestPart("type") String type,
                                                @RequestPart("dateOfPurchase") String dateOfPurchase,
                                                @RequestPart("timeLastUsed") String timeLastUsed
     ) {
-        ClothingCreateRequestDto dto = new ClothingCreateRequestDto(image, userId, type, season, color, dateOfPurchase, timeLastUsed);
+        ClothingCreateRequestDto dto = new ClothingCreateRequestDto(image, userId, category, type, season, color, dateOfPurchase, timeLastUsed);
 
         return ResponseEntity.ok().body(clothingService.createClothing(dto));
     }
