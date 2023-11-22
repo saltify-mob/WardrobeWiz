@@ -6,8 +6,6 @@ export const fetchClothingData = async () => {
     }
     const data = await response.json();
     localStorage.setItem('clothingData', JSON.stringify(data));
-    console.log('Fetched Clothing Data:', data);
-    return data;
   } catch (error) {
     console.error('Error fetching clothing data:', error);
     throw error;

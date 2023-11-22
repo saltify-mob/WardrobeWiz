@@ -32,7 +32,7 @@ const GeolocationComponent: React.FC = () => {
   const [location, setLocation] = useState<LocationState>({});
 
   const fetchWeather = async (lat: number, lon: number) => {
-    const apiKey = '63520229f6b76bb7ab50efa7b41e2ee5&units=metric'; // needs to be changed
+    const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     try {

@@ -1,12 +1,4 @@
-type ClothingItem = {
-    id: string;
-    type: string;
-    season: string;
-    color: string;
-    dateOfPurchase: string;
-    timeLastUsed: string;
-    imageUrl: string;
-  };
+import { ClothingItem } from "../types/ClothingItem";
   
   export const fetchOutfitData = async () => {
     try {
@@ -15,11 +7,7 @@ type ClothingItem = {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data: ClothingItem[] = await response.json();
-      
-      // Store the data in local storage
       localStorage.setItem('OutfitData', JSON.stringify(data));
-  
-      console.log('Fetched Outfit Data:', data);
     } catch (error) {
       console.error('Error fetching clothing data:', error);
     }
