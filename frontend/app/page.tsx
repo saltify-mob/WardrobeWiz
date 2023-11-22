@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Home() {
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user && typeof window !== 'undefined') {
+    if (!isLoading && !user) {
       router.push('/api/auth/login');
     }
-  }, [user, router]);
+  }, [user, isLoading]);
 
   return user && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
