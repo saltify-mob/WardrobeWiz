@@ -15,8 +15,9 @@ public class Clothing {
     public Clothing() {
     }
 
-    public Clothing(User user, String type, String season, String color, String dateOfPurchase, String timeLastUsed, String imageUrl, String imageKey) {
+    public Clothing(User user, String category, String type, String season, String color, String dateOfPurchase, String timeLastUsed, String imageUrl, String imageKey) {
         this.user = user;
+        this.category = category;
         this.type = type;
         this.season = season;
         this.color = color;
@@ -30,6 +31,9 @@ public class Clothing {
     @UuidGenerator
     @Column
     private String id;
+
+    @Column
+    private String category;
 
     @Column
     String type;
@@ -99,5 +103,13 @@ public class Clothing {
 
     public String getId() {
         return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
