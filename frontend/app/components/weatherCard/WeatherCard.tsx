@@ -17,6 +17,11 @@ interface ErrorData {
   message: string;
 }
 
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
 interface LocationState {
   coordinates?: Coordinates;
   weather?: WeatherData;
