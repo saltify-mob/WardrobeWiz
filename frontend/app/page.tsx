@@ -10,14 +10,14 @@ export default function Home() {
   const { user } = useUser();
 
   if (!user) {
-    console.log("hello")
+    return <div>Hello!</div>
+  } else {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-4">
+        <GeolocationComponent />
+        <TodaysOutfit />
+        <BottomNavBar />
+      </main>
+    );
   }
-
-  return user && (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <GeolocationComponent />
-      <TodaysOutfit />
-      <BottomNavBar />
-    </main>
-  );
 }
