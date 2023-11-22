@@ -17,7 +17,7 @@ export default function Home() {
         <BottomNavBar />
       </main>
     );
+  } else {
+    window.location.href = "/api/auth/login";
   }
-
-  return <Login />;
 }
