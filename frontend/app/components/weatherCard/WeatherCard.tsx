@@ -87,7 +87,7 @@ const GeolocationComponent: React.FC = () => {
     return () => {
       navigator.geolocation.clearWatch(watcher);
     };
-  });
+  }, []);
 
   const WeatherIcon = ({ code }: { code: string }) => {
     const iconUrl = `http://openweathermap.org/img/wn/${code}.png`;

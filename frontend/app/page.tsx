@@ -24,7 +24,7 @@ export default function Home() {
   }, [user, isLoading, router]);
 
   return (
-    <main className="w-full flex items-center justify-between p-4">
+    <main className="w-full flex-col items-center justify-between p-4">
       <GeolocationComponent />
       <TodaysOutfit />
       <BottomNavBar />
