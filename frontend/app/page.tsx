@@ -15,7 +15,7 @@ export default function Home() {
     if (!user) {
       router.push('/api/auth/login');
     }
-  }, [user]);
+  });
 
   return user && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
