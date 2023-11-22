@@ -3,25 +3,21 @@
 import GeolocationComponent from './components/weatherCard/WeatherCard';
 import BottomNavBar from './components/navBar/NavBar';
 import TodaysOutfit from './components/suggestionCard/SuggestionCard';
-import { useAuth0 } from '@auth0/auth0-react';
 import Login from './login';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Home() {
-  const { isAuthenticated, user } = useAuth0();
+  const { user, error, isLoading } = useUser();
 
-  if (!isAuthenticated) {
-    console.log(isAuthenticated);
-    console.log(user?.name);
+  if (user) {
     return (
-      <Login />
+      <main className="flex min-h-screen flex-col items-center justify-between p-4">
+        <GeolocationComponent />
+        <TodaysOutfit />
+        <BottomNavBar />
+      </main>
     );
   }
 
-  return isAuthenticated && (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <GeolocationComponent />
-      <TodaysOutfit />
-      <BottomNavBar />
-    </main>
-  );
+  return <Login />;
 }
