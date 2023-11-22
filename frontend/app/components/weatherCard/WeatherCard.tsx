@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface WeatherCondition {
   main: string;
@@ -90,9 +91,17 @@ const GeolocationComponent: React.FC = () => {
 
   const WeatherIcon = ({ code }: { code: string }) => {
     const iconUrl = `http://openweathermap.org/img/wn/${code}.png`;
-    const width = 50;
-    const height = 50;
-    return <img src={iconUrl} alt="Weather icon" className="mx-auto" />;
+    return (
+      <div className="mx-auto">
+        <Image
+          src={iconUrl}
+          alt="Weather icon"
+          width={50}
+          height={50}
+          layout="fixed"
+        />
+      </div>
+    );
   };
 
   return (

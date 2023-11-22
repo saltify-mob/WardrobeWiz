@@ -5,8 +5,7 @@ import BottomNavBar from './components/navBar/NavBar';
 import TodaysOutfit from './components/suggestionCard/SuggestionCard';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { ClothingItem } from './types/ClothingItem';
+import { useEffect } from 'react';
 import { fetchClothingData } from './hooks/ClothingDataFetcher';
 import { fetchOutfitData } from './hooks/GenerateOutfitFetcher';
 
