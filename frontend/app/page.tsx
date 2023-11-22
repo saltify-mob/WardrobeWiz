@@ -10,7 +10,10 @@ import Login from './login';
 export default function Home() {
   const { isAuthenticated } = useAuth0();
 
+  
+
   if (!isAuthenticated) {
+    console.log(isAuthenticated);
     return (
       <Login />
     );
