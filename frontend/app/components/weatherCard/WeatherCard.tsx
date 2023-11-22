@@ -18,7 +18,7 @@ interface ErrorData {
 }
 
 interface LocationState {
-  // coordinates?: Coordinates;
+  coordinates?: Coordinates;
   weather?: WeatherData;
   error?: ErrorData;
 }
