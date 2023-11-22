@@ -3,11 +3,12 @@
 import GeolocationComponent from './components/weatherCard/WeatherCard';
 import BottomNavBar from './components/navBar/NavBar';
 import TodaysOutfit from './components/suggestionCard/SuggestionCard';
-import Login from './login';
 import { useUser } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
+  const router = useRouter();
 
   if (user) {
     return (
@@ -18,8 +19,6 @@ export default function Home() {
       </main>
     );
   } else {
-    if (typeof window !== "undefined") {
-      window.location.href = "/api/auth/login";
-    }    
+    router.push("/api/auth/login");
   }
 }
