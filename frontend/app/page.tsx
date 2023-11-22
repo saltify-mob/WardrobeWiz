@@ -15,7 +15,7 @@ export default function Home() {
     if (!isLoading && !user) {
       router.push('/api/auth/login');
     }
-  }, [user, isLoading]);
+  }, [user, isLoading, router]);
 
   return user && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
