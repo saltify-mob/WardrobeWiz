@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
+import se.saltify.backend.clothing.dto.ClothingGenerateResponseDto;
 import se.saltify.backend.clothing.dto.ClothingRequestDto;
 import se.saltify.backend.clothing.dto.ClothingResponseDto;
 import se.saltify.backend.clothing.service.ClothingService;
@@ -60,6 +61,11 @@ public class ClothingController {
         ClothingCreateRequestDto dto = new ClothingCreateRequestDto(image, userId, category, type, season, color, dateOfPurchase, timeLastUsed);
 
         return ResponseEntity.ok().body(clothingService.createClothing(dto));
+    }
+
+    @GetMapping("/generate")
+    ResponseEntity<ClothingGenerateResponseDto> generateClothing() {
+        return ResponseEntity.ok(clothingService.generateClothing("auth0|655a8cd4022a9fc3be9a9387"));
     }
 
     @ExceptionHandler({NoSuchElementException.class})
