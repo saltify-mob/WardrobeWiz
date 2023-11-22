@@ -8,26 +8,23 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ClothingItem } from './types/ClothingItem';
 import { fetchClothingData } from './hooks/ClothingDataFetcher';
+import { fetchOutfitData } from './hooks/GenerateOutfitFetcher';
 
 
 export default function Home() {
   const { user, isLoading } = useUser();
-  const [ userClothes, setUserClothes ] = useState<ClothingItem[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     if (!isLoading && user) {
-      fetchClothingData().then((data) => {
-        setUserClothes(data);
-      }).catch((error) => {
-        console.error('Failed to fetch clothing data:', error);
-      });
+      fetchClothingData();
+      fetchOutfitData();
     } else if (!isLoading && !user) {
       router.push('/api/auth/login');
     }
   }, [user, isLoading, router]);
 
-  return user && (
+  return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <GeolocationComponent />
       <TodaysOutfit />
