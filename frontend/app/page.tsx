@@ -18,6 +18,8 @@ export default function Home() {
       </main>
     );
   } else {
-    window.location.href = "/api/auth/login";
+    if (typeof window !== "undefined") {
+      window.location.href = "/api/auth/login";
+    }    
   }
 }
