@@ -19,7 +19,6 @@ export default function Home() {
     if (!isLoading && user) {
       fetchClothingData().then((data) => {
         setUserClothes(data);
-        console.log(data);
       }).catch((error) => {
         console.error('Failed to fetch clothing data:', error);
       });
