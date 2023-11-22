@@ -1,15 +1,19 @@
 package se.saltify.backend.clothing.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import se.saltify.backend.clothing.Clothing;
 import se.saltify.backend.clothing.ClothingRepository;
 import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
+import se.saltify.backend.clothing.dto.ClothingGenerateResponseDto;
 import se.saltify.backend.clothing.dto.ClothingRequestDto;
 import se.saltify.backend.clothing.dto.ClothingResponseDto;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
+import java.lang.annotation.ElementType;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -56,6 +60,20 @@ public class ClothingService {
         clothing.setTimeLastUsed(dto.timeLastUsed());
         clothingRepository.save(clothing);
         return mapToDto(clothing);
+    }
+
+    public ClothingGenerateResponseDto generateClothing(String userId) {
+        List<Clothing> clothing = clothingRepository.findClothingsForUser(userId);
+        List<Clothing> headWears = clothing.stream().filter(c -> c.getCategory().equals("headwear")).toList();
+        List<Clothing> tops = clothing.stream().filter(c -> c.getCategory().equals("top")).toList();
+        List<Clothing> lowerGarments = clothing.stream().filter(c -> c.getCategory().equals("lowerGarment")).toList();
+
+        Random r = new Random();
+        Clothing randomHeadwear = headWears.stream().skip(r.nextInt(headWears.size())).findFirst().orElseThrow();
+        Clothing randomTop = tops.stream().skip(r.nextInt(tops.size())).findFirst().orElseThrow();
+        Clothing randomlowerGarment = lowerGarments.stream().skip(r.nextInt(lowerGarments.size())).findFirst().orElseThrow();
+
+        return new ClothingGenerateResponseDto(randomHeadwear, randomTop, randomlowerGarment);
     }
 
     private ClothingResponseDto mapToDto(Clothing c) {
