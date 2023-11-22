@@ -92,7 +92,7 @@ const GeolocationComponent: React.FC = () => {
   const WeatherIcon = ({ code }: { code: string }) => {
     const iconUrl = `http://openweathermap.org/img/wn/${code}.png`;
     return (
-      <div className="mx-auto">
+      <div className="flex justify-center">
         <Image
           src={iconUrl}
           alt="Weather icon"
