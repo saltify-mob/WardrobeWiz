@@ -1,10 +1,12 @@
+'use client';
 import React, { useEffect } from 'react';
 import BottomNavBar from '../../components/navBar/NavBar';
 import { fetchClothingData } from '../../hooks/ClothingDataFetcher'; // Adjust the path accordingly
+import { fetchOutfitData } from '../../hooks/GenerateOutfitFetcher';
 
 export default function Info() {
   useEffect(() => {
-    fetchClothingData();
+    fetchOutfitData();
   }, []); // The empty array ensures this runs only once when the component mounts
 
   return (
