@@ -12,10 +12,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!user && typeof window !== 'undefined') {
       router.push('/api/auth/login');
     }
-  });
+  }, [user, router]);
 
   return user && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
