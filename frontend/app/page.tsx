@@ -7,10 +7,10 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import { handleLogin } from '@auth0/nextjs-auth0';
 
 export default function Home() {
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
 
   if (!user) {
-    handleLogin();
+    console.log("Hi!");
   }
 
   if (user) {
