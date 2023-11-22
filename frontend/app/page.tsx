@@ -5,13 +5,15 @@ import BottomNavBar from './components/navBar/NavBar';
 import TodaysOutfit from './components/suggestionCard/SuggestionCard';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useRouter } from 'next/navigation';
+import Login from './login';
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
-  const router = useRouter();
 
   if (!isAuthenticated) {
-    router.push("/api/auth/login");
+    return (
+      <Login />
+    );
   }
 
   return isAuthenticated && (
