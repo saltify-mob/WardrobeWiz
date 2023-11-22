@@ -10,7 +10,7 @@ export default function Home() {
   const { user } = useUser();
 
   if (!user) {
-    console.log("Hi!");
+    handleLogin();
   }
 
   if (user) {
@@ -22,4 +22,6 @@ export default function Home() {
       </main>
     );
   }
+
+  return "";
 }
