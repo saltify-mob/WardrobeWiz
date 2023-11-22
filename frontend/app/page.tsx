@@ -17,7 +17,7 @@ export default function Home() {
     }
   }, [user]);
 
-  return (
+  return user && (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <GeolocationComponent />
       <TodaysOutfit />
