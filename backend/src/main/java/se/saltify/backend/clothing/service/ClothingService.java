@@ -76,6 +76,10 @@ public class ClothingService {
         return new ClothingGenerateResponseDto(randomHeadwear, randomTop, randomlowerGarment);
     }
 
+    public List<ClothingResponseDto> getWardrobeForUser(String userId){
+        List<Clothing> clothing = clothingRepository.findClothingsForUser(userId);
+        return clothing.stream().map(this::mapToDto).toList();
+    }
     private ClothingResponseDto mapToDto(Clothing c) {
         return new ClothingResponseDto(
                 c.getId(),

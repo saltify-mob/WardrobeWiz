@@ -68,6 +68,11 @@ public class ClothingController {
         return ResponseEntity.ok(clothingService.generateClothing("auth0|655a8cd4022a9fc3be9a9387"));
     }
 
+    @GetMapping("/wardrobe/{id}")
+    public ResponseEntity<List<ClothingResponseDto>> getWardrobeForUser(@PathVariable String id){
+        return ResponseEntity.ok(clothingService.getWardrobeForUser(id));
+    }
+
     @ExceptionHandler({NoSuchElementException.class})
     private ResponseEntity<String> handleNoSuchElementExceptionException(NoSuchElementException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
