@@ -7,6 +7,7 @@ export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('');
   const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
   const router = useRouter();
 
   const handleFileChange = (event) => {
@@ -20,7 +21,7 @@ export default function AddClothingPage() {
     const formData = new FormData();
     formData.append('season', season);
     formData.append('type', 'type');
-    formData.append('category', 'top');
+    formData.append('category', 'category');
     formData.append('color', 'blue');
     formData.append('dateOfPurchase', '2023-08-08');
     formData.append('timeLastUsed', '2023-08-08');
@@ -67,6 +68,20 @@ export default function AddClothingPage() {
           <option value="hoodie">Hoodie</option>
           <option value="sweatShirt">Sweat Shirt</option>
           <option value="jacket">Jacket</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="category">Type: </label>
+        <select
+          id="category"
+          required
+          value={season}
+          placeholder="Enter category"
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="headwear">Headwear</option>
+          <option value="top">Top</option>
+          <option value="lowerGarment">Lower Garment</option>
         </select>
       </div>
       <input type="file" onChange={handleFileChange} />
