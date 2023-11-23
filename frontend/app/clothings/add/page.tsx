@@ -8,6 +8,10 @@ export default function AddClothingPage() {
   const [season, setSeason] = useState('');
   const [type, setType] = useState('');
   const [category, setCategory] = useState('');
+  const [color, setColor] = useState('');
+  const [dateOfPurchase, setDateOfPurchase] = useState('');
+  const [timeLastUsed, setTimeLastUsed] = useState('');
+
   const router = useRouter();
 
   const handleFileChange = (event) => {
@@ -20,11 +24,11 @@ export default function AddClothingPage() {
 
     const formData = new FormData();
     formData.append('season', season);
-    formData.append('type', 'type');
-    formData.append('category', 'category');
-    formData.append('color', 'blue');
-    formData.append('dateOfPurchase', '2023-08-08');
-    formData.append('timeLastUsed', '2023-08-08');
+    formData.append('type', type);
+    formData.append('category', category);
+    formData.append('color', color);
+    formData.append('dateOfPurchase', dateOfPurchase);
+    formData.append('timeLastUsed', timeLastUsed);
     formData.append('userId', userToken);
     if (file) {
       formData.append('image', file);
@@ -83,6 +87,49 @@ export default function AddClothingPage() {
           <option value="top">Top</option>
           <option value="lowerGarment">Lower Garment</option>
         </select>
+      </div>
+      <div>
+        <label htmlFor="color">Color: </label>
+        <select
+          id="color"
+          required
+          value={color}
+          placeholder="Enter color"
+          onChange={(e) => setColor(e.target.value)}
+        >
+          <option value="blue">Blue</option>
+          <option value="red">Red</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
+          <option value="orange">Orange</option>
+          <option value="pink">Pink</option>
+          <option value="purple">Purple</option>
+          <option value="brown">Brown</option>
+          <option value="black">Black</option>
+          <option value="white">White</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="dateOfPurchase">Date of Purchase: </label>
+        <input
+          id="dateOfPurchase"
+          required
+          type="text"
+          value={dateOfPurchase}
+          placeholder="Enter date of purchase"
+          onChange={(e) => setDateOfPurchase(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="timeLastUsed">Time Last Used: </label>
+        <input
+          id="timeLastUsed"
+          required
+          type="text"
+          value={timeLastUsed}
+          placeholder="Enter time last used"
+          onChange={(e) => setTimeLastUsed(e.target.value)}
+        />
       </div>
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Submit</button>
