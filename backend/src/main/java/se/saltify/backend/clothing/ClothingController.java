@@ -22,13 +22,14 @@ import java.util.NoSuchElementException;
 @RequestMapping("/api/clothings")
 public class ClothingController {
     private final ClothingService clothingService;
+    private final String userIdHeader = "ww-user-id";
 
     public ClothingController(ClothingService clothingService) {
         this.clothingService = clothingService;
     }
 
     @GetMapping
-    ResponseEntity<List<ClothingResponseDto>> findAll(@RequestHeader("ww-user-id") String userId) {
+    ResponseEntity<List<ClothingResponseDto>> findAll(@RequestHeader(userIdHeader) String userId) {
         return ResponseEntity.ok(clothingService.findAll(userId));
     }
 
@@ -52,26 +53,26 @@ public class ClothingController {
     ResponseEntity<ClothingResponseDto> createClothing(
             @RequestHeader("ww-user-id") String userId,
             @RequestPart("image") MultipartFile image,
-                                               @RequestPart("season") String season,
-                                               @RequestPart("color") String color,
-                                               @RequestPart("category") String category,
-                                               @RequestPart("type") String type,
-                                               @RequestPart("dateOfPurchase") String dateOfPurchase,
-                                               @RequestPart("timeLastUsed") String timeLastUsed
+            @RequestPart("season") String season,
+            @RequestPart("color") String color,
+            @RequestPart("category") String category,
+            @RequestPart("type") String type,
+            @RequestPart("dateOfPurchase") String dateOfPurchase,
+            @RequestPart("timeLastUsed") String timeLastUsed
     ) {
         ClothingCreateRequestDto dto = new ClothingCreateRequestDto(image, userId, category, type, season, color, dateOfPurchase, timeLastUsed);
 
         return ResponseEntity.ok().body(clothingService.createClothing(dto));
     }
 
-    @GetMapping("/generate/{id}")
-    ResponseEntity<ClothingGenerateResponseDto> generateClothing(@PathVariable String id) {
-        return ResponseEntity.ok(clothingService.generateClothing(id));
+    @GetMapping("/generate")
+    ResponseEntity<ClothingGenerateResponseDto> generateClothing(@RequestHeader(userIdHeader) String userId) {
+        return ResponseEntity.ok(clothingService.generateClothing(userId));
     }
 
-    @GetMapping("/wardrobe/{id}")
-    public ResponseEntity<List<ClothingResponseDto>> getWardrobeForUser(@PathVariable String id){
-        return ResponseEntity.ok(clothingService.getWardrobeForUser(id));
+    @GetMapping("/wardrobe")
+    public ResponseEntity<List<ClothingResponseDto>> getWardrobeForUser(@RequestHeader(userIdHeader) String userId) {
+        return ResponseEntity.ok(clothingService.getWardrobeForUser(userId));
     }
 
     @ExceptionHandler({NoSuchElementException.class})
