@@ -1,22 +1,26 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
+
 interface Clothing {
-    id: string;
-    category: string;
-    type: string;
-    season: string;
-    color: string;
-    dateOfPurchase: string;
-    timeLastUsed: string;
-    imageUrl: string;
-  }
+  id: string;
+  category: string;
+  type: string;
+  season: string;
+  color: string;
+  dateOfPurchase: string;
+  timeLastUsed: string;
+  imageUrl: string;
+}
+
 interface Props {
   tops: Clothing[];
 }
+
 const TopsCard = (props: Props) => {
   const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const scrollAmount = 100;
+  
   return (
-    <div className="flex flex-row">
+    <section className="flex flex-row">
       <img
         src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
         className="self-center w-10 h-5 hover:cursor-pointer"
@@ -25,21 +29,21 @@ const TopsCard = (props: Props) => {
           container.scrollLeft -= scrollAmount;
         }}
       />
-      <div
+      <article
         className="flex flex-row max-w-md overflow-scroll scroll-smooth"
         dir="ltr"
         ref={sliderRef}
       >
         {props.tops.map((top, index) => (
           <img
-            className="scroll-ps-2 snap-x border-solid border-2 border-black m-2"
+            className="scroll-ps-2 snap-x m-2"
             height={100}
             width={200}
             key={index}
             src={top.imageUrl}
           ></img>
         ))}
-      </div>
+      </article>
       <img
         src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
         className="self-center w-10 h-5 hover:cursor-pointer"
@@ -48,7 +52,7 @@ const TopsCard = (props: Props) => {
           container.scrollLeft += scrollAmount;
         }}
       />
-    </div>
+    </section>
   );
 }
 

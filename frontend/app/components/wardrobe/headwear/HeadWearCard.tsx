@@ -1,14 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
+
 interface Clothing {
-    id: string;
-    category: string;
-    type: string;
-    season: string;
-    color: string;
-    dateOfPurchase: string;
-    timeLastUsed: string;
-    imageUrl: string;
-  }
+  id: string;
+  category: string;
+  type: string;
+  season: string;
+  color: string;
+  dateOfPurchase: string;
+  timeLastUsed: string;
+  imageUrl: string;
+}
+
 interface Props{
     headwears: Clothing[]
 }
@@ -16,8 +18,9 @@ interface Props{
 const HeadWearCard = (props: Props) => {
   const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const scrollAmount = 100;	
+
   return (
-    <div className="flex flex-row">
+    <section className="flex flex-row">
       <img
         src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
         className="self-center w-10 h-5 hover:cursor-pointer"
@@ -33,7 +36,7 @@ const HeadWearCard = (props: Props) => {
       >
         {props.headwears.map((h, index) => (
           <img
-            className="scroll-ps-2 snap-x border-solid border-2 border-black m-2"
+            className="scroll-ps-2 snap-x m-2"
             height={50}
             width={100}
             key={index}
@@ -49,7 +52,7 @@ const HeadWearCard = (props: Props) => {
           container.scrollLeft += scrollAmount;
         }}
       />
-    </div>
+    </section>
   );
 }
 
