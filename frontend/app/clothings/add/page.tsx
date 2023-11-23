@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 
 export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
-  const router = useRouter();
-
   const [season, setSeason] = useState('');
+  const [type, setType] = useState('');
+  const router = useRouter();
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -19,7 +19,7 @@ export default function AddClothingPage() {
 
     const formData = new FormData();
     formData.append('season', season);
-    formData.append('type', 'jacket');
+    formData.append('type', 'type');
     formData.append('category', 'top');
     formData.append('color', 'blue');
     formData.append('dateOfPurchase', '2023-08-08');
@@ -52,6 +52,21 @@ export default function AddClothingPage() {
           <option value="spring">Spring</option>
           <option value="summer">Summer</option>
           <option value="autumn">Autumn</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="type">Type: </label>
+        <select
+          id="type"
+          required
+          value={season}
+          placeholder="Enter type"
+          onChange={(e) => setType(e.target.value)}
+        >
+          <option value="shirt">Shirt</option>
+          <option value="hoodie">Hoodie</option>
+          <option value="sweatShirt">Sweat Shirt</option>
+          <option value="jacket">Jacket</option>
         </select>
       </div>
       <input type="file" onChange={handleFileChange} />
