@@ -16,12 +16,12 @@ interface Props{
 const HeadWearCard = (props: Props) => {
 
   return (
-    <div className='flex flex-row'>
-        {props.headwears.map((h, index) => (
-            <img height={100} width={200} key={index} src={h.imageUrl}></img>
-        ))}
+    <div className="flex flex-row">
+      {props.headwears.map((h, index) => (
+        <img height={100} width={200} key={index} src={h.imageUrl}></img>
+      ))}
     </div>
-  )
+  );
 }
 
 export default HeadWearCard;

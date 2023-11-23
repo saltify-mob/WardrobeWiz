@@ -34,15 +34,18 @@ const WardrobeCard = () => {
   getWardrobe(); 
   }, []);
   const headWears = wardrobe.filter(cloting => cloting.category === 'headwear');
-  const tops = wardrobe.filter(cloting => cloting.category === 'top');
+  const tops = wardrobe.filter((cloting) => cloting.category === "top");
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
   return (
-    <div className='flex flex-col'>
-        <HeadWearCard headwears={headWears} />
-        <TopsCard tops={tops} />
-        <LowerGarmentsCard lowerGarments={lowerGarments} />
+    <div className="flex flex-col">
+      <h1>Head Garment</h1>
+      <HeadWearCard headwears={headWears} />
+      <h1>Body Garment</h1>
+      <TopsCard tops={tops} />
+      <h1>Lower Garment</h1>
+      <LowerGarmentsCard lowerGarments={lowerGarments} />
     </div>
-  )
+  );
 }
 
 export default WardrobeCard;
