@@ -26,10 +26,18 @@ export default function ClothingsPage() {
       .then((res) => setClothes(res));
   }, []);
 
-  const handleDelete = (id: string) => {
-    fetch(`${HOST_NAME}/api/clothings/${id}`, {
-      method: 'DELETE',
-    }).then(() => router.refresh());
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete?')) {
+      const response = await fetch(`${HOST_NAME}/api/clothings/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setClothes((prev) => prev.filter((clothes) => clothes.id !== id));
+      } else {
+        alert('Cannot delete');
+      }
+    }
   };
 
   return (
