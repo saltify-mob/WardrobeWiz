@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetcher } from '@/app/utils/fetcher';
 
@@ -14,8 +14,10 @@ export default function AddClothingPage() {
 
   const router = useRouter();
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
   };
 
   const handleAddClothing = async (e: React.FormEvent<HTMLFormElement>) => {
