@@ -26,6 +26,12 @@ export default function ClothingsPage() {
       .then((res) => setClothes(res));
   }, []);
 
+  const handleDelete = (id: string) => {
+    fetch(`${HOST_NAME}/api/clothings/${id}`, {
+      method: 'DELETE',
+    }).then(() => router.refresh());
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-2">
@@ -41,6 +47,12 @@ export default function ClothingsPage() {
               height={300}
               width={300}
             />
+            <button
+              className="text-red-500"
+              onClick={() => handleDelete(cloth.id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
