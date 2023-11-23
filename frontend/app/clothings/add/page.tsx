@@ -32,6 +32,7 @@ export default function AddClothingPage() {
   return (
     <form onSubmit={handleAddClothing}>
       <input type="file" onChange={handleFileChange} />
+      <button type="submit">Submit</button>
     </form>
   );
 }
