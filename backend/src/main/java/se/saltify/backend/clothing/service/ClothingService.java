@@ -30,8 +30,8 @@ public class ClothingService {
         this.azureBlobStorageService = azureBlobStorageService;
     }
 
-    public List<ClothingResponseDto> findAll() {
-        return clothingRepository.findAll().stream().map(this::mapToDto).toList();
+    public List<ClothingResponseDto> findAll(String userId) {
+        return clothingRepository.findClothingsForUser(userId).stream().map(this::mapToDto).toList();
     }
 
     public ClothingResponseDto findById(String id) {
