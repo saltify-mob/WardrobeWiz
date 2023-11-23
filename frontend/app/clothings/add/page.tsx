@@ -114,7 +114,7 @@ export default function AddClothingPage() {
         <input
           id="dateOfPurchase"
           required
-          type="text"
+          type="date"
           value={dateOfPurchase}
           placeholder="Enter date of purchase"
           onChange={(e) => setDateOfPurchase(e.target.value)}
@@ -125,7 +125,7 @@ export default function AddClothingPage() {
         <input
           id="timeLastUsed"
           required
-          type="text"
+          type="date"
           value={timeLastUsed}
           placeholder="Enter time last used"
           onChange={(e) => setTimeLastUsed(e.target.value)}
