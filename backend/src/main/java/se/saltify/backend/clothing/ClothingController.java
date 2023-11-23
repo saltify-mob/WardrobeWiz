@@ -28,8 +28,8 @@ public class ClothingController {
     }
 
     @GetMapping
-    ResponseEntity<List<ClothingResponseDto>> findAll() {
-        return ResponseEntity.ok(clothingService.findAll());
+    ResponseEntity<List<ClothingResponseDto>> findAll(@RequestHeader("ww-user-id") String userId) {
+        return ResponseEntity.ok(clothingService.findAll(userId));
     }
 
     @GetMapping("/{id}")
@@ -49,10 +49,11 @@ public class ClothingController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<ClothingResponseDto> createClothing(@RequestPart("image") MultipartFile image,
+    ResponseEntity<ClothingResponseDto> createClothing(
+            @RequestHeader("ww-user-id") String userId,
+            @RequestPart("image") MultipartFile image,
                                                @RequestPart("season") String season,
                                                @RequestPart("color") String color,
-                                               @RequestPart("userId") String userId,
                                                @RequestPart("category") String category,
                                                @RequestPart("type") String type,
                                                @RequestPart("dateOfPurchase") String dateOfPurchase,

@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
-import { HOST_NAME } from '../page';
 import { useRouter } from 'next/navigation';
+import { fetcher } from '@/app/utils/fetcher';
 
 export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
-  const [season, setSeason] = useState('');
-  const [type, setType] = useState('');
-  const [category, setCategory] = useState('');
-  const [color, setColor] = useState('');
+  const [season, setSeason] = useState('winter');
+  const [type, setType] = useState('shirt');
+  const [category, setCategory] = useState('top');
+  const [color, setColor] = useState('red');
   const [dateOfPurchase, setDateOfPurchase] = useState('');
   const [timeLastUsed, setTimeLastUsed] = useState('');
 
@@ -20,7 +20,6 @@ export default function AddClothingPage() {
 
   const handleAddClothing = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userToken = localStorage.getItem('user-token') as string;
 
     const formData = new FormData();
     formData.append('season', season);
@@ -29,12 +28,11 @@ export default function AddClothingPage() {
     formData.append('color', color);
     formData.append('dateOfPurchase', dateOfPurchase);
     formData.append('timeLastUsed', timeLastUsed);
-    formData.append('userId', userToken);
     if (file) {
       formData.append('image', file);
     }
 
-    await fetch(`${HOST_NAME}/api/clothings`, {
+    await fetcher(`/api/clothings`, {
       method: 'POST',
       body: formData,
     })
