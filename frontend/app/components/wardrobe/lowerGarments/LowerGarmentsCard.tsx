@@ -1,20 +1,23 @@
-import React, { useRef } from 'react'
+import React, { useRef } from 'react';
+
 interface Clothing {
-    id: string;
-    category: string;
-    type: string;
-    season: string;
-    color: string;
-    dateOfPurchase: string;
-    timeLastUsed: string;
-    imageUrl: string;
+  id: string;
+  category: string;
+  type: string;
+  season: string;
+  color: string;
+  dateOfPurchase: string;
+  timeLastUsed: string;
+  imageUrl: string;
 }
-interface Props{
-    lowerGarments: Clothing[]
+
+interface Props {
+  lowerGarments: Clothing[];
 }
 const LowerGarmentsCard = (props: Props) => {
   const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const scrollAmount = 100;		
+
   return (
     <section className="flex flex-row">
       <img
