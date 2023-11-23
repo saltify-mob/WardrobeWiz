@@ -38,12 +38,18 @@ const WardrobeCard = () => {
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
   return (
     <div className="flex flex-col">
-      <h1>Head Garment</h1>
-      <HeadWearCard headwears={headWears} />
-      <h1>Body Garment</h1>
-      <TopsCard tops={tops} />
-      <h1>Lower Garment</h1>
-      <LowerGarmentsCard lowerGarments={lowerGarments} />
+      <div className='my-5'>
+        <h1 className="text-center">Head Garment</h1>
+        <HeadWearCard headwears={headWears} />
+      </div>
+      <div className='my-5'>
+        <h1 className="text-center">Body Garment</h1>
+        <TopsCard tops={tops} />
+      </div>
+      <div className='my-5'>
+        <h1 className="text-center">Lower Garment</h1>
+        <LowerGarmentsCard lowerGarments={lowerGarments} />
+      </div>
     </div>
   );
 }
