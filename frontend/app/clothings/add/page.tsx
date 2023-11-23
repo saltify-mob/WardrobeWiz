@@ -60,7 +60,7 @@ export default function AddClothingPage() {
         <select
           id="type"
           required
-          value={season}
+          value={type}
           placeholder="Enter type"
           onChange={(e) => setType(e.target.value)}
         >
@@ -71,13 +71,13 @@ export default function AddClothingPage() {
         </select>
       </div>
       <div>
-        <label htmlFor="category">Type: </label>
+        <label htmlFor="category">Category: </label>
         <select
           id="category"
           required
-          value={season}
+          value={category}
           placeholder="Enter category"
-          onChange={(e) => setType(e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
         >
           <option value="headwear">Headwear</option>
           <option value="top">Top</option>
