@@ -17,7 +17,7 @@ interface Clothing {
 const WardrobeCard = () => {
 
   const [wardrobe, setWardrobe] = useState<Clothing[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getWardrobe = async () => {
     try {
@@ -32,24 +32,36 @@ const WardrobeCard = () => {
     }
   };
   getWardrobe(); 
+  setIsLoading(false);
   }, []);
   const headWears = wardrobe.filter(cloting => cloting.category === 'headwear');
   const tops = wardrobe.filter((cloting) => cloting.category === "top");
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
   return (
     <div className="flex flex-col">
-      <div className='my-5'>
-        <h1 className="text-center text-lg">Head Garment</h1>
-        <HeadWearCard headwears={headWears} />
-      </div>
-      <div className='my-5'>
-        <h1 className="text-center text-lg">Body Garment</h1>
-        <TopsCard tops={tops} />
-      </div>
-      <div className='my-5'>
-        <h1 className="text-center text-lg">Lower Garment</h1>
-        <LowerGarmentsCard lowerGarments={lowerGarments} />
-      </div>
+      {isLoading ? (
+        <img
+          className="mb-60"
+          height={200}
+          width={200}
+          src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif"
+        ></img>
+      ) : (
+        <>
+          <div className="my-5">
+            <h1 className="text-center text-lg">Head Garment</h1>
+            <HeadWearCard headwears={headWears} />
+          </div>
+          <div className="my-5">
+            <h1 className="text-center text-lg">Body Garment</h1>
+            <TopsCard tops={tops} />
+          </div>
+          <div className="my-5">
+            <h1 className="text-center text-lg">Lower Garment</h1>
+            <LowerGarmentsCard lowerGarments={lowerGarments} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
