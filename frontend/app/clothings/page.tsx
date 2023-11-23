@@ -1,10 +1,8 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-
-export const HOST_NAME = 'https://wardrobewiz-backend.azurewebsites.net';
+import { fetcher } from '../utils/fetcher';
 
 export type Clothes = {
   id: string;
@@ -18,17 +16,15 @@ export type Clothes = {
 export default function ClothingsPage() {
   const [clothes, setClothes] = useState<Clothes[]>([]);
 
-  const router = useRouter();
-
   useEffect(() => {
-    fetch(`${HOST_NAME}/api/clothings`)
+    fetcher(`/api/clothings`)
       .then((res) => res.json())
       .then((res) => setClothes(res));
   }, []);
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete?')) {
-      const response = await fetch(`${HOST_NAME}/api/clothings/${id}`, {
+      const response = await fetcher(`/api/clothings/${id}`, {
         method: 'DELETE',
       });
 
