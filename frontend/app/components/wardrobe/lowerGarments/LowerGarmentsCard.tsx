@@ -34,7 +34,7 @@ const LowerGarmentsCard = (props: Props) => {
           <img
             className="scroll-ps-2 snap-x border-solid border-2 border-black m-2"
             height={100}
-            width={200}
+            width={150}
             key={index}
             src={lowerGarment.imageUrl}
           ></img>

@@ -19,7 +19,7 @@ const TopsCard = (props: Props) => {
     <div className="flex flex-row">
       <img
         src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-        className='self-center w-10 h-5 hover:cursor-pointer'
+        className="self-center w-10 h-5 hover:cursor-pointer"
         onClick={() => {
           const container = sliderRef.current;
           container.scrollLeft -= scrollAmount;
