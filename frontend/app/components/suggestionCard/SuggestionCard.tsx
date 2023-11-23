@@ -8,18 +8,18 @@ const TodaysOutfit = () => {
     trousersUrl: 'https://via.placeholder.com/150?text=Trousers',
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const outfitData = await fetchOutfitData();
-        console.log('Fetched Outfit Data:', outfitData);
-        setOutfit(outfitData);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+  const loadNewOutfit = async () => {
+    try {
+      const outfitData = await fetchOutfitData();
+      console.log('Fetched Outfit Data:', outfitData);
+      setOutfit(outfitData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    loadNewOutfit(); // Fetch data when the component mounts
   }, []);
 
   return (
@@ -30,6 +30,12 @@ const TodaysOutfit = () => {
         <img src={outfit.topUrl} alt="Top" className="w-32 h-32 object-cover" />
         <img src={outfit.trousersUrl} alt="Trousers" className="w-24 h-32 object-cover" />
       </div>
+      <button
+        onClick={loadNewOutfit}
+        className="mt-4 mb-16 bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-800 transition-colors"
+      >
+        Generate New
+      </button>
     </div>
   );
 };
