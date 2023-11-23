@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
+import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
 
 interface Clothing {
   id: string;
@@ -39,6 +40,7 @@ const WardrobeCard = () => {
     <div className='flex flex-col'>
         <HeadWearCard headwears={headWears} />
         <TopsCard tops={tops} />
+        <LowerGarmentsCard lowerGarments={lowerGarments} />
     </div>
   )
 }
