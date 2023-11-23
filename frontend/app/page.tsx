@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 import { fetchClothingData } from './hooks/ClothingDataFetcher';
 import { fetchOutfitData } from './hooks/GenerateOutfitFetcher';
 
-
 export default function Home() {
   const { user, isLoading } = useUser();
   const router = useRouter();
@@ -27,7 +26,6 @@ export default function Home() {
     <main className="w-full flex-col items-center justify-between p-4">
       <GeolocationComponent />
       <TodaysOutfit />
-      <BottomNavBar />
     </main>
   );
 }
