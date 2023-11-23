@@ -39,15 +39,15 @@ const WardrobeCard = () => {
   return (
     <div className="flex flex-col">
       <div className='my-5'>
-        <h1 className="text-center">Head Garment</h1>
+        <h1 className="text-center text-lg">Head Garment</h1>
         <HeadWearCard headwears={headWears} />
       </div>
       <div className='my-5'>
-        <h1 className="text-center">Body Garment</h1>
+        <h1 className="text-center text-lg">Body Garment</h1>
         <TopsCard tops={tops} />
       </div>
       <div className='my-5'>
-        <h1 className="text-center">Lower Garment</h1>
+        <h1 className="text-center text-lg">Lower Garment</h1>
         <LowerGarmentsCard lowerGarments={lowerGarments} />
       </div>
     </div>
