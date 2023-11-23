@@ -96,6 +96,8 @@ const GeolocationComponent: React.FC = () => {
         <Image
           src={iconUrl}
           alt="Weather icon"
+          width={50} // Set the width as needed
+          height={50} // Set the height as needed
           layout="fixed"
         />
       </div>
