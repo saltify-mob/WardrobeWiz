@@ -13,10 +13,16 @@ export default function AddClothingPage() {
 
   const handleAddClothing = (e) => {
     e.preventDefault();
+    const userToken = localStorage.getItem('user-token') as string;
 
     const formData = new FormData();
     formData.append('season', 'winter');
-
+    formData.append('type', 'jacket');
+    formData.append('category', 'top');
+    formData.append('color', 'blue');
+    formData.append('dateOfPurchase', '2023-08-08');
+    formData.append('timeLastUsed', '2023-08-08');
+    formData.append('userId', userToken);
     if (file) {
       formData.append('image', file);
     }
