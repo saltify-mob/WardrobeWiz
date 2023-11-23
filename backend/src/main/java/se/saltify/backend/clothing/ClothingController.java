@@ -63,9 +63,14 @@ public class ClothingController {
         return ResponseEntity.ok().body(clothingService.createClothing(dto));
     }
 
-    @GetMapping("/generate")
-    ResponseEntity<ClothingGenerateResponseDto> generateClothing() {
-        return ResponseEntity.ok(clothingService.generateClothing("auth0|655a8cd4022a9fc3be9a9387"));
+    @GetMapping("/generate/{id}")
+    ResponseEntity<ClothingGenerateResponseDto> generateClothing(@PathVariable String id) {
+        return ResponseEntity.ok(clothingService.generateClothing(id));
+    }
+
+    @GetMapping("/wardrobe/{id}")
+    public ResponseEntity<List<ClothingResponseDto>> getWardrobeForUser(@PathVariable String id){
+        return ResponseEntity.ok(clothingService.getWardrobeForUser(id));
     }
 
     @ExceptionHandler({NoSuchElementException.class})
