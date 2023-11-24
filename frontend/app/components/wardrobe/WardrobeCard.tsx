@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
+import { fetcher } from '@/app/utils/fetcher';
 
 interface Clothing {
   id: string;
@@ -21,7 +22,7 @@ const WardrobeCard = () => {
   useEffect(() => {
     const getWardrobe = async () => {
     try {
-      const response = await fetch('https://wardrobewiz-backend.azurewebsites.net/api/clothings/wardrobe/0bde3294-0feb-41e0-8763-4c6477623f5e');
+      const response = await fetcher('/api/clothings/wardrobe');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
