@@ -16,6 +16,14 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    if (user) {
+      localStorage.setItem('user_id', user.sub?.split('|')[1] as string);
+    } else {
+      localStorage.removeItem('user_id');
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (!isLoading && user) {
       createUser(user.email!);
       fetchClothingData();
