@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { fetchClothingData } from './hooks/ClothingDataFetcher';
 import { fetchOutfitData } from './hooks/GenerateOutfitFetcher';
+import { create } from 'domain';
+import { createUser } from './hooks/createUser';
 
 export default function Home() {
   const { user, isLoading } = useUser();
@@ -15,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && user) {
+      createUser(user.email!);
       fetchClothingData();
       fetchOutfitData();
     } else if (!isLoading && !user) {
