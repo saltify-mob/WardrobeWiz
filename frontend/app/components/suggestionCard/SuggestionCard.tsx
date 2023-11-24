@@ -23,7 +23,7 @@ const TodaysOutfit = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-white p-36 rounded-lg shadow-lg my-8">
+    <div className="flex flex-col items-center bg-white rounded-lg shadow-lg my-8">
       <h2 className="text-2xl font-semibold my-4">{`Today's Outfit`}</h2>
       <div className="flex flex-col items-center mb-6 space-y-4">
         <img src={outfit.headwearUrl} alt="Headwear" className="w-24 h-24 object-cover" />
