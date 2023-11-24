@@ -71,7 +71,7 @@ export default function AddClothingPage() {
           <option value="shirt">Shirt</option>
           <option value="hoodie">Hoodie</option>
           <option value="sweatShirt">Sweat Shirt</option>
-          <option value="jacket">Jacket</option>
+          <option value="t-shirt">T-shirt</option>
         </select>
       </div>
       <div>
