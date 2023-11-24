@@ -7,6 +7,7 @@ import se.saltify.backend.user.UserRequestDto;
 import se.saltify.backend.user.UserResponseDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,7 +27,8 @@ public class UserService {
     }
 
     public User addUser(UserRequestDto user){
-        return userRepository.save(new User(user.id(), user.firstName(), user.lastName()));
+        Optional<User> foundUser = userRepository.findById(user.id());
+        return foundUser.orElseGet(() -> userRepository.save(new User(user.id(), user.firstName(), user.lastName())));
     }
 
     public void deleteUserById(String id){
