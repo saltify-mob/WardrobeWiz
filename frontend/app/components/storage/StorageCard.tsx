@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ClothingDetail from './ClothingCard'; // Import the ClothingDetail component
+import { fetcher } from '@/app/utils/fetcher';
 
 interface Clothing {
   id: string;
@@ -20,7 +21,7 @@ const ClothingList: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://wardrobewiz-backend.azurewebsites.net/api/clothings/wardrobe/0bde3294-0feb-41e0-8763-4c6477623f5e');
+        const response = await fetcher('/api/clothings/wardrobe');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
