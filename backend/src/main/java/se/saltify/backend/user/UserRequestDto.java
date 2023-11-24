@@ -1,4 +1,4 @@
 package se.saltify.backend.user;
 
-public record UserRequestDto(String firstName, String lastName) {
+public record UserRequestDto(String id, String firstName, String lastName) {
 }

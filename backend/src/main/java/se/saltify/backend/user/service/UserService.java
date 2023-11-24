@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public User addUser(UserRequestDto user){
-        return userRepository.save(new User(user.firstName(), user.lastName()));
+        return userRepository.save(new User(user.id(), user.firstName(), user.lastName()));
     }
 
     public void deleteUserById(String id){

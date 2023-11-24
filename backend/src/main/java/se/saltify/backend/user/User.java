@@ -1,6 +1,7 @@
 package se.saltify.backend.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.hibernate.annotations.UuidGenerator;
 import se.saltify.backend.clothing.Clothing;
 
@@ -19,7 +20,8 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName) {
+    public User(String id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
