@@ -17,7 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && user) {
-      createUser(user.email!);
+      createUser(user);
       fetchClothingData();
       fetchOutfitData();
     } else if (!isLoading && !user) {
