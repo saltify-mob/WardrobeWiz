@@ -16,8 +16,8 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
-      localStorage.setItem('user_id', user.sub?.split('|')[1] as string);
+    if (user?.email) {
+      localStorage.setItem('user_id', user.email);
     } else {
       localStorage.removeItem('user_id');
     }
