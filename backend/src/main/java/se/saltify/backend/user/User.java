@@ -25,7 +25,6 @@ public class User {
     }
 
     @Id
-    @UuidGenerator
     @Column
     private String id;
 

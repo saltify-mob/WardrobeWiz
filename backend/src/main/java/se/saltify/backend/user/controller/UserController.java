@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 public class UserController {
 
