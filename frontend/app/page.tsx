@@ -14,21 +14,25 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user?.email) {
-      localStorage.setItem('user_id', user.email);
-    } else {
-      localStorage.removeItem('user_id');
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (!isLoading && user) {
-      createUser(user);
-    } else if (!isLoading && !user) {
-      router.push('/api/auth/login');
+    if (!isLoading) {
+      if (user) {
+        localStorage.setItem('user_id', user.email!);
+        createUser(user);
+      } else {
+        localStorage.removeItem('user_id');
+        router.push('/api/auth/login');
+      }
     }
   }, [user, isLoading, router]);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Redirecting to login...</div>;
+  }
+  
   return (
     <main className="w-full flex-col items-center justify-between">
       <HamburgerMenu />

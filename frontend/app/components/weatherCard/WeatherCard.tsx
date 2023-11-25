@@ -116,7 +116,7 @@ const WeatherCard: React.FC = () => {
     <div className="w-full text-center" style={{ background: 'linear-gradient(180deg, rgba(	135, 206, 235) 0%, rgba(235, 254, 255, 0) 100%)' }}>
       {location.weather ? (
         <div>
-          <div className="text-3xl font-bold">{location.weather.main?.temp} °C</div>
+          <div className="text-3xl font-bold">{location.weather.main?.temp ? `${location.weather.main.temp} °C` : '-- °C'}</div>
           <div className="text-xl">{location.weather.name}</div>
           {location.weather.weather && location.weather.weather.length > 0 && (
             <WeatherIcon code={location.weather.weather[0].icon} />
