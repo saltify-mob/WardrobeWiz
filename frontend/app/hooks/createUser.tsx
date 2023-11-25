@@ -13,9 +13,6 @@ export const createUser = async (user: UserProfile) => {
     };
     const response = await fetcher('/api/users', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(raw)
     });
   }
