@@ -26,7 +26,7 @@ const HeadWearCard = (props: Props) => {
       }}>
         <Image
           src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-          alt="Description of the image"
+          alt="Left arrow"
           width={20}
           height={20}
           layout="fixed"
@@ -57,7 +57,7 @@ const HeadWearCard = (props: Props) => {
       }}>
         <Image
           src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
-          alt="Description of the image"
+          alt="Right arrow"
           width={20}
           height={20}
           layout="fixed"
