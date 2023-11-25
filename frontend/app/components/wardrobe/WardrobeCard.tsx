@@ -23,11 +23,11 @@ const WardrobeCard = () => {
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
 
   return (
-    <div className="flex flex-col">
+    <div className="w-full flex-col items-center justify-between">
       {isLoading ? (
         <Image
           className="mb-60"
-          src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif" // Denna borde vi ändra?
+          src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif"
           alt="Loading"
           width={200}
           height={200}

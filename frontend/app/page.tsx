@@ -29,11 +29,11 @@ export default function Home() {
   }, [user, isLoading, router]);
 
   if (isLoading) {
-    return <div className="w-full flex-col items-center justify-between">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   if (!user) {
-    return <div className="w-full flex-col items-center justify-between">Redirecting to login...</div>;
+    return <div>Redirecting to login...</div>;
   }
   
   return (

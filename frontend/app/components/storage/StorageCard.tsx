@@ -39,7 +39,7 @@ const StorageCard: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="w-full flex-col items-center justify-between">
       <input
         type="text"
         placeholder="Search Clothes..."
