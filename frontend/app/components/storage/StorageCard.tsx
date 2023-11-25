@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ClothingCard from './ClothingCard'; // Import the ClothingDetail component
+import Image from 'next/image';
 import { fetcher } from '@/app/utils/fetcher';
+
+import ClothingCard from './ClothingCard';
 
 interface Clothing {
   id: string;
@@ -63,16 +65,17 @@ const StorageCard: React.FC = () => {
         placeholder="Search Clothes..."
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <div className="w-96 h-96"> {/* Set the width and height here */}
+      <div className="w-96 h-96">
         <div className="grid grid-cols-3 gap-4 h-full">
           {filteredClothes.map((clothing, index) => (
             <div key={index} className="relative">
-              <img
-                src={clothing.imageUrl}
-                alt={clothing.type}
-                className="w-full h-auto cursor-pointer"
-                onClick={() => toggleDetail(clothing)}
-              />
+               <Image
+                  src={clothing.imageUrl}
+                  alt={clothing.type}
+                  width={96}
+                  height={96}
+                  layout="responsive"
+                />
             </div>
           ))}
         </div>

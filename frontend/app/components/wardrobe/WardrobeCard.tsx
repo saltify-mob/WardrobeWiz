@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image';
+
 import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
@@ -41,12 +43,14 @@ const WardrobeCard = () => {
   return (
     <div className="flex flex-col">
       {isLoading ? (
-        <img
+        <Image
           className="mb-60"
-          height={200}
+          src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif" // Denna borde vi ändra?
+          alt="Loading"
           width={200}
-          src="https://media.tenor.com/JBgYqrobdxsAAAAi/loading.gif"
-        ></img>
+          height={200}
+          layout="fixed"
+        />
       ) : (
         <>
           <div className="my-5">
