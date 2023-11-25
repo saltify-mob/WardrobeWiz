@@ -29,7 +29,7 @@ interface LocationState {
   error?: ErrorData;
 }
 
-const GeolocationComponent: React.FC = () => {
+const WeatherCard: React.FC = () => {
   const [location, setLocation] = useState<LocationState>({});
 
   const fetchWeather = async (lat: number, lon: number) => {
@@ -81,12 +81,8 @@ const GeolocationComponent: React.FC = () => {
       });
       return;
     }
-
-    const watcher = navigator.geolocation.watchPosition(onSuccess, onError);
-
-    return () => {
-      navigator.geolocation.clearWatch(watcher);
-    };
+  
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
   const WeatherIcon = ({ code }: { code: string }) => {
@@ -123,4 +119,4 @@ const GeolocationComponent: React.FC = () => {
   );
 };
 
-export default GeolocationComponent;
+export default WeatherCard;

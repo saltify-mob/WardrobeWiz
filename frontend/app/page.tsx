@@ -1,11 +1,12 @@
 'use client';
 
-import GeolocationComponent from './components/weatherCard/WeatherCard';
-import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { createUser } from './hooks/createUser';
+
+import SuggestionCard from './components/suggestionCard/SuggestionCard';
+import WeatherCard from './components/weatherCard/WeatherCard';
 
 export default function Home() {
   const { user, isLoading } = useUser();
@@ -29,7 +30,7 @@ export default function Home() {
 
   return (
     <main className="w-full flex-col items-center justify-between">
-      <GeolocationComponent />
+      <WeatherCard />
       <SuggestionCard />
     </main>
   );
