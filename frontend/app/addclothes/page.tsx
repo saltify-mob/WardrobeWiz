@@ -44,7 +44,7 @@ export default function AddClothingPage() {
   };
 
   return (
-    <main>
+    <main className="w-full flex-col items-center justify-between">
       <HamburgerMenu />
       <form onSubmit={handleAddClothing}>
         <div>
