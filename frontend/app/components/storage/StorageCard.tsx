@@ -25,7 +25,7 @@ const StorageCard: React.FC = () => {
   };
 
   const toggleDetail = (clothing: Clothing) => {
-    setSelectedClothing(clothing);
+    setSelectedClothing(selectedClothing && selectedClothing.id === clothing.id ? null : clothing);
   };
 
   const closeDetail = () => {
