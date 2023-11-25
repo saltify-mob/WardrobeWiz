@@ -11,7 +11,7 @@ interface ClothingCardProps {
 
 const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete, onSendToWardrobe }) => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white bg-opacity-90">
+    <div className="w-full h-full flex items-center justify-center bg-white bg-opacity-90">
       <div className="max-w-md p-4 bg-white shadow-md rounded-md">
         <Image 
           src={clothing.imageUrl}

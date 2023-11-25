@@ -48,7 +48,7 @@ const StorageCard: React.FC = () => {
       <div className="w-96 h-96">
         <div className="grid grid-cols-3 gap-4 h-full">
           {filteredClothes.map((clothing, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative cursor-pointer" onClick={() => toggleDetail(clothing)}>
                <Image
                   src={clothing.imageUrl}
                   alt={clothing.type}
