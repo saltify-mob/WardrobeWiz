@@ -5,16 +5,10 @@ import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
 import { fetcher } from '@/app/utils/fetcher';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
-interface Clothing {
-  id: string;
+interface Clothing extends ClothingItem {
   category: string;
-  type: string;
-  season: string;
-  color: string;
-  dateOfPurchase: string;
-  timeLastUsed: string;
-  imageUrl: string;
 }
 
 const WardrobeCard = () => {

@@ -1,14 +1,8 @@
+import { ClothingItem } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 
-interface Clothing {
-  id: string;
+interface Clothing extends ClothingItem {
   category: string;
-  type: string;
-  season: string;
-  color: string;
-  dateOfPurchase: string;
-  timeLastUsed: string;
-  imageUrl: string;
 }
 
 interface Props {
