@@ -8,7 +8,7 @@ interface Clothing extends ClothingItem {
   category: string;
 }
 
-interface Props{
+interface Props {
     headwears: Clothing[]
 }
 
