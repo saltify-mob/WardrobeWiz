@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ClothingDetail from './ClothingCard'; // Import the ClothingDetail component
+import ClothingCard from './ClothingCard'; // Import the ClothingDetail component
 import { fetcher } from '@/app/utils/fetcher';
 
 interface Clothing {
@@ -13,7 +13,7 @@ interface Clothing {
   imageUrl: string;
 }
 
-const ClothingList: React.FC = () => {
+const StorageCard: React.FC = () => {
   const [clothes, setClothes] = useState<Clothing[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<Clothing | null>(null);
@@ -78,7 +78,7 @@ const ClothingList: React.FC = () => {
         </div>
       </div>
       {selectedClothing && (
-        <ClothingDetail
+        <ClothingCard
           clothing={selectedClothing}
           onClose={closeDetail}
           onDelete={() => handleDelete(selectedClothing.id)}
@@ -89,4 +89,4 @@ const ClothingList: React.FC = () => {
   );
 };
 
-export default ClothingList;
+export default StorageCard;

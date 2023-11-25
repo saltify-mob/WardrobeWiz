@@ -2,19 +2,19 @@ import React from 'react';
 import Image from 'next/image';
 import { ClothingItem } from '@/app/types/ClothingItem';
 
-interface ClothingDetailProps {
+interface ClothingCardProps {
   clothing: ClothingItem;
   onClose: () => void;
   onDelete: () => void;
   onSendToWardrobe: () => void;
 }
 
-const ClothingCard: React.FC<ClothingDetailProps> = ({ clothing, onClose, onDelete, onSendToWardrobe }) => {
+const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete, onSendToWardrobe }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white bg-opacity-90">
       <div className="max-w-md p-4 bg-white shadow-md rounded-md">
         <Image 
-          src={clothing.imageUrl} 
+          src={clothing.imageUrl}
           alt={clothing.type} 
           layout="responsive"
           width={170}

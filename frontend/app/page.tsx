@@ -24,7 +24,6 @@ export default function Home() {
   useEffect(() => {
     if (!isLoading && user) {
       createUser(user);
-      fetchClothingData();
     } else if (!isLoading && !user) {
       router.push('/api/auth/login');
     }
