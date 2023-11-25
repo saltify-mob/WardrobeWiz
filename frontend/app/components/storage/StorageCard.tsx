@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import ClothingCard from './ClothingCard';
@@ -25,7 +25,7 @@ const StorageCard: React.FC = () => {
   };
 
   const toggleDetail = (clothing: Clothing) => {
-    setSelectedClothing(selectedClothing && selectedClothing.id === clothing.id ? null : clothing);
+    setSelectedClothing(clothing);
   };
 
   const closeDetail = () => {
