@@ -37,7 +37,7 @@ export default function ClothingsPage() {
   };
 
   return (
-    <div>
+    <main>
       <div className="flex flex-col gap-2">
         {clothes.map((cloth) => (
           <div key={cloth.id}>
@@ -61,6 +61,6 @@ export default function ClothingsPage() {
         ))}
       </div>
       <Link href="/clothings/add">Add New</Link>
-    </div>
+    </main>
   );
 }

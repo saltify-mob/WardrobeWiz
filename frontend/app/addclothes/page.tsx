@@ -2,6 +2,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetcher } from '@/app/utils/fetcher';
+import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 
 export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
@@ -43,96 +44,99 @@ export default function AddClothingPage() {
   };
 
   return (
-    <form onSubmit={handleAddClothing}>
-      <div>
-        <label htmlFor="season">Season: </label>
-        <select
-          id="season"
-          required
-          value={season}
-          placeholder="Enter season"
-          onChange={(e) => setSeason(e.target.value)}
-        >
-          <option value="winter">Winter</option>
-          <option value="spring">Spring</option>
-          <option value="summer">Summer</option>
-          <option value="autumn">Autumn</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="type">Type: </label>
-        <select
-          id="type"
-          required
-          value={type}
-          placeholder="Enter type"
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option value="shirt">Shirt</option>
-          <option value="hoodie">Hoodie</option>
-          <option value="sweatShirt">Sweat Shirt</option>
-          <option value="t-shirt">T-shirt</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="category">Category: </label>
-        <select
-          id="category"
-          required
-          value={category}
-          placeholder="Enter category"
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="headwear">Headwear</option>
-          <option value="top">Top</option>
-          <option value="lowerGarment">Lower Garment</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="color">Color: </label>
-        <select
-          id="color"
-          required
-          value={color}
-          placeholder="Enter color"
-          onChange={(e) => setColor(e.target.value)}
-        >
-          <option value="blue">Blue</option>
-          <option value="red">Red</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="orange">Orange</option>
-          <option value="pink">Pink</option>
-          <option value="purple">Purple</option>
-          <option value="brown">Brown</option>
-          <option value="black">Black</option>
-          <option value="white">White</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="dateOfPurchase">Date of Purchase: </label>
-        <input
-          id="dateOfPurchase"
-          required
-          type="date"
-          value={dateOfPurchase}
-          placeholder="Enter date of purchase"
-          onChange={(e) => setDateOfPurchase(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="timeLastUsed">Time Last Used: </label>
-        <input
-          id="timeLastUsed"
-          required
-          type="date"
-          value={timeLastUsed}
-          placeholder="Enter time last used"
-          onChange={(e) => setTimeLastUsed(e.target.value)}
-        />
-      </div>
-      <input type="file" onChange={handleFileChange} />
-      <button type="submit">Submit</button>
-    </form>
+    <main>
+      <HamburgerMenu />
+      <form onSubmit={handleAddClothing}>
+        <div>
+          <label htmlFor="season">Season: </label>
+          <select
+            id="season"
+            required
+            value={season}
+            placeholder="Enter season"
+            onChange={(e) => setSeason(e.target.value)}
+          >
+            <option value="winter">Winter</option>
+            <option value="spring">Spring</option>
+            <option value="summer">Summer</option>
+            <option value="autumn">Autumn</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="type">Type: </label>
+          <select
+            id="type"
+            required
+            value={type}
+            placeholder="Enter type"
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value="shirt">Shirt</option>
+            <option value="hoodie">Hoodie</option>
+            <option value="sweatShirt">Sweat Shirt</option>
+            <option value="t-shirt">T-shirt</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="category">Category: </label>
+          <select
+            id="category"
+            required
+            value={category}
+            placeholder="Enter category"
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="headwear">Headwear</option>
+            <option value="top">Top</option>
+            <option value="lowerGarment">Lower Garment</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="color">Color: </label>
+          <select
+            id="color"
+            required
+            value={color}
+            placeholder="Enter color"
+            onChange={(e) => setColor(e.target.value)}
+          >
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="orange">Orange</option>
+            <option value="pink">Pink</option>
+            <option value="purple">Purple</option>
+            <option value="brown">Brown</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="dateOfPurchase">Date of Purchase: </label>
+          <input
+            id="dateOfPurchase"
+            required
+            type="date"
+            value={dateOfPurchase}
+            placeholder="Enter date of purchase"
+            onChange={(e) => setDateOfPurchase(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="timeLastUsed">Time Last Used: </label>
+          <input
+            id="timeLastUsed"
+            required
+            type="date"
+            value={timeLastUsed}
+            placeholder="Enter time last used"
+            onChange={(e) => setTimeLastUsed(e.target.value)}
+          />
+        </div>
+        <input type="file" onChange={handleFileChange} />
+        <button type="submit">Submit</button>
+      </form>
+    </main>
   );
 }

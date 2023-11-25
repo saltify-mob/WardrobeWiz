@@ -20,7 +20,7 @@ const HamburgerMenu = () => {
   
         {isOpen && (
           <div className="menu">
-            <Link href="/home">
+            <Link href="/">
             <a className="menu-item">Home</a>
             </Link>
             <Link href="/addclothes">
