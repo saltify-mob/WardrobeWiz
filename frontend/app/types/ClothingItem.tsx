@@ -7,3 +7,7 @@ export interface ClothingItem {
   timeLastUsed: string;
   imageUrl: string;
 }
+
+export interface Clothing extends ClothingItem {
+  category: string;
+}

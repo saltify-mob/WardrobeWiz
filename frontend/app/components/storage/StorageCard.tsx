@@ -3,11 +3,7 @@ import Image from 'next/image';
 import { fetcher } from '@/app/utils/fetcher';
 
 import ClothingCard from './ClothingCard';
-import { ClothingItem } from '@/app/types/ClothingItem';
-
-interface Clothing extends ClothingItem {
-  category: string;
-}
+import { Clothing } from '@/app/types/ClothingItem';
 
 const StorageCard: React.FC = () => {
   const [clothes, setClothes] = useState<Clothing[]>([]);

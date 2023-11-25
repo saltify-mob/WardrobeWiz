@@ -1,10 +1,6 @@
-import { ClothingItem } from '@/app/types/ClothingItem';
+import { Clothing } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 import Image from 'next/image';
-
-interface Clothing extends ClothingItem {
-  category: string;
-}
 
 interface Props {
   lowerGarments: Clothing[];

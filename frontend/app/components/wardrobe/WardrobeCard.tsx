@@ -5,11 +5,7 @@ import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
 import { fetcher } from '@/app/utils/fetcher';
-import { ClothingItem } from '@/app/types/ClothingItem';
-
-interface Clothing extends ClothingItem {
-  category: string;
-}
+import { Clothing } from '@/app/types/ClothingItem';
 
 const WardrobeCard = () => {
 
