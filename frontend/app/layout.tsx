@@ -1,6 +1,8 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+
 import './globals.css';
 import BottomNavBar from './components/navBar/NavBar';
+import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
 
 export const metadata = {
   title: 'Wardrobe Wiz',
@@ -15,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
+        <HamburgerMenu />
         <body>{children}</body>
         <BottomNavBar />
       </UserProvider>

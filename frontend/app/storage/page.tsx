@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import BottomNavBar from '../../components/navBar/NavBar';
-import StorageCard from '../../components/storage/StorageCard';
 
+import BottomNavBar from '../components/navBar/NavBar';
+import StorageCard from '../components/storage/StorageCard';
 
 export default function Storage() {
   return (
