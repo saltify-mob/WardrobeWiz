@@ -1,6 +1,6 @@
 'use client';
 
-import BottomNavBar from '../../components/navBar/NavBar';
+import BottomNavBar from '../components/navBar/NavBar';
 
 export default function Info() {
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import BottomNavBar from '../../components/navBar/NavBar';
+import BottomNavBar from '../components/navBar/NavBar';
 
 
 export default function addClothes() {

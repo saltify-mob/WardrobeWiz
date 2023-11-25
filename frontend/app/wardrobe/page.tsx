@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import BottomNavBar from '../../components/navBar/NavBar';
-import WardrobeCard from '../../components/wardrobe/WardrobeCard';
+import BottomNavBar from '../components/navBar/NavBar';
+import WardrobeCard from '../components/wardrobe/WardrobeCard';
 
 export default function Wardrobe() {
   return (
