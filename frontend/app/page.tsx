@@ -25,7 +25,6 @@ export default function Home() {
     if (!isLoading && user) {
       createUser(user);
       fetchClothingData();
-      fetchOutfitData();
     } else if (!isLoading && !user) {
       router.push('/api/auth/login');
     }

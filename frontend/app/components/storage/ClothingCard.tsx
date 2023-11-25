@@ -1,23 +1,15 @@
-
 import React from 'react';
+import Image from 'next/image';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
 interface ClothingDetailProps {
-  clothing: {
-    id: string;
-    category: string;
-    type: string;
-    season: string;
-    color: string;
-    dateOfPurchase: string;
-    timeLastUsed: string;
-    imageUrl: string;
-  };
+  clothing: ClothingItem;
   onClose: () => void;
   onDelete: () => void;
   onSendToWardrobe: () => void;
 }
 
-const ClothingDetail: React.FC<ClothingDetailProps> = ({ clothing, onClose, onDelete, onSendToWardrobe }) => {
+const ClothingCard: React.FC<ClothingDetailProps> = ({ clothing, onClose, onDelete, onSendToWardrobe }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white bg-opacity-90">
       <div className="max-w-md p-4 bg-white shadow-md rounded-md">
@@ -32,4 +24,4 @@ const ClothingDetail: React.FC<ClothingDetailProps> = ({ clothing, onClose, onDe
   );
 };
 
-export default ClothingDetail;
+export default ClothingCard;
