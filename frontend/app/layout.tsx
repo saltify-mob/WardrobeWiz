@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html data-theme="nord" lang="en">
       <UserProvider>
         <body>{children}</body>
       </UserProvider>
