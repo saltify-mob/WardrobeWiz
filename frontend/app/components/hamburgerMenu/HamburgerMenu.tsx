@@ -21,13 +21,16 @@ const HamburgerMenu = () => {
             <Link href="/home">
             <a className="menu-item">Home</a>
             </Link>
-            <Link href="/tabs/wardrobe">
+            <Link href="/addclothes">
                 <a className="menu-item">Wardrobe</a>
             </Link>
-            <Link href="/tabs/storage">
+            <Link href="/wardrobe">
+                <a className="menu-item">Wardrobe</a>
+            </Link>
+            <Link href="/storage">
                 <a className="menu-item">Storage</a>
             </Link>
-            <Link href="/tabs/settings">
+            <Link href="/settings">
                 <a className="menu-item">Settings</a>
             </Link>
           </div>
