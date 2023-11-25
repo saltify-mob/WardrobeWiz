@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { fetchOutfitData } from '../../hooks/GenerateOutfitFetcher';
+import { fetchOutfitData } from '../../hooks/fetchOutfitData';
+import Image from 'next/image';
 
-const TodaysOutfit = () => {
+const SuggestionCard = () => {
   const [outfit, setOutfit] = useState({
-    headwearUrl: 'https://via.placeholder.com/150?text=Headwear',
+    headwearUrl: 'https://via.placeholder.com/100?text=Headwear',
     topUrl: 'https://via.placeholder.com/150?text=Top',
-    trousersUrl: 'https://via.placeholder.com/150?text=Trousers',
+    trousersUrl: 'https://via.placeholder.com/120x180?text=Trousers'
   });
 
   const loadNewOutfit = async () => {
@@ -19,16 +20,37 @@ const TodaysOutfit = () => {
   };
 
   useEffect(() => {
-    loadNewOutfit(); // Fetch data when the component mounts
+    loadNewOutfit();
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-white rounded-lg shadow-lg my-8">
+    <div className="full-w flex flex-col items-center bg-white my-8">
       <h2 className="text-2xl font-semibold my-4">{`Today's Outfit`}</h2>
       <div className="flex flex-col items-center mb-6 space-y-4">
-        <img src={outfit.headwearUrl} alt="Headwear" className="w-24 h-24 object-cover" />
-        <img src={outfit.topUrl} alt="Top" className="w-32 h-32 object-cover" />
-        <img src={outfit.trousersUrl} alt="Trousers" className="w-24 h-32 object-cover" />
+        <Image 
+          src={outfit.headwearUrl} 
+          alt="Headwear" 
+          width={100}
+          height={100}
+          objectFit="cover"
+          className="rounded-md"
+        />
+        <Image 
+            src={outfit.topUrl} 
+            alt="Top" 
+            width={150}
+            height={150}
+            objectFit="cover"
+            className="rounded-md"
+        />
+        <Image 
+            src={outfit.trousersUrl} 
+            alt="Trousers" 
+            width={120}
+            height={180}
+            objectFit="cover"
+            className="rounded-md"
+        />
       </div>
       <button
         onClick={loadNewOutfit}
@@ -40,4 +62,4 @@ const TodaysOutfit = () => {
   );
 };
 
-export default TodaysOutfit;
+export default SuggestionCard;

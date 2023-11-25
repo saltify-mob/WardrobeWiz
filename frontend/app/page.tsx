@@ -1,14 +1,12 @@
 'use client';
 
 import GeolocationComponent from './components/weatherCard/WeatherCard';
-import BottomNavBar from './components/navBar/NavBar';
-import TodaysOutfit from './components/suggestionCard/SuggestionCard';
+import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { fetchClothingData } from './hooks/ClothingDataFetcher';
-import { fetchOutfitData } from './hooks/GenerateOutfitFetcher';
-import { create } from 'domain';
+import { fetchClothingData } from './hooks/fetchClothingData';
+import { fetchOutfitData } from './hooks/fetchOutfitData';
 import { createUser } from './hooks/createUser';
 
 export default function Home() {
@@ -34,9 +32,9 @@ export default function Home() {
   }, [user, isLoading, router]);
 
   return (
-    <main className="w-full flex-col items-center justify-between p-4">
+    <main className="w-full flex-col items-center justify-between">
       <GeolocationComponent />
-      <TodaysOutfit />
+      <SuggestionCard />
     </main>
   );
 }
