@@ -43,6 +43,8 @@ const WeatherCard: React.FC = () => {
         ...prevState,
         weather: data,
       }));
+      localStorage.setItem('weatherData', JSON.stringify(data));
+      localStorage.setItem('weatherDataTimestamp', Date.now().toString());
     } catch (error) {
       console.error("Error fetching weather data", error);
     }
@@ -71,18 +73,26 @@ const WeatherCard: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!('geolocation' in navigator)) {
-      onError({
-        code: 0,
-        message: 'Geolocation not supported',
-        PERMISSION_DENIED: 1,
-        POSITION_UNAVAILABLE: 2,
-        TIMEOUT: 3
-      });
-      return;
+    const storedWeatherData = localStorage.getItem('weatherData');
+    const storedTimestamp = localStorage.getItem('weatherDataTimestamp');
+    const expiryTime = 3600000;
+
+    if (storedWeatherData && storedTimestamp && (Date.now() - parseInt(storedTimestamp) < expiryTime)) {
+      setLocation({ weather: JSON.parse(storedWeatherData) });
+    } else {
+      if (!('geolocation' in navigator)) {
+        onError({
+          code: 0,
+          message: 'Geolocation not supported',
+          PERMISSION_DENIED: 1,
+          POSITION_UNAVAILABLE: 2,
+          TIMEOUT: 3
+        });
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
     }
-  
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
   const WeatherIcon = ({ code }: { code: string }) => {
