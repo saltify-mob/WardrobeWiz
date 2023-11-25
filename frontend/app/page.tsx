@@ -7,6 +7,7 @@ import { createUser } from './hooks/createUser';
 
 import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import WeatherCard from './components/weatherCard/WeatherCard';
+import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
 
 export default function Home() {
   const { user, isLoading } = useUser();
@@ -30,6 +31,7 @@ export default function Home() {
 
   return (
     <main className="w-full flex-col items-center justify-between">
+      <HamburgerMenu />
       <WeatherCard />
       <SuggestionCard />
     </main>

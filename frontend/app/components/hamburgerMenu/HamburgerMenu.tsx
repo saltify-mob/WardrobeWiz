@@ -24,7 +24,7 @@ const HamburgerMenu = () => {
             <a className="menu-item">Home</a>
             </Link>
             <Link href="/addclothes">
-                <a className="menu-item">Wardrobe</a>
+                <a className="menu-item">Add clothes</a>
             </Link>
             <Link href="/wardrobe">
                 <a className="menu-item">Wardrobe</a>
