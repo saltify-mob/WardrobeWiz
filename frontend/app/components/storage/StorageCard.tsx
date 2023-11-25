@@ -45,20 +45,18 @@ const StorageCard: React.FC = () => {
         placeholder="Search Clothes..."
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <div className="w-96 h-96">
-        <div className="grid grid-cols-3 gap-4 h-full">
-          {filteredClothes.map((clothing, index) => (
-            <div key={index} className="relative cursor-pointer" onClick={() => toggleDetail(clothing)}>
-               <Image
-                  src={clothing.imageUrl}
-                  alt={clothing.type}
-                  width={96}
-                  height={96}
-                  layout="responsive"
-                />
-            </div>
-          ))}
-        </div>
+      <div>
+        {filteredClothes.map((clothing, index) => (
+          <div key={index} className="relative cursor-pointer" onClick={() => toggleDetail(clothing)}>
+            <Image
+              src={clothing.imageUrl}
+              alt={clothing.type}
+              width={96}
+              height={96}
+              layout="responsive"
+            />
+          </div>
+        ))}
       </div>
       {selectedClothing && (
         <ClothingCard
