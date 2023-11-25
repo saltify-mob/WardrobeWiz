@@ -12,7 +12,7 @@ const BottomNavBar = () => {
   return (
     <nav className="fixed bottom-0 inset-x-0 bg-white p-2 flex justify-between items-center shadow-md">
       <Link
-        href="/tabs/info"
+        href="/settings"
         className="flex flex-col items-center space-y-1 text-gray-700"
       >
         <InfoIcon />
@@ -36,7 +36,7 @@ const BottomNavBar = () => {
       </Link>
 
       <Link
-        href="/tabs/wardrobe"
+        href="/wardrobe"
         className="flex flex-col items-center space-y-1 text-gray-700"
       >
         <WardrobeIcon />
@@ -44,7 +44,7 @@ const BottomNavBar = () => {
       </Link>
 
       <Link
-        href="/tabs/storage"
+        href="/storage"
         className="flex flex-col items-center space-y-1 text-gray-700"
       >
         <StorageIcon />
