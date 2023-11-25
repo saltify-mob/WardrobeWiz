@@ -90,10 +90,6 @@ const WeatherCard: React.FC = () => {
         });
         return;
       }
-
-      const geolocationOptions = {
-        enableHighAccuracy: false
-      };
   
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
         enableHighAccuracy: false
