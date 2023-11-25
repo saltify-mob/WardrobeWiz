@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import BottomNavBar from '../components/navBar/NavBar';
 import WardrobeCard from '../components/wardrobe/WardrobeCard';
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 

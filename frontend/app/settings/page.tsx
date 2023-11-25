@@ -1,7 +1,6 @@
 'use client';
 
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
-import BottomNavBar from '../components/navBar/NavBar';
 
 export default function Settings() {
 
