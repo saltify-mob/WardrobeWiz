@@ -6,17 +6,17 @@ export const createUser = async (user: UserProfile) => {
 
   if (!response.ok) {
     const fullName = user.name!.split(' ');
-    const raw = JSON.stringify({
+    const raw = {
       id: user.email,
       firstName: fullName[0],
       lastName: fullName[1],
-    });
+    };
     const response = await fetcher('/api/users', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: raw,
+      body: JSON.stringify(raw)
     });
   }
 };

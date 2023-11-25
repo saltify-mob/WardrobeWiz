@@ -5,8 +5,6 @@ import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { fetchClothingData } from './hooks/fetchClothingData';
-import { fetchOutfitData } from './hooks/fetchOutfitData';
 import { createUser } from './hooks/createUser';
 
 export default function Home() {
