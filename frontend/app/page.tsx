@@ -8,6 +8,7 @@ import { createUser } from './hooks/createUser';
 import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import WeatherCard from './components/weatherCard/WeatherCard';
 import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
+import { fetchWardrobeData } from './hooks/fetchWardrobeData';
 
 export default function Home() {
   const { user, isLoading } = useUser();
@@ -18,8 +19,10 @@ export default function Home() {
       if (user) {
         localStorage.setItem('user_id', user.email!);
         createUser(user);
+        fetchWardrobeData('wardrobe_data');
       } else {
         localStorage.removeItem('user_id');
+        localStorage.removeItem('wardrobe_data');
         router.push('/api/auth/login');
       }
     }

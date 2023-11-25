@@ -8,28 +8,21 @@ import { fetcher } from '@/app/utils/fetcher';
 import { Clothing } from '@/app/types/ClothingItem';
 
 const WardrobeCard = () => {
-
   const [wardrobe, setWardrobe] = useState<Clothing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const getWardrobe = async () => {
-    try {
-      const response = await fetcher('/api/clothings/wardrobe');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setWardrobe(data);
-    } catch (error) {
-      console.error('Error fetching clothing data:', error);
+    const storedData = localStorage.getItem('clothingData');
+    if (storedData) {
+      setWardrobe(JSON.parse(storedData));
     }
-  };
-  getWardrobe(); 
-  setIsLoading(false);
+    setIsLoading(false);
   }, []);
+
   const headWears = wardrobe.filter(cloting => cloting.category === 'headwear');
   const tops = wardrobe.filter((cloting) => cloting.category === "top");
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
+  
   return (
     <div className="flex flex-col">
       {isLoading ? (

@@ -11,19 +11,10 @@ const StorageCard: React.FC = () => {
   const [selectedClothing, setSelectedClothing] = useState<Clothing | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetcher('/api/clothings/wardrobe');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setClothes(data);
-      } catch (error) {
-        console.error('Error fetching clothing data:', error);
-      }
-    };
-    fetchData();
+    const storedData = localStorage.getItem('clothingData');
+    if (storedData) {
+      setClothes(JSON.parse(storedData));
+    }
   }, []);
 
   const handleDelete = (id: string) => {
