@@ -20,21 +20,11 @@ const HamburgerMenu = () => {
   
         {isOpen && (
           <div className="menu">
-            <Link href="/">
-            <a className="menu-item">Home</a>
-            </Link>
-            <Link href="/addclothes">
-                <a className="menu-item">Add clothes</a>
-            </Link>
-            <Link href="/wardrobe">
-                <a className="menu-item">Wardrobe</a>
-            </Link>
-            <Link href="/storage">
-                <a className="menu-item">Storage</a>
-            </Link>
-            <Link href="/settings">
-                <a className="menu-item">Settings</a>
-            </Link>
+            <Link href="/">Home</Link>
+            <Link href="/addclothes">Add clothes</Link>
+            <Link href="/wardrobe">Wardrobe</Link>
+            <Link href="/storage">Storage</Link>
+            <Link href="/settings">Settings</Link>
           </div>
         )}
       </div>

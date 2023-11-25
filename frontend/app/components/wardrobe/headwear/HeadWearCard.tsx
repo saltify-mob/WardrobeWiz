@@ -12,7 +12,7 @@ const HeadWearCard = (props: Props) => {
   const scrollAmount = 100;	
 
   return (
-    <section className="w-full flex-col items-center justify-between">
+    <section>
       <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
       const container = sliderRef.current;
       if (container) {
