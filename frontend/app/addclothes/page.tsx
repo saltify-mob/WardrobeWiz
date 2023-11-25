@@ -55,6 +55,7 @@ export default function AddClothingPage() {
             value={season}
             placeholder="Enter season"
             onChange={(e) => setSeason(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
           >
             <option value="winter">Winter</option>
             <option value="spring">Spring</option>
@@ -70,6 +71,7 @@ export default function AddClothingPage() {
             value={type}
             placeholder="Enter type"
             onChange={(e) => setType(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
           >
             <option value="shirt">Shirt</option>
             <option value="hoodie">Hoodie</option>
@@ -85,6 +87,7 @@ export default function AddClothingPage() {
             value={category}
             placeholder="Enter category"
             onChange={(e) => setCategory(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
           >
             <option value="headwear">Headwear</option>
             <option value="top">Top</option>
@@ -99,6 +102,7 @@ export default function AddClothingPage() {
             value={color}
             placeholder="Enter color"
             onChange={(e) => setColor(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
           >
             <option value="blue">Blue</option>
             <option value="red">Red</option>
@@ -134,8 +138,8 @@ export default function AddClothingPage() {
             onChange={(e) => setTimeLastUsed(e.target.value)}
           />
         </div>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Submit</button>
+        <input className='file-input w-full max-w-xs' type="file" onChange={handleFileChange} />
+        <button className='btn btn-primary' type="submit">Submit</button>
       </form>
     </main>
   );

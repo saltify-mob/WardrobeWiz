@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 interface Clothing {
   id: string;
@@ -18,19 +18,19 @@ interface Props {
 const TopsCard = (props: Props) => {
   const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
   const scrollAmount = 100;
-  
+
   return (
     <section className="flex flex-row">
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-        className="self-center w-10 h-5 hover:cursor-pointer"
+<button
+        
+        className="self-center btn btn-circle btn-neutral"
         onClick={() => {
           const container = sliderRef.current;
           container.scrollLeft -= scrollAmount;
         }}
-      />
+        >❮</button>
       <article
-        className="flex flex-row max-w-md overflow-scroll scroll-smooth"
+        className="flex flex-row max-w-md overflow-hidden scroll-smooth"
         dir="ltr"
         ref={sliderRef}
       >
@@ -44,14 +44,13 @@ const TopsCard = (props: Props) => {
           ></img>
         ))}
       </article>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
-        className="self-center w-10 h-5 hover:cursor-pointer"
+      <button
+        className="self-center btn btn-circle btn-neutral"
         onClick={() => {
           const container = sliderRef.current;
           container.scrollLeft += scrollAmount;
         }}
-      />
+      >❯</button>
     </section>
   );
 }
