@@ -4,7 +4,6 @@ import Image from 'next/image';
 import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
-import { fetcher } from '@/app/utils/fetcher';
 import { Clothing } from '@/app/types/ClothingItem';
 
 const WardrobeCard = () => {
@@ -12,7 +11,7 @@ const WardrobeCard = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedData = localStorage.getItem('clothingData');
+    const storedData = localStorage.getItem('wardrobe_data');
     if (storedData) {
       setWardrobe(JSON.parse(storedData));
     }
@@ -22,7 +21,7 @@ const WardrobeCard = () => {
   const headWears = wardrobe.filter(cloting => cloting.category === 'headwear');
   const tops = wardrobe.filter((cloting) => cloting.category === "top");
   const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
-  
+
   return (
     <div className="flex flex-col">
       {isLoading ? (

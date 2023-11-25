@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { fetcher } from '@/app/utils/fetcher';
 
 import ClothingCard from './ClothingCard';
 import { Clothing } from '@/app/types/ClothingItem';
@@ -11,7 +10,7 @@ const StorageCard: React.FC = () => {
   const [selectedClothing, setSelectedClothing] = useState<Clothing | null>(null);
 
   useEffect(() => {
-    const storedData = localStorage.getItem('clothingData');
+    const storedData = localStorage.getItem('wardrobe_data');
     if (storedData) {
       setClothes(JSON.parse(storedData));
     }

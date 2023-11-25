@@ -19,7 +19,7 @@ export default function Home() {
       if (user) {
         localStorage.setItem('user_id', user.email!);
         createUser(user);
-        fetchWardrobeData('wardrobe_data');
+        fetchWardrobeData();
       } else {
         localStorage.removeItem('user_id');
         localStorage.removeItem('wardrobe_data');
