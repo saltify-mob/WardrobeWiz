@@ -53,7 +53,7 @@ const StorageCard: React.FC = () => {
               alt={clothing.type}
               width={96}
               height={96}
-              layout="responsive"
+              layout="fixed"
             />
           </div>
         ))}

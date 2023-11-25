@@ -11,13 +11,14 @@ const TopsCard = (props: Props) => {
   const scrollAmount = 100;
   
   return (
-    <section className="w-full flex-col items-center justify-between">
-      <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-      const container = sliderRef.current;
-      if (container) {
-        container.scrollLeft -= scrollAmount;
-      }
-      }}>
+    <section className="flex flex-row items-center justify-center">
+      {props.tops.length ? (
+        <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
+        const container = sliderRef.current;
+        if (container) {
+          container.scrollLeft -= scrollAmount;
+        }
+        }}>
         <Image
           src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
           alt="Left arrow"
@@ -26,7 +27,8 @@ const TopsCard = (props: Props) => {
           layout="fixed"
         />
       </div>
-      <article
+      ) : (<></>)}
+      <div
         className="flex flex-row max-w-md overflow-scroll scroll-smooth"
         dir="ltr"
         ref={sliderRef}
@@ -42,13 +44,14 @@ const TopsCard = (props: Props) => {
             />
           </div>
         ))}
-      </article>
-      <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-      const container = sliderRef.current;
-      if (container) {
-        container.scrollLeft += scrollAmount;
-      }
-      }}>
+      </div>
+      {props.tops.length ? (
+        <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
+        const container = sliderRef.current;
+        if (container) {
+          container.scrollLeft += scrollAmount;
+        }
+        }}>
         <Image
           src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
           alt="Right arrow"
@@ -57,6 +60,7 @@ const TopsCard = (props: Props) => {
           layout="fixed"
         />
       </div>
+      ) : (<></>)}
     </section>
   );
 }

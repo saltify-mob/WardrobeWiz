@@ -14,7 +14,7 @@ const HamburgerMenu = () => {
       <div>
         <div onClick={toggleMenu}>
           <svg width="23" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 2h19M2.003 8.75h19M2.003 15.75h19" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+            <path d="M2 2h19M2.003 8.75h19M2.003 15.75h19" stroke="#000" strokeWidth="4" strokeLinecap="round"/>
           </svg>
         </div>
   

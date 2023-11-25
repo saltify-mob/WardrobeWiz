@@ -9,7 +9,7 @@ export default function Storage() {
   return (
   <main className="w-full flex-col items-center justify-between">
     <HamburgerMenu />
-    <div>Storage Page</div>
+    <h1 className='text-2xl font-bold'>My Storage</h1>
     <StorageCard/>
   </main>
   );
