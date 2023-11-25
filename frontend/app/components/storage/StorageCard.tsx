@@ -3,16 +3,10 @@ import Image from 'next/image';
 import { fetcher } from '@/app/utils/fetcher';
 
 import ClothingCard from './ClothingCard';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
-interface Clothing {
-  id: string;
+interface Clothing extends ClothingItem {
   category: string;
-  type: string;
-  season: string;
-  color: string;
-  dateOfPurchase: string;
-  timeLastUsed: string;
-  imageUrl: string;
 }
 
 const StorageCard: React.FC = () => {
