@@ -2,6 +2,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetcher } from '@/app/utils/fetcher';
+import Image from 'next/image';
 
 export default function AddClothingPage({
   params,
@@ -15,6 +16,7 @@ export default function AddClothingPage({
   const [color, setColor] = useState('red');
   const [dateOfPurchase, setDateOfPurchase] = useState('');
   const [timeLastUsed, setTimeLastUsed] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     fetcher(`/api/clothings/${params.id}`)
@@ -27,6 +29,7 @@ export default function AddClothingPage({
         setColor(res.color);
         setDateOfPurchase(res.dateOfPurchase);
         setTimeLastUsed(res.timeLastUsed);
+        setImageUrl(res.imageUrl);
       });
   }, [params.id]);
 
@@ -52,6 +55,7 @@ export default function AddClothingPage({
   return (
     <main className="w-full flex-col items-center justify-between">
       <form onSubmit={handleSubmit}>
+        <Image src={imageUrl} alt="imageUrl" height={100} width={100} />
         <div>
           <label htmlFor="season">Season: </label>
           <select
