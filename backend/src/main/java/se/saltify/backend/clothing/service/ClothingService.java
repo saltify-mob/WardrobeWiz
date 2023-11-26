@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import se.saltify.backend.clothing.Clothing;
 import se.saltify.backend.clothing.ClothingRepository;
-import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
-import se.saltify.backend.clothing.dto.ClothingGenerateResponseDto;
-import se.saltify.backend.clothing.dto.ClothingRequestDto;
-import se.saltify.backend.clothing.dto.ClothingResponseDto;
+import se.saltify.backend.clothing.dto.*;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
@@ -52,18 +49,6 @@ public class ClothingService {
         return mapToDto(cloth);
     }
 
-    public ClothingResponseDto updateClothing(String id, ClothingRequestDto dto) {
-        Clothing clothing = clothingRepository.findById(id).orElseThrow();
-        clothing.setCategory(dto.category());
-        clothing.setType(dto.type());
-        clothing.setSeason(dto.season());
-        clothing.setColor(dto.color());
-        clothing.setDateOfPurchase(dto.dateOfPurchase());
-        clothing.setTimeLastUsed(dto.timeLastUsed());
-        clothingRepository.save(clothing);
-        return mapToDto(clothing);
-    }
-
     public ClothingGenerateResponseDto generateClothing(String userId, double temp) {
         List<Clothing> clothing = clothingRepository.findClothingsForUserAndSeason(userId, determineSeason(temp));
         List<Clothing> headWears = clothing.stream().filter(c -> c.getCategory().equals("headwear")).toList();
@@ -81,6 +66,19 @@ public class ClothingService {
     public List<ClothingResponseDto> getWardrobeForUser(String userId) {
         List<Clothing> clothing = clothingRepository.findClothingsForUser(userId);
         return clothing.stream().map(this::mapToDto).toList();
+    }
+
+    public ClothingResponseDto updateClothing(String id, ClothingUpdateRequestDto dto) {
+        Clothing clothing = clothingRepository.findById(id).orElseThrow();
+        clothing.setType(dto.type());
+        clothing.setSeason(dto.season());
+        clothing.setColor(dto.color());
+        clothing.setCategory(dto.category());
+        clothing.setTimeLastUsed(dto.timeLastUsed());
+        clothing.setDateOfPurchase(dto.dateOfPurchase());
+        clothing.setLocation(dto.location());
+        clothingRepository.save(clothing);
+        return mapToDto(clothing);
     }
 
     private ClothingResponseDto mapToDto(Clothing c) {
