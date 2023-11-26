@@ -41,11 +41,11 @@ public class ClothingService {
     public ClothingResponseDto createClothing(ClothingCreateRequestDto dto) {
         User user = userRepository.findById(dto.userId()).orElseThrow();
 
-        String imageKey = "clothing-image-" +  UUID.randomUUID();
+        String imageKey = "clothing-image-" + UUID.randomUUID();
         System.out.println("YO" + imageKey);
         String imageUrl = azureBlobStorageService.uploadImage(dto.image(), imageKey);
 
-        Clothing cloth = new Clothing(user, dto.category(), dto.type(), dto.season(), dto.color(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey);
+        Clothing cloth = new Clothing(user, dto.category(), dto.type(), dto.season(), dto.color(), dto.dateOfPurchase(), dto.timeLastUsed(), imageUrl, imageKey, dto.location());
         clothingRepository.save(cloth);
         return mapToDto(cloth);
     }
@@ -76,10 +76,11 @@ public class ClothingService {
         return new ClothingGenerateResponseDto(randomHeadwear, randomTop, randomlowerGarment);
     }
 
-    public List<ClothingResponseDto> getWardrobeForUser(String userId){
+    public List<ClothingResponseDto> getWardrobeForUser(String userId) {
         List<Clothing> clothing = clothingRepository.findClothingsForUser(userId);
         return clothing.stream().map(this::mapToDto).toList();
     }
+
     private ClothingResponseDto mapToDto(Clothing c) {
         return new ClothingResponseDto(
                 c.getId(),
@@ -89,7 +90,9 @@ public class ClothingService {
                 c.getColor(),
                 c.getDateOfPurchase(),
                 c.getTimeLastUsed(),
-        c.getImageUrl());
+                c.getImageUrl(),
+                c.getLocation()
+        );
 
     }
 
