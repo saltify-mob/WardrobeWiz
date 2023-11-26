@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import se.saltify.backend.clothing.dto.ClothingCreateRequestDto;
-import se.saltify.backend.clothing.dto.ClothingGenerateResponseDto;
-import se.saltify.backend.clothing.dto.ClothingRequestDto;
-import se.saltify.backend.clothing.dto.ClothingResponseDto;
+import se.saltify.backend.clothing.dto.*;
 import se.saltify.backend.clothing.service.ClothingService;
 
 import java.util.List;
@@ -36,11 +33,6 @@ public class ClothingController {
     @GetMapping("/{id}")
     ResponseEntity<ClothingResponseDto> findById(@PathVariable String id) {
         return ResponseEntity.ok(clothingService.findById(id));
-    }
-
-    @PutMapping("/{id}")
-    ResponseEntity<ClothingResponseDto> updateClothing(@PathVariable String id, @RequestBody ClothingRequestDto dto) {
-        return ResponseEntity.ok(clothingService.updateClothing(id, dto));
     }
 
     @DeleteMapping("/{id}")
@@ -75,6 +67,11 @@ public class ClothingController {
     @GetMapping("/wardrobe")
     public ResponseEntity<List<ClothingResponseDto>> getWardrobeForUser(@RequestHeader(userIdHeader) String userId) {
         return ResponseEntity.ok(clothingService.getWardrobeForUser(userId));
+    }
+
+    @PutMapping("/{id}")
+  ResponseEntity <ClothingResponseDto> updateClothing(@PathVariable String id, @RequestBody ClothingUpdateRequestDto dto) {
+        return ResponseEntity.ok(clothingService.updateClothing(id, dto));
     }
 
     @ExceptionHandler({NoSuchElementException.class})
