@@ -12,6 +12,8 @@ import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
 import java.lang.annotation.ElementType;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -62,8 +64,8 @@ public class ClothingService {
         return mapToDto(clothing);
     }
 
-    public ClothingGenerateResponseDto generateClothing(String userId) {
-        List<Clothing> clothing = clothingRepository.findClothingsForUser(userId);
+    public ClothingGenerateResponseDto generateClothing(String userId, double temp) {
+        List<Clothing> clothing = clothingRepository.findClothingsForUserAndSeason(userId, determineSeason(temp));
         List<Clothing> headWears = clothing.stream().filter(c -> c.getCategory().equals("headwear")).toList();
         List<Clothing> tops = clothing.stream().filter(c -> c.getCategory().equals("top")).toList();
         List<Clothing> lowerGarments = clothing.stream().filter(c -> c.getCategory().equals("lowerGarment")).toList();
@@ -104,5 +106,19 @@ public class ClothingService {
         azureBlobStorageService.deleteImage(imageKey);
 
         clothingRepository.deleteById(id);
+    }
+
+    private String determineSeason(double temp) {
+        if (temp >= 25) {
+            return "summer";
+        } else if (temp >= 10) {
+            Month currentMonth = LocalDate.now().getMonth();
+            int monthValue = currentMonth.getValue();
+            if (monthValue >= Month.JANUARY.getValue() && monthValue <= Month.JUNE.getValue()) {
+                return "spring";
+            } else return "autumn";
+        } else {
+            return "winter";
+        }
     }
 }
