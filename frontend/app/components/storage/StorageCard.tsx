@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 import ClothingCard from './ClothingCard';
 import { Clothing } from '@/app/types/ClothingItem';
+import { fetcher } from '@/app/utils/fetcher';
+import { fetchWardrobeData } from '@/app/hooks/FetchWardrobeData';
 
 const StorageCard: React.FC = () => {
   const [clothes, setClothes] = useState<Clothing[]>([]);
@@ -16,8 +18,17 @@ const StorageCard: React.FC = () => {
     }
   }, []);
 
-  const handleDelete = (id: string) => {
-    // Implement delete functionality here
+  const handleDelete = async (id: string) => {
+    try {
+      await fetcher(`/api/clothing/${id}`, { method: 'DELETE' });
+      setClothes(clothes.filter(clothing => clothing.id !== id));
+      if (selectedClothing?.id === id) {
+        setSelectedClothing(null);
+      }
+      fetchWardrobeData();
+    } catch (error) {
+      console.error('Error deleting clothing item:', error);
+    }
   };
 
   const handleSendToWardrobe = (clothing: Clothing) => {
