@@ -9,6 +9,7 @@ export default function AddClothingPage() {
   const [season, setSeason] = useState('winter');
   const [type, setType] = useState('shirt');
   const [category, setCategory] = useState('top');
+  const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
   const [dateOfPurchase, setDateOfPurchase] = useState('');
   const [timeLastUsed, setTimeLastUsed] = useState('');
@@ -29,6 +30,7 @@ export default function AddClothingPage() {
     formData.append('type', type);
     formData.append('category', category);
     formData.append('color', color);
+    formData.append('location', location);
     formData.append('dateOfPurchase', dateOfPurchase);
     formData.append('timeLastUsed', timeLastUsed);
     if (file) {
@@ -89,6 +91,20 @@ export default function AddClothingPage() {
             <option value="headwear">Headwear</option>
             <option value="top">Top</option>
             <option value="lowerGarment">Lower Garment</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="location">Location: </label>
+          <select
+            id="location"
+            required
+            value={location}
+            placeholder="Enter location"
+            onChange={(e) => setlocation(e.target.value)}
+          >
+            <option value="wardrobe">Wardrobe</option>
+            <option value="storage">Storage</option>
+            <option value="luggage">Luggage</option>
           </select>
         </div>
         <div>
