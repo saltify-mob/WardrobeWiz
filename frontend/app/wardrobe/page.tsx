@@ -6,9 +6,9 @@ import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 
 export default function Wardrobe() {
   return (
-    <main className="w-full flex-col items-center justify-between">
+    <main className="flex flex-col items-center w-full p-4">
       <HamburgerMenu />
-      <h1 className='text-2xl font-bold'>My Wardrobe</h1>
+      <h1 className="text-2xl font-bold my-4 text-center">My Wardrobe</h1>
       <WardrobeCard />
     </main>
   );

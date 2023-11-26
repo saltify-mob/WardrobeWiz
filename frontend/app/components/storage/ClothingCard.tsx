@@ -21,10 +21,10 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete
           height={227}
           objectFit="cover"
         />
-        <div className="mt-4">
-          <button onClick={onDelete} className="mr-2">Delete</button>
-          <button onClick={onSendToWardrobe}>Send to Wardrobe</button>
-          <button onClick={onClose} className="absolute top-0 right-0 p-2">X</button>
+        <div className="mt-4 flex justify-between">
+          <button onClick={onDelete} className="bg-red-500 text-white px-4 py-2 rounded-md">Delete</button>
+          <button onClick={onSendToWardrobe} className="bg-green-500 text-white px-4 py-2 rounded-md">Send to Wardrobe</button>
+          <button onClick={onClose} className="absolute top-0 right-0 p-2 text-xl">X</button>
         </div>
       </div>
     </div>

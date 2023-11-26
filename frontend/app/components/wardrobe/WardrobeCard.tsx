@@ -21,17 +21,17 @@ const WardrobeCard = () => {
   const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment');
 
   return (
-    <div className="w-full flex-col items-center justify-between">
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Head Garment</h1>
+    <div className="flex flex-col items-center w-full">
+      <div className="w-full mb-4">
+        <h2 className="text-lg font-semibold text-center mb-2">Head Garment</h2>
         <HeadWearCard headwears={headWears} />
       </div>
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Body Garment</h1>
+      <div className="w-full mb-4">
+        <h2 className="text-lg font-semibold text-center mb-2">Body Garment</h2>
         <TopsCard tops={tops} />
       </div>
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Lower Garment</h1>
+      <div className="w-full mb-4">
+        <h2 className="text-lg font-semibold text-center mb-2">Lower Garment</h2>
         <LowerGarmentsCard lowerGarments={lowerGarments} />
       </div>
     </div>

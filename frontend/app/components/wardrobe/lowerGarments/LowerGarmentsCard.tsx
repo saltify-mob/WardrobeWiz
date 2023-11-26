@@ -1,66 +1,47 @@
-import { ClothingItem } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
 interface Props {
   lowerGarments: ClothingItem[];
 }
-const LowerGarmentsCard = (props: Props) => {
-  const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
-  const scrollAmount = 100;		
+
+const LowerGarmentsCard = ({ lowerGarments }: Props) => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const scrollAmount = 100;
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="flex flex-row items-center justify-center">
-      {props.lowerGarments.length ? (
-      <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-        const container = sliderRef.current;
-        if (container) {
-          container.scrollLeft -= scrollAmount;
-        }
-        }}>
-        <Image
-          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-          alt="Left arrow"
-          width={20}
-          height={20}
-          layout="fixed"
-        />
-      </div>
-      ) : (<></>)}
-      <div
-        className="flex flex-row max-w-md overflow-scroll scroll-smooth"
-        dir="ltr"
-        ref={sliderRef}
-      >
-        {props.lowerGarments.map((lowerGarment, index) => (
-          <div className="scroll-ps-2 snap-x m-2" key={index}>
-            <Image
-              src={lowerGarment.imageUrl}
-              alt="Lower garment"
-              width={150}
-              height={100}
-              layout="fixed"
-            />
+    <div className="bg-white rounded-lg shadow-lg p-4 flex items-center">
+      {lowerGarments.length > 0 && (
+        <button onClick={scrollLeft} className="mr-2">
+          <Image src="https://cdn-icons-png.flaticon.com/512/109/109618.png" alt="Left" width={100} height={100} />
+        </button>
+      )}
+      <div ref={sliderRef} className="flex overflow-x-auto no-scrollbar">
+        {lowerGarments.map((garment, index) => (
+          <div key={index} className="flex-none w-48 mx-2">
+            <Image src={garment.imageUrl} alt={garment.name} width={192} height={192} layout="fixed" />
           </div>
         ))}
       </div>
-      {props.lowerGarments.length ? (
-        <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-        const container = sliderRef.current;
-        if (container) {
-          container.scrollLeft += scrollAmount;
-        }
-        }}>
-        <Image
-          src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
-          alt="Right arrow"
-          width={20}
-          height={20}
-          layout="fixed"
-        />
-      </div>
-      ) : (<></>)}
-    </section>
+      {lowerGarments.length > 0 && (
+        <button onClick={scrollRight} className="ml-2">
+          <Image src="https://cdn-icons-png.flaticon.com/512/109/109617.png" alt="Right" width={100} height={100} />
+        </button>
+      )}
+    </div>
   );
 }
 

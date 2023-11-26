@@ -41,13 +41,14 @@ const StorageCard: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="relative p-4">
       <input
         type="text"
         placeholder="Search Clothes..."
         onChange={(e) => setSearchTerm(e.target.value)}
+        className="mb-4 w-full px-3 py-2 border rounded-md"
       />
-      <div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {filteredClothes.map((clothing, index) => (
           <div key={index} className="relative cursor-pointer" onClick={() => toggleDetail(clothing)}>
             <Image
@@ -61,12 +62,14 @@ const StorageCard: React.FC = () => {
         ))}
       </div>
       {selectedClothing && (
-        <ClothingCard
-          clothing={selectedClothing}
-          onClose={closeDetail}
-          onDelete={() => handleDelete(selectedClothing.id)}
-          onSendToWardrobe={() => handleSendToWardrobe(selectedClothing)}
-        />
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <ClothingCard
+            clothing={selectedClothing}
+            onClose={closeDetail}
+            onDelete={() => handleDelete(selectedClothing.id)}
+            onSendToWardrobe={() => handleSendToWardrobe(selectedClothing)}
+          />
+        </div>
       )}
     </div>
   );

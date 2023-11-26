@@ -1,4 +1,5 @@
 export interface ClothingItem {
+  name: string;
   id: string;
   category: string;
   type: string;
