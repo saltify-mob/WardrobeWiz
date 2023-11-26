@@ -1,6 +1,7 @@
 import { ClothingItem } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
   lowerGarments: ClothingItem[];
@@ -34,13 +35,15 @@ const LowerGarmentsCard = (props: Props) => {
       >
         {props.lowerGarments.map((lowerGarment, index) => (
           <div className="scroll-ps-2 snap-x m-2" key={index}>
-            <Image
-              src={lowerGarment.imageUrl}
-              alt="Lower garment"
-              width={150}
-              height={100}
-              layout="fixed"
-            />
+            <Link href={`/clothings/${lowerGarment.id}`}>
+              <Image
+                src={lowerGarment.imageUrl}
+                alt="Lower garment"
+                width={150}
+                height={100}
+                layout="fixed"
+              />
+            </Link>
           </div>
         ))}
       </div>
