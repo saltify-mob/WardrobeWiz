@@ -57,7 +57,7 @@ public class Clothing {
     @Column
     String imageKey;
 
-    @Column(columnDefinition = "varchar(255) default closet")
+    @Column(columnDefinition = "varchar(255) default wardrobe")
     private String location;
 
     public String getImageUrl() {return imageUrl;}
