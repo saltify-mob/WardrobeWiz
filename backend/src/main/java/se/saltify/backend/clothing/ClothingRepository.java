@@ -11,4 +11,8 @@ public interface ClothingRepository extends ListCrudRepository<Clothing, String>
 
     @Query("SELECT c FROM Clothing c WHERE c.user.id = :userId")
     List<Clothing> findClothingsForUser(String userId);
+
+    @Query("SELECT c FROM Clothing c WHERE c.user.id = :userId AND c.season = :season")
+    List<Clothing> findClothingsForUserAndSeason(String userId, String season);
+
 }
