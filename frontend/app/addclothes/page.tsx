@@ -42,7 +42,7 @@ export default function AddClothingPage() {
       body: formData,
     })
       .then((res) => res.json())
-      .then(() => router.replace('/clothings'));
+      .then(() => router.replace('/wardrobe'));
   };
 
   return (
@@ -100,7 +100,7 @@ export default function AddClothingPage() {
             required
             value={location}
             placeholder="Enter location"
-            onChange={(e) => setlocation(e.target.value)}
+            onChange={(e) => setLocation(e.target.value)}
           >
             <option value="wardrobe">Wardrobe</option>
             <option value="storage">Storage</option>
