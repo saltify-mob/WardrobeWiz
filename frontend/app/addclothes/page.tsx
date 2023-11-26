@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetcher } from '@/app/utils/fetcher';
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
+import { fetchWardrobeData } from '../hooks/FetchWardrobeData';
 
 export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
@@ -40,7 +41,10 @@ export default function AddClothingPage() {
       body: formData,
     })
       .then((res) => res.json())
-      .then(() => router.replace('/clothings'));
+      .then(() => {
+        fetchWardrobeData();
+        router.replace('/addclothes');
+      });
   };
 
   return (

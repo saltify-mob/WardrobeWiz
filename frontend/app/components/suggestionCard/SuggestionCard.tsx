@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchOutfitData } from '../../hooks/fetchOutfitData';
+import { fetchOutfitData } from '../../hooks/FetchOutfitData';
 import Image from 'next/image';
 
 const SuggestionCard = () => {

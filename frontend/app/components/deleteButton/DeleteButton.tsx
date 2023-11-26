@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteUser } from '@/app/hooks/deleteUser';
+import { deleteUser } from '@/app/hooks/DeleteUser';
 import { useRouter } from 'next/navigation';
 
 const DeleteButton = () => {
@@ -9,7 +9,7 @@ const DeleteButton = () => {
     const success = await deleteUser();
     if (success) {
       localStorage.clear();
-      router.push('/api/auth/login');
+      router.push('/api/auth/logout');
     } else {
       console.error('Failed to delete user account');
     }
