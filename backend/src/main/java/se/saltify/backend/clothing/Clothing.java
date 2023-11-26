@@ -15,7 +15,7 @@ public class Clothing {
     public Clothing() {
     }
 
-    public Clothing(User user, String category, String type, String season, String color, String dateOfPurchase, String timeLastUsed, String imageUrl, String imageKey) {
+    public Clothing(User user, String category, String type, String season, String color, String dateOfPurchase, String timeLastUsed, String imageUrl, String imageKey, String location) {
         this.user = user;
         this.category = category;
         this.type = type;
@@ -25,6 +25,7 @@ public class Clothing {
         this.timeLastUsed = timeLastUsed;
         this.imageUrl = imageUrl;
         this.imageKey = imageKey;
+        this.location = location;
     }
 
     @Id
@@ -55,6 +56,9 @@ public class Clothing {
 
     @Column
     String imageKey;
+
+    @Column(columnDefinition = "varchar(255) default closet")
+    private String location;
 
     public String getImageUrl() {return imageUrl;}
 
@@ -111,5 +115,8 @@ public class Clothing {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getLocation() { return location;
     }
 }
