@@ -38,7 +38,8 @@ export default function AddClothingPage() {
       formData.append('image', file);
     }
 
-    handleAddClothing(formData);
+    await handleAddClothing(formData);
+    router.push('/wardrobe');
   };
 
   return (
