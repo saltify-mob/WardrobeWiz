@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 
-import { Clothing } from '@/app/types/ClothingItem';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
 interface Props {
-  headwears: Clothing[]
+  headwears: ClothingItem[]
 }
 
 const HeadWearCard = (props: Props) => {
