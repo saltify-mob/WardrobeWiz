@@ -1,9 +1,8 @@
 'use client';
 import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetcher } from '@/app/utils/fetcher';
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
-import { fetchWardrobeData } from '../hooks/FetchWardrobeData';
+import { useWardrobe } from '../hooks/wardrobeContext';
 
 export default function AddClothingPage() {
   const [file, setFile] = useState<Blob | null>(null);
@@ -15,6 +14,7 @@ export default function AddClothingPage() {
   const [dateOfPurchase, setDateOfPurchase] = useState('');
   const [timeLastUsed, setTimeLastUsed] = useState('');
 
+  const { handleAddClothing } = useWardrobe();
   const router = useRouter();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export default function AddClothingPage() {
     }
   };
 
-  const handleAddClothing = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -38,21 +38,13 @@ export default function AddClothingPage() {
       formData.append('image', file);
     }
 
-    await fetcher(`/api/clothings`, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(() => {
-        fetchWardrobeData();
-        router.replace('/wardrobe');
-      });
+    handleAddClothing(formData);
   };
 
   return (
     <main className="w-full flex-col items-center justify-between">
       <HamburgerMenu />
-      <form onSubmit={handleAddClothing}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="season">Season: </label>
           <select

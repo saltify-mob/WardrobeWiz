@@ -4,10 +4,10 @@ import Image from 'next/image';
 import HeadWearCard from './headwear/HeadWearCard';
 import TopsCard from './tops/TopsCard';
 import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
-import { Clothing } from '@/app/types/ClothingItem';
+import { ClothingItem } from '@/app/types/ClothingItem';
 
 const WardrobeCard = () => {
-  const [wardrobe, setWardrobe] = useState<Clothing[]>([]);
+  const [wardrobe, setWardrobe] = useState<ClothingItem[]>([]);
 
   useEffect(() => {
     const storedData = localStorage.getItem('wardrobe_data');
@@ -16,9 +16,9 @@ const WardrobeCard = () => {
     }
   }, []);
 
-  const headWears = wardrobe.filter(cloting => cloting.category === 'headwear');
-  const tops = wardrobe.filter((cloting) => cloting.category === "top");
-  const lowerGarments = wardrobe.filter(cloting => cloting.category === 'lowerGarment');
+  const headWears = wardrobe.filter(clothing => clothing.category === 'headwear');
+  const tops = wardrobe.filter((clothing) => clothing.category === "top");
+  const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment');
 
   return (
     <div className="w-full flex-col items-center justify-between">

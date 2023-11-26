@@ -1,14 +1,16 @@
 import { fetcher } from '../utils/fetcher';
+import { ClothingItem } from '../types/ClothingItem'; // Assuming this is your type definition
 
-export const fetchWardrobeData = async () => {
+export const fetchWardrobeData = async (): Promise<ClothingItem[] | null> => {
     try {
       const response = await fetcher('/api/clothings/wardrobe');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
-      localStorage.setItem('wardrobe_data', JSON.stringify(data));
+      const data: ClothingItem[] = await response.json();
+      return data;
     } catch (error) {
       console.error('Error fetching data:', error);
+      return null;
     }
-  };
+};

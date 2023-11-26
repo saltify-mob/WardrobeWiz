@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteUser } from '@/app/hooks/DeleteUser';
+import { deleteUser } from '@/app/hooks/deleteUser';
 import { useRouter } from 'next/navigation';
 
 const DeleteButton = () => {

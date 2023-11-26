@@ -1,6 +1,7 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import './globals.css';
+import { WardrobeProvider } from './hooks/wardrobeContext';
 
 export const metadata = {
   title: 'Wardrobe Wiz',
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body>{children}</body>
+        <WardrobeProvider>
+          <body>{children}</body>
+        </WardrobeProvider>
       </UserProvider>
     </html>
   );

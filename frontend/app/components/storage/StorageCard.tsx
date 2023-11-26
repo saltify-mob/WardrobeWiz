@@ -2,40 +2,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import ClothingCard from './ClothingCard';
-import { Clothing } from '@/app/types/ClothingItem';
-import { fetcher } from '@/app/utils/fetcher';
-import { fetchWardrobeData } from '@/app/hooks/FetchWardrobeData';
+import { ClothingItem } from '@/app/types/ClothingItem';
+import { useWardrobe } from '@/app/hooks/wardrobeContext';
 
 const StorageCard: React.FC = () => {
-  const [clothes, setClothes] = useState<Clothing[]>([]);
+  const [clothes, setClothes] = useState<ClothingItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedClothing, setSelectedClothing] = useState<Clothing | null>(null);
-
-  useEffect(() => {
-    const storedData = localStorage.getItem('wardrobe_data');
-    if (storedData) {
-      setClothes(JSON.parse(storedData));
-    }
-  }, []);
+  const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
+  const { wardrobe, handleDeleteClothing } = useWardrobe();
 
   const handleDelete = async (id: string) => {
     try {
-      await fetcher(`/api/clothing/${id}`, { method: 'DELETE' });
-      setClothes(clothes.filter(clothing => clothing.id !== id));
+      await handleDeleteClothing(id);
       if (selectedClothing?.id === id) {
         setSelectedClothing(null);
       }
-      fetchWardrobeData();
     } catch (error) {
       console.error('Error deleting clothing item:', error);
     }
   };
 
-  const handleSendToWardrobe = (clothing: Clothing) => {
+  const handleSendToWardrobe = (clothing: ClothingItem) => {
     // Implement send to wardrobe functionality here
   };
 
-  const toggleDetail = (clothing: Clothing) => {
+  const toggleDetail = (clothing: ClothingItem) => {
     setSelectedClothing(clothing);
   };
 
@@ -43,7 +34,7 @@ const StorageCard: React.FC = () => {
     setSelectedClothing(null);
   };
 
-  const filteredClothes = clothes.filter((clothing) =>
+  const filteredClothes = wardrobe.filter((clothing) =>
     clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
     clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
     clothing.color.toLowerCase().includes(searchTerm.toLowerCase())

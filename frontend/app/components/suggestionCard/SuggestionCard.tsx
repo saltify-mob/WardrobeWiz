@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { fetchOutfitData } from '@/app/hooks/FetchOutfitData';
+import { fetchOutfitData } from '@/app/hooks/fetchOutfitData';
 
 const SuggestionCard = () => {
   const [outfit, setOutfit] = useState({
