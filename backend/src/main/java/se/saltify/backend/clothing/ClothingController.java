@@ -67,8 +67,9 @@ public class ClothingController {
     }
 
     @GetMapping("/generate")
-    ResponseEntity<ClothingGenerateResponseDto> generateClothing(@RequestHeader(userIdHeader) String userId) {
-        return ResponseEntity.ok(clothingService.generateClothing(userId));
+    ResponseEntity<ClothingGenerateResponseDto> generateClothing(@RequestHeader(userIdHeader) String userId, @RequestParam("temp") double temp) {
+        System.out.println(temp);
+        return ResponseEntity.ok(clothingService.generateClothing(userId, temp));
     }
 
     @GetMapping("/wardrobe")
