@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import Image from 'next/image';
 
 import { ClothingItem } from '@/app/types/ClothingItem';
+import Link from 'next/link';
 
 interface Props {
   headwears: ClothingItem[]
@@ -36,13 +37,15 @@ const HeadWearCard = (props: Props) => {
       >
         {props.headwears.map((h, index) => (
           <div className="scroll-ps-2 snap-x m-2" key={index}>
-            <Image
-              src={h.imageUrl}
-              alt="Picture of head wear"
-              width={100}
-              height={50}
-              layout="fixed"
-            />
+            <Link href={`/clothings/${h.id}`}>
+              <Image
+                src={h.imageUrl}
+                alt="Picture of head wear"
+                width={100}
+                height={50}
+                layout="fixed"
+              />
+            </Link>
           </div>
         ))}
       </div>
