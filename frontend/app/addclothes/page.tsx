@@ -43,14 +43,10 @@ export default function AddClothingPage() {
       body: formData,
     })
       .then((res) => res.json())
-<<<<<<< HEAD
       .then(() => {
         fetchWardrobeData();
-        router.replace('/addclothes');
+        router.replace('/wardrobe');
       });
-=======
-      .then(() => router.replace('/wardrobe'));
->>>>>>> b788145b070583eb167c1287c153071a291ab4df
   };
 
   return (
