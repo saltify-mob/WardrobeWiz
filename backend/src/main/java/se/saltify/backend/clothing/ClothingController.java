@@ -26,8 +26,10 @@ public class ClothingController {
     }
 
     @GetMapping
-    ResponseEntity<List<ClothingResponseDto>> findAll(@RequestHeader(userIdHeader) String userId) {
-        return ResponseEntity.ok(clothingService.findAll(userId));
+    ResponseEntity<List<ClothingResponseDto>> findAll(@RequestHeader(userIdHeader) String userId, @RequestParam(required = false) String location) {
+       if(location == null){
+           return ResponseEntity.ok(clothingService.findAll(userId));
+       } return ResponseEntity.ok(clothingService.findAllByLocationAndUserId(userId, location));
     }
 
     @GetMapping("/{id}")

@@ -33,6 +33,10 @@ public class ClothingService {
         return clothingRepository.findClothingsForUser(userId).stream().map(this::mapToDto).toList();
     }
 
+    public List<ClothingResponseDto> findAllByLocationAndUserId(String userId, String location) {
+        return clothingRepository.findClothingsForUserAndLocation(userId, location).stream().map(this::mapToDto).toList();
+    }
+
     public ClothingResponseDto findById(String id) {
         return clothingRepository.findById(id).map(this::mapToDto).orElseThrow();
     }
