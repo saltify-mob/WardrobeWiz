@@ -12,6 +12,7 @@ const WardrobeCard = () => {
   const { wardrobe, handleDeleteClothing } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
 
+
   const handleDelete = async (id: string) => {
     try {
       await handleDeleteClothing(id);
@@ -46,21 +47,30 @@ const WardrobeCard = () => {
         onToggleDetail={toggleDetail}
         categoryTitle="Head Garment"
       />
-  
+
       <ClothingCategoryCard
         clothingItems={tops}
         onToggleDetail={toggleDetail}
         categoryTitle="Body Garment"
       />
-  
+
       <ClothingCategoryCard
         clothingItems={lowerGarments}
         onToggleDetail={toggleDetail}
         categoryTitle="Lower Garment"
       />
-  
-      {/* Existing code for selectedClothing and ClothingCard */}
+      
+      {selectedClothing && (
+        <ClothingCard
+          clothing={selectedClothing}
+          onClose={closeDetail}
+          onDelete={() => handleDelete(selectedClothing.id)}
+          onSendTo={() => handleSendToStorage(selectedClothing)}
+          sendToLabel='Send to Storage'
+        />
+      )}
     </div>
+
   );
 }
 
