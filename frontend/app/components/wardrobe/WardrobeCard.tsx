@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { ClothingItem } from '@/app/types/ClothingItem';
 import ClothingCard from '../ClothingCard/ClothingCard';
@@ -11,6 +11,9 @@ const WardrobeCard = () => {
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const storedWardrobe = localStorage.getItem('wardrobe_data');
+  }, []);
 
   const handleDelete = async (id: string) => {
     try {

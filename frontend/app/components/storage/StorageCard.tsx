@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import ClothingCard from '../ClothingCard/ClothingCard';
@@ -11,6 +11,10 @@ const StorageCard: React.FC = () => {
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const router = useRouter();
+
+  useEffect(() => {
+    const storedWardrobe = localStorage.getItem('wardrobe_data');
+  }, []);
 
   const handleDelete = async (id: string) => {
     try {
