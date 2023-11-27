@@ -24,7 +24,7 @@ const SuggestionCard = () => {
   }, []);
 
   return (
-    <div className="full-w flex flex-col items-center bg-white my-8">
+    <div className="w-full flex flex-col items-center bg-D5E8F6 rounded-lg ">
       <h2 className="text-2xl font-semibold my-4">{`Today's Outfit`}</h2>
       <div className="flex flex-col items-center mb-6 space-y-4">
         <Image 
@@ -33,7 +33,7 @@ const SuggestionCard = () => {
           width={100}
           height={100}
           objectFit="cover"
-          className="rounded-md"
+          className="rounded-md shadow-2xl"
         />
         <Image 
             src={outfit.topUrl} 
@@ -41,7 +41,7 @@ const SuggestionCard = () => {
             width={150}
             height={150}
             objectFit="cover"
-            className="rounded-md"
+            className="rounded-md shadow-2xl"
         />
         <Image 
             src={outfit.trousersUrl} 
@@ -49,13 +49,12 @@ const SuggestionCard = () => {
             width={120}
             height={180}
             objectFit="cover"
-            className="rounded-md"
+            className="rounded-md shadow-2xl"
         />
       </div>
       <button
         onClick={loadNewOutfit}
-        className="mt-4 mb-16 bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-800 transition-colors"
-      >
+        className="btn btn-primary mt-4 w-full mx-15 px-24 py-2 bg-primary text-white font-semibold rounded-lg">
         Generate New
       </button>
     </div>

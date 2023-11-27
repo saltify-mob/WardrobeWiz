@@ -113,14 +113,18 @@ const WeatherCard: React.FC = () => {
   };
 
   return (
-    <div className="w-full text-center" style={{ background: 'linear-gradient(180deg, rgba(	135, 206, 235) 0%, rgba(235, 254, 255, 0) 100%)' }}>
+    <div className="w-full text-center p-4" style={{ background: 'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)' }}>
       {location.weather ? (
         <div>
-          <div className="text-3xl font-bold">{location.weather.main?.temp ? `${location.weather.main.temp} °C` : '-- °C'}</div>
-          <div className="text-xl">{location.weather.name}</div>
+
+         <div className="text-3xl font-bold"> 
           {location.weather.weather && location.weather.weather.length > 0 && (
             <WeatherIcon code={location.weather.weather[0].icon} />
           )}
+          </div>
+          <div className="text-3xl font-bold">{location.weather.main?.temp ? `${location.weather.main.temp} °C` : '-- °C'}</div>
+          <div className="text-xl">{location.weather.name}</div>
+          
         </div>
       ) : location.error ? (
         <div className="text-red-600">{location.error.message}</div>

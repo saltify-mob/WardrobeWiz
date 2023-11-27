@@ -29,18 +29,22 @@ export default function Home() {
   }, [user, isLoading]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-center text-2B8BD4 font-semibold mt-10">Loading...</div>;
   }
 
   if (!user) {
-    return <div>Redirecting to login...</div>;
+    return <div className="text-center text-2B8BD4 font-semibold mt-10">Redirecting to login...</div>;
   }
 
   return (
-    <main className="w-full flex-col items-center justify-between">
+    <main className="w-full flex flex-col justify-between bg-EEF6FC ">
       <HamburgerMenu />
+      <main className="w-full flex flex-col items-center justify-between bg-EEF6FC ">
       <WeatherCard />
+      </main>
+      <main className="w-full flex flex-col items-center justify-between bg-EEF6FC   px-4">
       <SuggestionCard />
+      </main>
     </main>
   );
 }
