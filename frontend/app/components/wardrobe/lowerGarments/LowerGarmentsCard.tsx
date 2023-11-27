@@ -2,7 +2,6 @@ import { ClothingItem } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
 interface Props {
   lowerGarments: ClothingItem[];
 }
