@@ -14,6 +14,7 @@ interface WardrobeContextType {
     handleAddClothing: (formData: FormData) => Promise<void>;
     handleDeleteClothing: (clothingId: string) => Promise<void>;
     handleUpdateClothing: (clothingId: string, updateData: UpdateClothingData) => Promise<boolean>;
+    updateWardrobe: (newWardrobe: ClothingItem[]) => void;
 }
 
 const WardrobeContext = createContext<WardrobeContextType>({
@@ -21,7 +22,8 @@ const WardrobeContext = createContext<WardrobeContextType>({
     fetchAndSetWardrobe: async () => { },
     handleAddClothing: async () => { },
     handleDeleteClothing: async () => { },
-    handleUpdateClothing: async () => false
+    handleUpdateClothing: async () => false,
+    updateWardrobe: () => {}
 });
 
 export const useWardrobe = () => useContext(WardrobeContext);
@@ -70,8 +72,13 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         return false;
     };
 
+    const updateWardrobe = (newWardrobe: ClothingItem[]) => {
+        setWardrobe(newWardrobe);
+        localStorage.setItem('wardrobe_data', JSON.stringify(newWardrobe));
+    };
+
     return (
-        <WardrobeContext.Provider value={{ wardrobe, fetchAndSetWardrobe, handleAddClothing, handleDeleteClothing, handleUpdateClothing }}>
+        <WardrobeContext.Provider value={{ wardrobe, updateWardrobe, fetchAndSetWardrobe, handleAddClothing, handleDeleteClothing, handleUpdateClothing }}>
             {children}
         </WardrobeContext.Provider>
     );

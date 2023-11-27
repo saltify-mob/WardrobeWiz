@@ -7,17 +7,16 @@ import ClothingCategoryCard from './ClothingCategoryCard';
 import { useRouter } from 'next/navigation';
 
 const WardrobeCard = () => {
-  const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
-  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, fetchAndSetWardrobe, handleUpdateClothing, updateWardrobe } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const storedWardrobe = localStorage.getItem('wardrobe_data');
     if (storedWardrobe) {
-      setLocalWardrobe(JSON.parse(storedWardrobe));
+      updateWardrobe(JSON.parse(storedWardrobe));
     } else {
-      setLocalWardrobe(wardrobe);
+      fetchAndSetWardrobe();
     }
   }, [wardrobe]);
 
