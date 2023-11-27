@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useWardrobe } from '../../hooks/wardrobeContext';
 import { UpdateClothingData } from '@/app/types/UpdateClothingData';
+import { useRouter } from 'next/navigation';
 
 interface AddOrUpdateClothingFormProps {
   id?: string;
@@ -20,6 +21,8 @@ const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id })
   const currentDate = new Date().toISOString().split('T')[0];
   const [dateOfPurchase, setDateOfPurchase] = useState(currentDate);
   const [timeLastUsed, setTimeLastUsed] = useState(currentDate);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (id) {
@@ -57,6 +60,7 @@ const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id })
       };
 
       await handleUpdateClothing(id, updateData);
+      router.push('/wardrobe');
     } else {
       const formData = new FormData();
       formData.append('season', season);

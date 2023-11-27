@@ -43,7 +43,7 @@ const StorageCard: React.FC = () => {
   };
 
   function handleUpdate(id: string): void {
-    router.push(`/clothings/${id}`);
+    router.push(`/updateclothing/${id}`);
   }
 
   const filteredClothes = wardrobe.filter((clothing) =>

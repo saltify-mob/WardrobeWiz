@@ -43,7 +43,7 @@ const WardrobeCard = () => {
   };
 
   function handleUpdate(id: string): void {
-    router.push(`/clothings/${id}`);
+    router.push(`/updateclothing/${id}`);
   }
 
   const headWears = wardrobe.filter(clothing => clothing.category === 'headwear' && clothing.location === "wardrobe");
