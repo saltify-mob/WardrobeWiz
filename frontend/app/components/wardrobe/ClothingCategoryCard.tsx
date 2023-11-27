@@ -76,17 +76,17 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
           </svg>
         </IconButton>
       )}>
-      {clothingItems.map((top, index) => (
-        <Link key={index} href={`/updateclothing/${top.id}`}>
+      {clothingItems.map((item, index) => (
+        <div key={index} onClick={() => onToggleDetail(item)}>
            <Image
            key={index}
            width={1000}
            height={1050}
-           src={top.imageUrl}
+           src={item.imageUrl}
            alt="image"
            className="w-full"
          />
-         </Link>
+         </div>
       ))} 
     </Carousel>
     </div>

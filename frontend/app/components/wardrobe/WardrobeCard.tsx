@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { ClothingItem } from '@/app/types/ClothingItem';
 import ClothingCard from '../ClothingCard/ClothingCard';
