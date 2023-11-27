@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 const WardrobeCard = () => {
   const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
-  const { wardrobe, handleDeleteClothing, handleUpdateClothing, updateWardrobe } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const router = useRouter();
 
