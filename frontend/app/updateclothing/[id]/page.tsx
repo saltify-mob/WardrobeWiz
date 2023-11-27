@@ -1,10 +1,10 @@
 'use client';
 
 import HamburgerMenu from '@/app/components/hamburgerMenu/HamburgerMenu';
-import AddorUpdateClothingForm from '@/app/components/addOrUpdateClothingForm/AddOrUpdateClothingForm';
-import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useWardrobe } from '@/app/contexts/wardrobeContext';
+import ClothingForm from '@/app/components/clothingForm/ClothingForm';
 
 const UpdateClothesPage: React.FC = () => {
   const { wardrobe } = useWardrobe();
@@ -19,7 +19,7 @@ const UpdateClothesPage: React.FC = () => {
     <main className="w-full flex-col items-center justify-between">
       <HamburgerMenu />
       <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />
-      <AddorUpdateClothingForm id={id} />
+      <ClothingForm id={id} />
     </main>
   );
 }

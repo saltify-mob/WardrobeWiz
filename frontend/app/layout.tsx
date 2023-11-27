@@ -1,7 +1,7 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import './globals.css';
-import { WardrobeProvider } from './hooks/wardrobeContext';
+import { WardrobeProvider } from './contexts/wardrobeContext';
 
 export const metadata = {
   title: 'Wardrobe Wiz',

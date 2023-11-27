@@ -1,11 +1,11 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { fetchWardrobeData } from './fetchWardrobeData';
-import { addClothing } from './addClothing';
-import { deleteClothing } from './deleteClothing';
+import { fetchWardrobeData } from '../hooks/fetchWardrobeData';
+import { addClothing } from '../hooks/addClothing';
+import { deleteClothing } from '../hooks/deleteClothing';
 import { ClothingItem } from '../types/ClothingItem';
-import { updateClothing } from './updateClothing';
+import { updateClothing } from '../hooks/updateClothing';
 import { UpdateClothingData } from '../types/UpdateClothingData';
 
 interface WardrobeContextType {

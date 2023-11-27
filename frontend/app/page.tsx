@@ -8,7 +8,7 @@ import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import WeatherCard from './components/weatherCard/WeatherCard';
 import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
 import { createUser } from './hooks/createUser';
-import { useWardrobe } from './hooks/wardrobeContext';
+import { useWardrobe } from './contexts/wardrobeContext';
 
 export default function Home() {
   const { user, isLoading } = useUser();

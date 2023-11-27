@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import ClothingCard from '../ClothingCard/ClothingCard';
+import ClothingCard from '../clothingCard/ClothingCard';
 import { ClothingItem } from '@/app/types/ClothingItem';
-import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import { useRouter } from 'next/navigation';
+import { useWardrobe } from '@/app/contexts/wardrobeContext';
 
 const StorageCard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,14 +1,14 @@
 'use client'
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useWardrobe } from '../../hooks/wardrobeContext';
+import { useWardrobe } from '../../contexts/wardrobeContext';
 import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 import { useRouter } from 'next/navigation';
 
-interface AddOrUpdateClothingFormProps {
+interface ClothingFormProps {
   id?: string;
 }
 
-const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id }) => {
+const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
@@ -183,4 +183,4 @@ const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id })
   );
 };
 
-export default AddOrUpdateClothingForm;
+export default ClothingForm;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import { ClothingItem } from '@/app/types/ClothingItem';
-import ClothingCard from '../ClothingCard/ClothingCard';
-import { useWardrobe } from '@/app/hooks/wardrobeContext';
+import ClothingCard from '../clothingCard/ClothingCard';
 import ClothingCategoryCard from './ClothingCategoryCard';
 import { useRouter } from 'next/navigation';
+import { useWardrobe } from '@/app/contexts/wardrobeContext';
 
 const WardrobeCard = () => {
   const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
