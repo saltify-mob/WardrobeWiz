@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import Image from 'next/image';
 
 import { ClothingItem } from '@/app/types/ClothingItem';
-import Link from 'next/link';
 
 interface Props {
   headwears: ClothingItem[];
@@ -37,7 +36,7 @@ const HeadWearCard = (props: Props) => {
         ref={sliderRef}
       >
         {props.headwears.map((h, index) => (
-          <div className="scroll-ps-2 snap-x m-2" key={index}>
+          <div className="scroll-ps-2 snap-x m-2" key={index} onClick={() => props.onToggleDetail(h)}>
             <Image
               src={h.imageUrl}
               alt="Picture of head wear"

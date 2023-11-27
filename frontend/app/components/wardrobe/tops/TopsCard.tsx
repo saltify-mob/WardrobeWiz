@@ -1,7 +1,6 @@
 import { ClothingItem } from '@/app/types/ClothingItem';
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface Props {
   tops: ClothingItem[];
@@ -36,7 +35,11 @@ const TopsCard = (props: Props) => {
         ref={sliderRef}
       >
         {props.tops.map((top, index) => (
-          <div className="scroll-ps-2 snap-x m-2" key={index}>
+          <div 
+            className="scroll-ps-2 snap-x m-2" 
+            key={index}
+            onClick={() => props.onToggleDetail(top)}
+          >
             <Image
               src={top.imageUrl}
               alt="Top garment"

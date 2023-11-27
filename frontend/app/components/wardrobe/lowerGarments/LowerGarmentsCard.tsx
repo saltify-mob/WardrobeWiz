@@ -35,7 +35,11 @@ const LowerGarmentsCard = (props: Props) => {
         ref={sliderRef}
       >
         {props.lowerGarments.map((lowerGarment, index) => (
-          <div className="scroll-ps-2 snap-x m-2" key={index}>
+          <div 
+            className="scroll-ps-2 snap-x m-2" 
+            key={index}
+            onClick={() => props.onToggleDetail(lowerGarment)}
+          >
             <Image
               src={lowerGarment.imageUrl}
               alt="Lower garment"
