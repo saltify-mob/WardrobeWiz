@@ -33,11 +33,14 @@ interface WardrobeProviderProps {
 export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) => {
     const [wardrobe, setWardrobe] = useState<ClothingItem[]>([]);
 
+    useEffect(() => {
+        fetchAndSetWardrobe();
+    }, []);
+
     const fetchAndSetWardrobe = async () => {
         const data = await fetchWardrobeData();
         if (data) {
             setWardrobe(data);
-            localStorage.setItem('wardrobe_data', JSON.stringify(data));
         }
     };
 
@@ -46,7 +49,6 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         if (addedClothing) {
             const newWardrobe = [...wardrobe, addedClothing];
             setWardrobe(newWardrobe);
-            localStorage.setItem('wardrobe_data', JSON.stringify(newWardrobe));
         }
     };
     
@@ -55,7 +57,6 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         if (success) {
             const newWardrobe = wardrobe.filter(item => item.id !== clothingId);
             setWardrobe(newWardrobe);
-            localStorage.setItem('wardrobe_data', JSON.stringify(newWardrobe));
         }
     };
 
@@ -64,7 +65,6 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         if (updatedItem) {
             const updatedWardrobe = wardrobe.map(item => item.id === clothingId ? updatedItem : item);
             setWardrobe(updatedWardrobe);
-            localStorage.setItem('wardrobe_data', JSON.stringify(updatedWardrobe));
             return true;
         }
         return false;
