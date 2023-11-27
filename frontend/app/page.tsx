@@ -39,12 +39,12 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col justify-between bg-EEF6FC ">
       <HamburgerMenu />
-      <main className="w-full flex flex-col items-center justify-between bg-EEF6FC ">
+      <div className="w-full flex flex-col items-center justify-between bg-EEF6FC ">
       <WeatherCard />
-      </main>
-      <main className="w-full flex flex-col items-center justify-between bg-EEF6FC   px-4">
+      </div>
+      <div className="w-full flex flex-col items-center justify-between bg-EEF6FC   px-4">
       <SuggestionCard />
-      </main>
+      </div>
     </main>
   );
 }
