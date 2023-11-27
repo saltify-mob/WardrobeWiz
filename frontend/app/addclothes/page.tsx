@@ -1,4 +1,3 @@
-import React from 'react';
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 import AddOrUpdateClothingForm from '../components/addOrUpdateClothingForm/AddorUpdateClothingForm';
 

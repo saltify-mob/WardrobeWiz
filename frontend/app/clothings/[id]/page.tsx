@@ -1,3 +1,5 @@
+'use client';
+
 import HamburgerMenu from '@/app/components/hamburgerMenu/HamburgerMenu';
 import AddorUpdateClothingForm from '@/app/components/addOrUpdateClothingForm/AddorUpdateClothingForm';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
