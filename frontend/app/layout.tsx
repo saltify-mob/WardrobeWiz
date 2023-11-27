@@ -18,17 +18,15 @@ export default function RootLayout({
     <html lang="en">
       <UserProvider>
         <WardrobeProvider>
-          <body>
-            <div
-              className="p-4"
-              style={{
-                background:
-                  'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)',
-              }}
-            >
-              <HamburgerMenu />
-              {children}
-            </div>
+          <body
+            className="p-4 h-screen w-screen"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)',
+            }}
+          >
+            <HamburgerMenu />
+            {children}
           </body>
         </WardrobeProvider>
       </UserProvider>
