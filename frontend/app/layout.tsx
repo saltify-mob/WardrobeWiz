@@ -6,7 +6,8 @@ import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
 
 export const metadata = {
   title: 'Wardrobe Wiz',
-  description: 'A clothing app for suggesting clothes for the day based on the weather.'
+  description:
+    'A clothing app for suggesting clothes for the day based on the weather.',
 };
 
 export default function RootLayout({
@@ -19,7 +20,7 @@ export default function RootLayout({
       <UserProvider>
         <WardrobeProvider>
           <body
-            className="p-4 h-screen w-screen"
+            className="h-screen w-screen"
             style={{
               background:
                 'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)',
