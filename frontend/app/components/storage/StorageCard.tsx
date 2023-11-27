@@ -10,7 +10,7 @@ const StorageCard: React.FC = () => {
   const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
-  const { wardrobe, handleDeleteClothing, handleUpdateClothing, updateWardrobe } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const router = useRouter();
 
   useEffect(() => {
