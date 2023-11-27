@@ -15,11 +15,12 @@ const WardrobeCard = () => {
   useEffect(() => {
     const storedWardrobe = localStorage.getItem('wardrobe_data');
     if (storedWardrobe) {
+      console.log("yes we have it!")
       setLocalWardrobe(JSON.parse(storedWardrobe));
     } else {
       setLocalWardrobe(wardrobe);
     }
-  }, []);
+  }, [wardrobe]);
 
   const handleDelete = async (id: string) => {
     try {
