@@ -75,6 +75,7 @@ const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id })
       }
 
       await handleAddClothing(formData);
+      router.push('/wardrobe');
     }
   };
 
