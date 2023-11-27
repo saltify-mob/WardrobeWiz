@@ -80,14 +80,16 @@ const WardrobeCard = () => {
       />
 
       {selectedClothing && (
-        <ClothingCard
-          clothing={selectedClothing}
-          onClose={closeDetail}
-          onDelete={() => handleDelete(selectedClothing.id)}
-          onSendTo={() => handleSendToStorage(selectedClothing)}
-          onUpdate={() => handleUpdate(selectedClothing.id)}
-          sendToLabel='Send to Storage'
-        />
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <ClothingCard
+            clothing={selectedClothing}
+            onClose={closeDetail}
+            onDelete={() => handleDelete(selectedClothing.id)}
+            onSendTo={() => handleSendToStorage(selectedClothing)}
+            onUpdate={() => handleUpdate(selectedClothing.id)}
+            sendToLabel='Send to Storage'
+          />
+        </div>
       )}
     </div>
 
