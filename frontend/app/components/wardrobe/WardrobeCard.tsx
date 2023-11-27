@@ -6,6 +6,7 @@ import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
 import { ClothingItem } from '@/app/types/ClothingItem';
 import ClothingCard from '../storage/ClothingCard';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
+import ClothingCategoryCard from './ClothingCategoryCard';
 
 const WardrobeCard = () => {
   const { wardrobe, handleDeleteClothing } = useWardrobe();
@@ -40,29 +41,25 @@ const WardrobeCard = () => {
 
   return (
     <div className="w-full flex-col items-center justify-between">
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Head Garment</h1>
-        <HeadWearCard headwears={headWears} onToggleDetail={toggleDetail} />
-      </div>
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Body Garment</h1>
-        <TopsCard tops={tops} onToggleDetail={toggleDetail} />
-      </div>
-
-      <div className="w-full flex-col items-center justify-between">
-        <h1 className="text-center text-lg">Lower Garment</h1>
-        <LowerGarmentsCard lowerGarments={lowerGarments} onToggleDetail={toggleDetail} />
-      </div>
-
-      {selectedClothing && (
-        <ClothingCard
-          clothing={selectedClothing}
-          onClose={closeDetail}
-          onDelete={() => handleDelete(selectedClothing.id)}
-          onSendTo={() => handleSendToStorage(selectedClothing)}
-          sendToLabel='Send to Storage'
-        />
-      )}
+      <ClothingCategoryCard
+        clothingItems={headWears}
+        onToggleDetail={toggleDetail}
+        categoryTitle="Head Garment"
+      />
+  
+      <ClothingCategoryCard
+        clothingItems={tops}
+        onToggleDetail={toggleDetail}
+        categoryTitle="Body Garment"
+      />
+  
+      <ClothingCategoryCard
+        clothingItems={lowerGarments}
+        onToggleDetail={toggleDetail}
+        categoryTitle="Lower Garment"
+      />
+  
+      {/* Existing code for selectedClothing and ClothingCard */}
     </div>
   );
 }
