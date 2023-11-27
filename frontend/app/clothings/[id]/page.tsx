@@ -8,7 +8,8 @@ import { usePathname } from 'next/navigation';
 
 const UpdateClothesPage: React.FC = () => {
   const { wardrobe } = useWardrobe();
-  const id = usePathname();
+  const pathname = usePathname();
+  const id = pathname.split('/').pop();
 
 
   const clothingItem = wardrobe.find((clothing) => clothing.id === id);
