@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-import ClothingCard from './ClothingCard';
+import ClothingCard from '../ClothingCard/ClothingCard';
 import { ClothingItem } from '@/app/types/ClothingItem';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
+import { useRouter } from 'next/navigation';
 
 const StorageCard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const { wardrobe, handleDeleteClothing } = useWardrobe();
+  const router = useRouter();
 
   const handleDelete = async (id: string) => {
     try {
@@ -32,6 +34,10 @@ const StorageCard: React.FC = () => {
   const closeDetail = () => {
     setSelectedClothing(null);
   };
+
+  function handleUpdate(id: string): void {
+    router.push(`/clothings/${id}`);
+  }
 
   const filteredClothes = wardrobe.filter((clothing) =>
     clothing.location === "storage" && (
@@ -66,6 +72,7 @@ const StorageCard: React.FC = () => {
           onClose={closeDetail}
           onDelete={() => handleDelete(selectedClothing.id)}
           onSendTo={() => handleSendToWardrobe(selectedClothing)}
+          onUpdate={() => handleUpdate(selectedClothing.id)}
           sendToLabel='Send to Wardrobe'
         />
       )}

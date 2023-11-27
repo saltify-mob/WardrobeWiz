@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
-import HeadWearCard from './headwear/HeadWearCard';
-import TopsCard from './tops/TopsCard';
-import LowerGarmentsCard from './lowerGarments/LowerGarmentsCard';
 import { ClothingItem } from '@/app/types/ClothingItem';
-import ClothingCard from '../storage/ClothingCard';
+import ClothingCard from '../ClothingCard/ClothingCard';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import ClothingCategoryCard from './ClothingCategoryCard';
+import { useRouter } from 'next/navigation';
 
 const WardrobeCard = () => {
   const { wardrobe, handleDeleteClothing } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
+  const router = useRouter();
 
 
   const handleDelete = async (id: string) => {
@@ -36,6 +35,10 @@ const WardrobeCard = () => {
     setSelectedClothing(null);
   };
 
+  function handleUpdate(id: string): void {
+    router.push(`/clothings/${id}`);
+  }
+
   const headWears = wardrobe.filter(clothing => clothing.category === 'headwear' && clothing.location === "wardrobe");
   const tops = wardrobe.filter((clothing) => clothing.category === "top" && clothing.location === "wardrobe");
   const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment' && clothing.location === "wardrobe");
@@ -59,13 +62,14 @@ const WardrobeCard = () => {
         onToggleDetail={toggleDetail}
         categoryTitle="Lower Garment"
       />
-      
+
       {selectedClothing && (
         <ClothingCard
           clothing={selectedClothing}
           onClose={closeDetail}
           onDelete={() => handleDelete(selectedClothing.id)}
           onSendTo={() => handleSendToStorage(selectedClothing)}
+          onUpdate={() => handleUpdate(selectedClothing.id)}
           sendToLabel='Send to Storage'
         />
       )}
