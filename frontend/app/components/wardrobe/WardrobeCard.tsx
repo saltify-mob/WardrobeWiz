@@ -7,16 +7,17 @@ import ClothingCategoryCard from './ClothingCategoryCard';
 import { useRouter } from 'next/navigation';
 
 const WardrobeCard = () => {
-  const { wardrobe, handleDeleteClothing, fetchAndSetWardrobe, handleUpdateClothing, updateWardrobe } = useWardrobe();
+  const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing, updateWardrobe } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const storedWardrobe = localStorage.getItem('wardrobe_data');
     if (storedWardrobe) {
-      updateWardrobe(JSON.parse(storedWardrobe));
+      setLocalWardrobe(JSON.parse(storedWardrobe));
     } else {
-      fetchAndSetWardrobe();
+      setLocalWardrobe(wardrobe);
     }
   }, [wardrobe]);
 
@@ -54,9 +55,9 @@ const WardrobeCard = () => {
     router.push(`/updateclothing/${id}`);
   }
 
-  const headWears = wardrobe.filter(clothing => clothing.category === 'headwear' && clothing.location === "wardrobe");
-  const tops = wardrobe.filter((clothing) => clothing.category === "top" && clothing.location === "wardrobe");
-  const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment' && clothing.location === "wardrobe");
+  const headWears = localWardrobe.filter(clothing => clothing.category === 'headwear' && clothing.location === "wardrobe");
+  const tops = localWardrobe.filter((clothing) => clothing.category === "top" && clothing.location === "wardrobe");
+  const lowerGarments = localWardrobe.filter(clothing => clothing.category === 'lowerGarment' && clothing.location === "wardrobe");
 
   return (
     <div className="w-full flex-col items-center justify-between">

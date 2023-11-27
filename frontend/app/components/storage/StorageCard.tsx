@@ -7,17 +7,18 @@ import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import { useRouter } from 'next/navigation';
 
 const StorageCard: React.FC = () => {
+  const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
-  const { wardrobe, handleDeleteClothing, fetchAndSetWardrobe, handleUpdateClothing, updateWardrobe } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing, updateWardrobe } = useWardrobe();
   const router = useRouter();
 
   useEffect(() => {
     const storedWardrobe = localStorage.getItem('wardrobe_data');
     if (storedWardrobe) {
-      updateWardrobe(JSON.parse(storedWardrobe));
+      setLocalWardrobe(JSON.parse(storedWardrobe));
     } else {
-      fetchAndSetWardrobe();
+      setLocalWardrobe(wardrobe);
     }
   }, [wardrobe]);
 
@@ -55,7 +56,7 @@ const StorageCard: React.FC = () => {
     router.push(`/updateclothing/${id}`);
   }
 
-  const filteredClothes = wardrobe.filter((clothing) =>
+  const filteredClothes = localWardrobe.filter((clothing) =>
     clothing.location === 'storage' &&
     (clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
       clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
