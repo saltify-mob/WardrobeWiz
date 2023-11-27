@@ -7,9 +7,9 @@ import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 
 export default function Storage() {
   return (
-  <main className="w-full flex-col items-center justify-between">
+    <main className="flex flex-col items-center w-full">
     <HamburgerMenu />
-    <h1 className='text-2xl font-bold'>My Storage</h1>
+    <h1 className="text-2xl font-bold my-4 text-center">My Storage</h1>
     <StorageCard/>
   </main>
   );
