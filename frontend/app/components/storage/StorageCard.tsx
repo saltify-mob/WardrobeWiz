@@ -18,9 +18,9 @@ const StorageCard: React.FC = () => {
     if (storedWardrobe) {
       setLocalWardrobe(JSON.parse(storedWardrobe));
     } else {
-      setLocalWardrobe(wardrobe);
+    
     }
-  }, [wardrobe]);
+  }, []);
 
   const handleDelete = async (id: string) => {
     try {
