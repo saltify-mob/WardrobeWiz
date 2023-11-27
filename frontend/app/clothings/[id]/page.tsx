@@ -4,7 +4,7 @@ import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
-const AddClothesPage: React.FC = () => {
+const UpdateClothesPage: React.FC = () => {
   const { wardrobe } = useWardrobe();
   const id = usePathname();
 
@@ -20,3 +20,5 @@ const AddClothesPage: React.FC = () => {
     </main>
   );
 }
+
+export default UpdateClothesPage;
