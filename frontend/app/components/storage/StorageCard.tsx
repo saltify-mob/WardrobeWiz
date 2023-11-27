@@ -7,6 +7,7 @@ import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import { useRouter } from 'next/navigation';
 
 const StorageCard: React.FC = () => {
+  const [localWardrobe, setLocalWardrobe] = useState<ClothingItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
@@ -14,7 +15,12 @@ const StorageCard: React.FC = () => {
 
   useEffect(() => {
     const storedWardrobe = localStorage.getItem('wardrobe_data');
-  }, []);
+    if (storedWardrobe) {
+      setLocalWardrobe(JSON.parse(storedWardrobe));
+    } else {
+      setLocalWardrobe(wardrobe);
+    }
+  }, [wardrobe]);
 
   const handleDelete = async (id: string) => {
     try {
@@ -86,7 +92,7 @@ const StorageCard: React.FC = () => {
       </div>
       {selectedClothing && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-         
+
             <ClothingCard
               clothing={selectedClothing}
               onClose={closeDetail}
