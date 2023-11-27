@@ -6,7 +6,6 @@ import { ClothingItem } from '@/app/types/ClothingItem';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
 
 const StorageCard: React.FC = () => {
-  const [clothes, setClothes] = useState<ClothingItem[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const { wardrobe, handleDeleteClothing } = useWardrobe();
@@ -35,6 +34,7 @@ const StorageCard: React.FC = () => {
   };
 
   const filteredClothes = wardrobe.filter((clothing) =>
+    clothing.location === "Storage" ||
     clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
     clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
     clothing.color.toLowerCase().includes(searchTerm.toLowerCase())

@@ -7,4 +7,5 @@ export interface ClothingItem {
   dateOfPurchase: string;
   timeLastUsed: string;
   imageUrl: string;
+  location: string;
 }
