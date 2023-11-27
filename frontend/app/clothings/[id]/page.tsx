@@ -20,10 +20,3 @@ export default function UpdateClothingPage() {
     </main>
   );
 }
-
-export async function getServerSideProps(context: { params: { id: string; }; }) {
-  const { id } = context.params;
-  return {
-    props: { id }, 
-  };
-}
