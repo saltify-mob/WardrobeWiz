@@ -1,8 +1,14 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react';
-import { useWardrobe } from '../../hooks/wardrobeContext'; // Adjust the import path as needed
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useWardrobe } from '../../hooks/wardrobeContext';
+import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 
-const AddClothingForm: React.FC = () => {
+interface AddOrUpdateClothingFormProps {
+  id?: string;
+}
+
+const AddOrUpdateClothingForm: React.FC<AddOrUpdateClothingFormProps> = ({ id }) => {
+  const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
   const [type, setType] = useState('shirt');
@@ -10,12 +16,25 @@ const AddClothingForm: React.FC = () => {
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
 
-    // Placeholder:
-    const currentDate = new Date().toISOString().split('T')[0];
-    const [dateOfPurchase] = useState(currentDate);
-    const [timeLastUsed] = useState(currentDate);
+  // Placeholder
+  const currentDate = new Date().toISOString().split('T')[0];
+  const [dateOfPurchase, setDateOfPurchase] = useState(currentDate);
+  const [timeLastUsed, setTimeLastUsed] = useState(currentDate);
 
-  const { handleAddClothing } = useWardrobe();
+  useEffect(() => {
+    if (id) {
+      const clothingItem = wardrobe.find(item => item.id === id);
+      if (clothingItem) {
+        setSeason(clothingItem.season);
+        setType(clothingItem.type);
+        setCategory(clothingItem.category);
+        setLocation(clothingItem.location);
+        setColor(clothingItem.color);
+        setDateOfPurchase(clothingItem.dateOfPurchase);
+        setTimeLastUsed(clothingItem.timeLastUsed);
+      }
+    }
+  }, [id, wardrobe]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -26,24 +45,38 @@ const AddClothingForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('season', season);
-    formData.append('type', type);
-    formData.append('category', category);
-    formData.append('color', color);
-    formData.append('location', location);
-    formData.append('dateOfPurchase', dateOfPurchase);
-    formData.append('timeLastUsed', timeLastUsed);
-    if (file) {
-      formData.append('image', file);
-    }
+    if (id) {
+      const updateData: UpdateClothingData = {
+        season,
+        type,
+        category,
+        location,
+        color,
+        dateOfPurchase,
+        timeLastUsed,
+      };
 
-    handleAddClothing(formData);
+      await handleUpdateClothing(id, updateData);
+    } else {
+      const formData = new FormData();
+      formData.append('season', season);
+      formData.append('type', type);
+      formData.append('category', category);
+      formData.append('color', color);
+      formData.append('location', location);
+      formData.append('dateOfPurchase', dateOfPurchase);
+      formData.append('timeLastUsed', timeLastUsed);
+      if (file) {
+        formData.append('image', file);
+      }
+
+      await handleAddClothing(formData);
+    }
   };
+
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md px-4 py-6">
-      {/* Season Selection */}
       <div className="mb-4">
         <label htmlFor="season" className="block text-sm font-medium text-gray-700">Season: </label>
         <select
@@ -60,7 +93,6 @@ const AddClothingForm: React.FC = () => {
         </select>
       </div>
 
-      {/* Category Selection */}
       <div className="mb-4">
         <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category: </label>
         <select
@@ -73,11 +105,9 @@ const AddClothingForm: React.FC = () => {
           <option value="headwear">Headwear</option>
           <option value="top">Top</option>
           <option value="lowerGarment">Lower Garment</option>
-          {/* Add more options as needed */}
         </select>
       </div>
 
-      {/* Type Selection */}
       <div className="mb-4">
         <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type: </label>
         <select
@@ -91,11 +121,9 @@ const AddClothingForm: React.FC = () => {
           <option value="hoodie">Hoodie</option>
           <option value="sweatShirt">Sweat Shirt</option>
           <option value="t-shirt">T-shirt</option>
-          {/* Add more options as needed */}
         </select>
       </div>
 
-      {/* Location Selection */}
       <div className="mb-4">
         <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location: </label>
         <select
@@ -108,11 +136,9 @@ const AddClothingForm: React.FC = () => {
           <option value="wardrobe">Wardrobe</option>
           <option value="storage">Storage</option>
           <option value="storage">Lugage</option>
-          {/* Add more options as needed */}
         </select>
       </div>
 
-      {/* Color Selection */}
       <div className="mb-4">
         <label htmlFor="color" className="block text-sm font-medium text-gray-700">Color: </label>
         <select
@@ -132,38 +158,9 @@ const AddClothingForm: React.FC = () => {
           <option value="brown">Brown</option>
           <option value="black">Black</option>
           <option value="white">White</option>
-          {/* Add more options as needed */}
         </select>
       </div>
-{/*
-      
-      <div className="mb-4">
-        <label htmlFor="dateOfPurchase" className="block text-sm font-medium text-gray-700">Date of Purchase: </label>
-        <input
-          id="dateOfPurchase"
-          required
-          type="date"
-          value={dateOfPurchase}
-          onChange={(e) => setDateOfPurchase(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </div>
 
-     
-      <div className="mb-4">
-        <label htmlFor="timeLastUsed" className="block text-sm font-medium text-gray-700">Time Last Used: </label>
-        <input
-          id="timeLastUsed"
-          required
-          type="date"
-          value={timeLastUsed}
-          onChange={(e) => setTimeLastUsed(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </div>
-  */}
-
-      {/* File Input */}
       <div className="mb-4">
         <input
           type="file"
@@ -172,7 +169,6 @@ const AddClothingForm: React.FC = () => {
         />
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg">
@@ -182,4 +178,4 @@ const AddClothingForm: React.FC = () => {
   );
 };
 
-export default AddClothingForm;
+export default AddOrUpdateClothingForm;
