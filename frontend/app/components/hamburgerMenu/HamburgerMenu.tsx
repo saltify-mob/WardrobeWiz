@@ -21,7 +21,7 @@ const HamburgerMenu = () => {
         {isOpen && (
           <div className="menu">
             <Link href="/">Home</Link>
-            <Link href="/addclothes">Add clothes</Link>
+            <Link href="/addclothing">Add clothes</Link>
             <Link href="/wardrobe">Wardrobe</Link>
             <Link href="/storage">Storage</Link>
             <Link href="/settings">Settings</Link>
