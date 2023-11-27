@@ -11,8 +11,11 @@ export default function AddClothingPage() {
   const [category, setCategory] = useState('top');
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
-  const [dateOfPurchase, setDateOfPurchase] = useState('');
-  const [timeLastUsed, setTimeLastUsed] = useState('');
+
+  // Placeholder:
+  const currentDate = new Date().toISOString().split('T')[0];
+  const [dateOfPurchase] = useState(currentDate);
+  const [timeLastUsed] = useState(currentDate);
 
   const { handleAddClothing } = useWardrobe();
   const router = useRouter();
@@ -124,28 +127,6 @@ export default function AddClothingPage() {
             <option value="black">Black</option>
             <option value="white">White</option>
           </select>
-        </div>
-        <div>
-          <label htmlFor="dateOfPurchase">Date of Purchase: </label>
-          <input
-            id="dateOfPurchase"
-            required
-            type="date"
-            value={dateOfPurchase}
-            placeholder="Enter date of purchase"
-            onChange={(e) => setDateOfPurchase(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="timeLastUsed">Time Last Used: </label>
-          <input
-            id="timeLastUsed"
-            required
-            type="date"
-            value={timeLastUsed}
-            placeholder="Enter time last used"
-            onChange={(e) => setTimeLastUsed(e.target.value)}
-          />
         </div>
         <input type="file" onChange={handleFileChange} />
         <button type="submit">Submit</button>
