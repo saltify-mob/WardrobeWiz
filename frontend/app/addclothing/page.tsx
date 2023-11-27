@@ -1,5 +1,5 @@
 import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
-import AddOrUpdateClothingForm from '../components/addOrUpdateClothingForm/AddorUpdateClothingForm';
+import AddOrUpdateClothingForm from '../components/addOrUpdateClothingForm/AddOrUpdateClothingForm';
 
 const AddClothesPage: React.FC = () => {
   return (

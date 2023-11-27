@@ -1,7 +1,7 @@
 'use client';
 
 import HamburgerMenu from '@/app/components/hamburgerMenu/HamburgerMenu';
-import AddorUpdateClothingForm from '@/app/components/addOrUpdateClothingForm/AddorUpdateClothingForm';
+import AddorUpdateClothingForm from '@/app/components/addOrUpdateClothingForm/AddOrUpdateClothingForm';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
