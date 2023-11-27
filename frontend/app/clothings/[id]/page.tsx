@@ -1,11 +1,14 @@
-import React from 'react';
 import HamburgerMenu from '@/app/components/hamburgerMenu/HamburgerMenu';
 import AddorUpdateClothingForm from '@/app/components/addOrUpdateClothingForm/AddorUpdateClothingForm';
 import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-export default function UpdateClothingPage({ id }: { id: string }) {
+export default function UpdateClothingPage() {
   const { wardrobe } = useWardrobe();
+  const id = usePathname();
+
+
   const clothingItem = wardrobe.find((clothing) => clothing.id === id);
   const imageUrl = clothingItem ? clothingItem.imageUrl : '';
 
