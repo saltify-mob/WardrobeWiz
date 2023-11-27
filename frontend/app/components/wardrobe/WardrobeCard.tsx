@@ -7,7 +7,7 @@ import ClothingCategoryCard from './ClothingCategoryCard';
 import { useRouter } from 'next/navigation';
 
 const WardrobeCard = () => {
-  const { wardrobe, handleDeleteClothing } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const router = useRouter();
 
@@ -23,8 +23,15 @@ const WardrobeCard = () => {
     }
   };
 
-  const handleSendToStorage = (clothing: ClothingItem) => {
-    // Implement send to storage functionality here
+  const handleSendToStorage = async (clothing: ClothingItem) => {
+    const updatedData = { ...clothing, location: 'storage' };
+    const success = await handleUpdateClothing(clothing.id, updatedData);
+    if (success) {
+      console.log('Item sent to storage');
+      setSelectedClothing(null);
+    } else {
+      console.error('Failed to send clothing item to storage');
+    }
   };
 
   const toggleDetail = (clothing: ClothingItem) => {

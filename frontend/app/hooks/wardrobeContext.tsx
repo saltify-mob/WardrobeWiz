@@ -50,7 +50,6 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         }
     };
     
-
     const handleDeleteClothing = async (clothingId: string) => {
         const success = await deleteClothing(clothingId);
         if (success) {
