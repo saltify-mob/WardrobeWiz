@@ -16,9 +16,9 @@ const WardrobeCard = () => {
     }
   }, []);
 
-  const headWears = wardrobe.filter(clothing => clothing.category === 'headwear' || clothing.location === "wardrobe");
-  const tops = wardrobe.filter((clothing) => clothing.category === "top" || clothing.location === "wardrobe");
-  const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment'|| clothing.location === "wardrobe");
+  const headWears = wardrobe.filter(clothing => clothing.category === 'headwear' && clothing.location === "wardrobe");
+  const tops = wardrobe.filter((clothing) => clothing.category === "top" && clothing.location === "wardrobe");
+  const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment' && clothing.location === "wardrobe");
 
   return (
     <div className="w-full flex-col items-center justify-between">

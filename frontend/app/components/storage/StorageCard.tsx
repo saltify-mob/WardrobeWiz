@@ -34,10 +34,10 @@ const StorageCard: React.FC = () => {
   };
 
   const filteredClothes = wardrobe.filter((clothing) =>
-    clothing.location === "storage" ||
+    clothing.location === "storage" && (
     clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
     clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    clothing.color.toLowerCase().includes(searchTerm.toLowerCase())
+    clothing.color.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
