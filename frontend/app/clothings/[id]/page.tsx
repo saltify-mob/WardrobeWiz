@@ -4,7 +4,7 @@ import { useWardrobe } from '@/app/hooks/wardrobeContext';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
-export default function UpdateClothingPage() {
+const AddClothesPage: React.FC = () => {
   const { wardrobe } = useWardrobe();
   const id = usePathname();
 
