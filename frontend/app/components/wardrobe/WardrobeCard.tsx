@@ -19,7 +19,7 @@ const WardrobeCard = () => {
     } else {
       setLocalWardrobe(wardrobe);
     }
-  }, [wardrobe]);
+  }, []);
 
   const handleDelete = async (id: string) => {
     try {
