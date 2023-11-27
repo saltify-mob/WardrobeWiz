@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { ClothingItem } from '@/app/types/ClothingItem';
+import { Carousel, IconButton } from '@material-tailwind/react';
+import Link from 'next/link';
 
 interface Props {
   clothingItems: ClothingItem[];
@@ -9,69 +11,84 @@ interface Props {
 }
 
 const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: Props) => {
-  const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);
-  const scrollAmount = 100;
 
   return (
-    <div className="w-full flex-col items-center justify-between">
-      <h1 className="text-center text-lg">{categoryTitle}</h1>
-      <section className="flex flex-row items-center justify-center">
-      {clothingItems.length ? (
-        <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-          const container = sliderRef.current;
-          if (container) {
-            container.scrollLeft -= scrollAmount;
-          }
-        }}>
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-            alt="Left arrow"
-            width={20}
-            height={20}
-            layout="fixed"
+    <div className='flex flex-row items-center justify-center'>
+    <Carousel className="w-1/3"
+    navigation={({ setActiveIndex, activeIndex, length }) => (
+      <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+        {new Array(length).fill("").map((_, i) => (
+          <span
+            key={i}
+            className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+              activeIndex === i ? "w-8 h-2 bg-black" : "w-4 bg-black"
+            }`}
+            onClick={() => setActiveIndex(i)}
           />
-        </div>
-      ) : (<></>)}
-
-        <div
-          className="flex flex-row max-w-md overflow-scroll scroll-smooth"
-          dir="ltr"
-          ref={sliderRef}
+        ))}
+      </div>
+    )}
+     prevArrow={({ handlePrev }) => (
+      <IconButton
+        variant="text"
+        color="white"
+        size="lg"
+        onClick={handlePrev}
+        className="!absolute top-2/4 left-4 -translate-y-2/4 bg-black"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className="h-6 w-6"
         >
-          {clothingItems.map((item, index) => (
-            <div 
-              className="scroll-ps-2 snap-x m-2" 
-              key={index}
-              onClick={() => onToggleDetail(item)}
-            >
-              <Image
-                src={item.imageUrl}
-                alt={item.type}
-                width={200}
-                height={100}
-                layout="fixed"
-              />
-            </div>
-          ))}
-        </div>
-
-        {clothingItems.length ? (
-        <div className="self-center w-10 h-5 hover:cursor-pointer" onClick={() => {
-          const container = sliderRef.current;
-          if (container) {
-            container.scrollLeft += scrollAmount;
-          }
-        }}>
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/109/109617.png"
-            alt="Right arrow"
-            width={20}
-            height={20}
-            layout="fixed"
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
           />
-        </div>
-      ) : (<></>)}
-      </section>
+        </svg>
+      </IconButton>
+       )}
+      nextArrow={({ handleNext }) => (
+        <IconButton
+          variant="text"
+          color="white"
+          size="lg"
+          onClick={handleNext}
+          className="!absolute top-2/4 right-4 -translate-y-2/4 bg-black"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            />
+          </svg>
+        </IconButton>
+      )}>
+      {clothingItems.map((top, index) => (
+        <Link key={index} href={`/updateclothing/${top.id}`}>
+           <Image
+           key={index}
+           width={1000}
+           height={1050}
+           src={top.imageUrl}
+           alt="image"
+           className="w-full"
+         />
+         </Link>
+      ))} 
+    </Carousel>
     </div>
   );
 }
