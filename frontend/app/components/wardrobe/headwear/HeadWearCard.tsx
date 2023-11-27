@@ -38,7 +38,6 @@ const HeadWearCard = (props: Props) => {
       >
         {props.headwears.map((h, index) => (
           <div className="scroll-ps-2 snap-x m-2" key={index}>
-            <Link href={`/clothings/${h.id}`}>
               <Image
                 src={h.imageUrl}
                 alt="Picture of head wear"
@@ -46,7 +45,6 @@ const HeadWearCard = (props: Props) => {
                 height={50}
                 layout="fixed"
               />
-            </Link>
           </div>
         ))}
       </div>

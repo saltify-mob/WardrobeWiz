@@ -37,7 +37,6 @@ const TopsCard = (props: Props) => {
       >
         {props.tops.map((top, index) => (
           <div className="scroll-ps-2 snap-x m-2" key={index}>
-            <Link href={`/clothings/${top.id}`}>
               <Image
                 src={top.imageUrl}
                 alt="Top garment"
@@ -45,7 +44,6 @@ const TopsCard = (props: Props) => {
                 height={100}
                 layout="fixed"
               />
-            </Link>
           </div>
         ))}
       </div>
