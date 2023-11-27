@@ -77,8 +77,9 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
         </IconButton>
       )}>
       {clothingItems.map((top, index) => (
-        <Link href={`/updateclothing/${top.id}`}>
+        <Link key={index} href={`/updateclothing/${top.id}`}>
            <Image
+           key={index}
            width={1000}
            height={1050}
            src={top.imageUrl}
