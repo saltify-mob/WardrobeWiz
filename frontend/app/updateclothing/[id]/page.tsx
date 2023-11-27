@@ -1,6 +1,5 @@
 'use client';
 
-import HamburgerMenu from '@/app/components/hamburgerMenu/HamburgerMenu';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useWardrobe } from '@/app/contexts/wardrobeContext';
@@ -17,7 +16,6 @@ const UpdateClothesPage: React.FC = () => {
 
   return (
     <main className="w-full flex-col items-center justify-between">
-      <HamburgerMenu />
       <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />
       <ClothingForm id={id} />
     </main>

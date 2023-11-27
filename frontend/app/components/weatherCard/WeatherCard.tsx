@@ -113,7 +113,7 @@ const WeatherCard: React.FC = () => {
   };
 
   return (
-    <div className="w-full text-center p-4" style={{ background: 'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)' }}>
+    <div className="w-full text-center p-4">
       {location.weather ? (
         <div>
 
