@@ -55,7 +55,7 @@ const StorageCard: React.FC = () => {
     router.push(`/updateclothing/${id}`);
   }
 
-  const filteredClothes = localWardrobe.filter((clothing) =>
+  const filteredClothes = wardrobe.filter((clothing) =>
     clothing.location === 'storage' &&
     (clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
       clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
