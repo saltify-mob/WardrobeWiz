@@ -14,9 +14,9 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <h2 className="text-xl font-semibold mb-4 my-4">{categoryTitle}</h2> {/* Add the title here */}
+      <h2 className="text-xl font-semibold mb-4 my-4">{categoryTitle}</h2>
       <Carousel
-        className="w-full md:w-1/3 h-64" // Set a square aspect ratio
+        className="w-full md:w-1/3 h-64"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
             {new Array(length).fill("").map((_, i) => (
@@ -83,7 +83,7 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
            <Image
            key={index}
            layout="fill"
-           objectFit="cover" // Crop or zoom to fit
+           objectFit="cover"
            src={item.imageUrl}
            alt="image"
            className="w-full"
