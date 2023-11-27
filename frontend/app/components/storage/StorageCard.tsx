@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 const StorageCard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
-  const { wardrobe, handleDeleteClothing } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const router = useRouter();
 
   const handleDelete = async (id: string) => {
@@ -23,8 +23,15 @@ const StorageCard: React.FC = () => {
     }
   };
 
-  const handleSendToWardrobe = (clothing: ClothingItem) => {
-    // Implement send to wardrobe functionality here
+  const handleSendToWardrobe = async (clothing: ClothingItem) => {
+    const updatedData = { ...clothing, location: 'wardrobe' };
+    const success = await handleUpdateClothing(clothing.id, updatedData);
+    if (success) {
+      console.log('Item sent to wardrobe');
+      setSelectedClothing(null);
+    } else {
+      console.error('Failed to send clothing item to wardrobe');
+    }
   };
 
   const toggleDetail = (clothing: ClothingItem) => {
