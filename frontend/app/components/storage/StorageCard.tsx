@@ -50,7 +50,9 @@ const StorageCard: React.FC = () => {
     clothing.location === 'storage' &&
     (clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
       clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clothing.color.toLowerCase().includes(searchTerm.toLowerCase()))
+      clothing.color.toLowerCase().includes(searchTerm.toLowerCase())||
+      clothing.season.toLowerCase().includes(searchTerm.toLowerCase())
+      )
   );
 
   return (
