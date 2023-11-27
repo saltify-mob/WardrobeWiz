@@ -65,7 +65,8 @@ const StorageCard: React.FC = () => {
           clothing={selectedClothing}
           onClose={closeDetail}
           onDelete={() => handleDelete(selectedClothing.id)}
-          onSendToWardrobe={() => handleSendToWardrobe(selectedClothing)}
+          onSendTo={() => handleSendToWardrobe(selectedClothing)}
+          sendToLabel='Send to Wardrobe'
         />
       )}
     </div>

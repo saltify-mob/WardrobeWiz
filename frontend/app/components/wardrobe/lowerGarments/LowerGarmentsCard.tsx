@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 interface Props {
   lowerGarments: ClothingItem[];
+  onToggleDetail: (clothing: ClothingItem) => void;
 }
 const LowerGarmentsCard = (props: Props) => {
   const sliderRef = useRef<HTMLInputElement>({} as HTMLInputElement);

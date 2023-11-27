@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 interface Props {
   tops: ClothingItem[];
+  onToggleDetail: (clothing: ClothingItem) => void;
 }
 
 const TopsCard = (props: Props) => {

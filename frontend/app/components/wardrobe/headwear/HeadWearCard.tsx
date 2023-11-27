@@ -5,7 +5,8 @@ import { ClothingItem } from '@/app/types/ClothingItem';
 import Link from 'next/link';
 
 interface Props {
-  headwears: ClothingItem[]
+  headwears: ClothingItem[];
+  onToggleDetail: (clothing: ClothingItem) => void;
 }
 
 const HeadWearCard = (props: Props) => {
