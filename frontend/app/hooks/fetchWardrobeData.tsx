@@ -1,5 +1,5 @@
 import { fetcher } from '../utils/fetcher';
-import { ClothingItem } from '../types/ClothingItem'; // Assuming this is your type definition
+import { ClothingItem } from '../types/ClothingItem';
 
 export const fetchWardrobeData = async (): Promise<ClothingItem[] | null> => {
     try {

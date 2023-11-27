@@ -26,7 +26,7 @@ export default function Home() {
         router.push('/api/auth/login');
       }
     }
-  }, [user, isLoading, fetchAndSetWardrobe]);
+  }, [user, isLoading]);
 
   if (isLoading) {
     return <div>Loading...</div>;

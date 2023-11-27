@@ -1,5 +1,5 @@
 import { fetcher } from '../utils/fetcher';
-import { ClothingItem } from '../types/ClothingItem'; // Assuming this is your type
+import { ClothingItem } from '../types/ClothingItem';
 
 export const addClothing = async (formData: FormData): Promise<ClothingItem | null> => {
   try {
