@@ -17,7 +17,7 @@ const UpdateClothesPage: React.FC = () => {
   return (
     <main className="w-full flex-col items-center justify-between">
       <HamburgerMenu />
-      {imageUrl && <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />}
+      <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />
       <AddorUpdateClothingForm id={id} />
     </main>
   );
