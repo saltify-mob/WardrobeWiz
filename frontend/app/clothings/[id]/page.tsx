@@ -3,53 +3,55 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetcher } from '@/app/utils/fetcher';
 import Image from 'next/image';
+import { useWardrobe } from '@/app/hooks/wardrobeContext';
 
-export default function AddClothingPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const [season, setSeason] = useState('winter');
-  const [type, setType] = useState('shirt');
-  const [category, setCategory] = useState('top');
-  const [location, setLocation] = useState('wardrobe');
-  const [color, setColor] = useState('red');
-  const [dateOfPurchase, setDateOfPurchase] = useState('');
-  const [timeLastUsed, setTimeLastUsed] = useState('');
+export default function AddClothingPage({ params }: { params: { id: string } }) {
+  const { wardrobe, handleUpdateClothing } = useWardrobe();
+  const router = useRouter();
+
+  const [season, setSeason] = useState('');
+  const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
+  const [location, setLocation] = useState('');
+  const [color, setColor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-  useEffect(() => {
-    fetcher(`/api/clothings/${params.id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setCategory(res.category);
-        setSeason(res.season);
-        setType(res.type);
-        setLocation(res.location);
-        setColor(res.color);
-        setDateOfPurchase(res.dateOfPurchase);
-        setTimeLastUsed(res.timeLastUsed);
-        setImageUrl(res.imageUrl);
-      });
-  }, [params.id]);
+  // Placeholder:
+  const currentDate = new Date().toISOString().split('T')[0];
+  const [dateOfPurchase] = useState(currentDate);
+  const [timeLastUsed] = useState(currentDate);
 
-  const router = useRouter();
+  useEffect(() => {
+    const clothingItem = wardrobe.find(item => item.id === params.id);
+    if (clothingItem) {
+      setSeason(clothingItem.season || '');
+      setType(clothingItem.type || '');
+      setCategory(clothingItem.category || '');
+      setLocation(clothingItem.location || '');
+      setColor(clothingItem.color || '');
+      setImageUrl(clothingItem.imageUrl || '');
+    }
+  }, [params.id, wardrobe]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await fetcher(`/api/clothings/${params.id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        category,
-        type,
-        season,
-        color,
-        dateOfPurchase,
-        timeLastUsed,
-        location,
-      }),
-    });
-    router.push('/wardrobe');
+
+    const updatedData = {
+      season,
+      type,
+      category,
+      location,
+      color,
+      dateOfPurchase,
+      timeLastUsed,
+    };
+
+    const success = await handleUpdateClothing(params.id, updatedData);
+    if (success) {
+      router.push('/wardrobe');
+    } else {
+      console.error('Failed to update clothing item');
+    }
   };
 
   return (
@@ -134,28 +136,6 @@ export default function AddClothingPage({
             <option value="black">Black</option>
             <option value="white">White</option>
           </select>
-        </div>
-        <div>
-          <label htmlFor="dateOfPurchase">Date of Purchase: </label>
-          <input
-            id="dateOfPurchase"
-            required
-            type="date"
-            value={dateOfPurchase}
-            placeholder="Enter date of purchase"
-            onChange={(e) => setDateOfPurchase(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="timeLastUsed">Time Last Used: </label>
-          <input
-            id="timeLastUsed"
-            required
-            type="date"
-            value={timeLastUsed}
-            placeholder="Enter time last used"
-            onChange={(e) => setTimeLastUsed(e.target.value)}
-          />
         </div>
         <button type="submit">Submit</button>
       </form>

@@ -5,19 +5,23 @@ import { fetchWardrobeData } from './fetchWardrobeData';
 import { addClothing } from './addClothing';
 import { deleteClothing } from './deleteClothing';
 import { ClothingItem } from '../types/ClothingItem';
+import { updateClothing } from './updateClothing';
+import { UpdateClothingData } from '../types/UpdateClothingData';
 
 interface WardrobeContextType {
     wardrobe: ClothingItem[];
     fetchAndSetWardrobe: () => Promise<void>;
     handleAddClothing: (formData: FormData) => Promise<void>;
     handleDeleteClothing: (clothingId: string) => Promise<void>;
+    handleUpdateClothing: (clothingId: string, updateData: UpdateClothingData) => Promise<boolean>;
 }
 
 const WardrobeContext = createContext<WardrobeContextType>({
     wardrobe: [],
     fetchAndSetWardrobe: async () => { },
     handleAddClothing: async () => { },
-    handleDeleteClothing: async () => { }
+    handleDeleteClothing: async () => { },
+    handleUpdateClothing: async () => false
 });
 
 export const useWardrobe = () => useContext(WardrobeContext);
@@ -56,8 +60,19 @@ export const WardrobeProvider: React.FC<WardrobeProviderProps> = ({ children }) 
         }
     };
 
+    const handleUpdateClothing = async (clothingId: string, updateData: UpdateClothingData) => {
+        const updatedItem = await updateClothing(clothingId, updateData);
+        if (updatedItem) {
+            const updatedWardrobe = wardrobe.map(item => item.id === clothingId ? updatedItem : item);
+            setWardrobe(updatedWardrobe);
+            localStorage.setItem('wardrobe_data', JSON.stringify(updatedWardrobe));
+            return true;
+        }
+        return false;
+    };
+
     return (
-        <WardrobeContext.Provider value={{ wardrobe, fetchAndSetWardrobe, handleAddClothing, handleDeleteClothing }}>
+        <WardrobeContext.Provider value={{ wardrobe, fetchAndSetWardrobe, handleAddClothing, handleDeleteClothing, handleUpdateClothing }}>
             {children}
         </WardrobeContext.Provider>
     );
