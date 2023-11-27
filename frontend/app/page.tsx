@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 import SuggestionCard from './components/suggestionCard/SuggestionCard';
 import WeatherCard from './components/weatherCard/WeatherCard';
-import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu';
 import { createUser } from './hooks/createUser';
 import { useWardrobe } from './contexts/wardrobeContext';
 
@@ -38,7 +37,6 @@ export default function Home() {
 
   return (
     <main className="w-full flex flex-col justify-between bg-EEF6FC ">
-      <HamburgerMenu />
       <div className="w-full flex flex-col items-center justify-between bg-EEF6FC ">
       <WeatherCard />
       </div>
