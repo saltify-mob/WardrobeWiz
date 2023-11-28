@@ -5,6 +5,44 @@ import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 import { useRouter } from 'next/navigation';
 import { Button } from '@material-tailwind/react';
 
+// Define mapping objects
+const seasonDisplayNames: Record<string, string> = {
+  winter: 'Winter',
+  spring: 'Spring',
+  summer: 'Summer',
+  autumn: 'Autumn',
+};
+
+const categoryDisplayNames: Record<string, string> = {
+  headwear: 'Headwear',
+  top: 'Top',
+  lowerGarment: 'Lower Garments',
+};
+
+const typeDisplayNames: Record<string, Record<string, string>> = {
+  top: {
+    shirt: 'Shirt',
+    hoodie: 'Hoodie',
+    sweatShirt: 'Sweatshirt',
+    't-shirt': 'T-Shirt',
+  },
+  lowerGarment: {
+    shorts: 'Shorts',
+    sweatPants: 'Sweat Pants',
+    trousers: 'Trousers',
+  },
+  headwear: {
+    beanie: 'Beanie',
+    hat: 'Hat',
+  },
+};
+
+const locationDisplayNames: Record<string, string> = {
+  wardrobe: 'Wardrobe',
+  storage: 'Storage',
+  luggage: 'Luggage',
+};
+
 interface ClothingFormProps {
   id?: string;
 }
@@ -13,11 +51,10 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
-  const [type, setType] = useState('shirt');
   const [category, setCategory] = useState('top');
+  const [type, setType] = useState('shirt'); // Initialize with a default type
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
-
   const currentDate = new Date().toISOString().split('T')[0];
   const [dateOfPurchase, setDateOfPurchase] = useState(currentDate);
   const [timeLastUsed, setTimeLastUsed] = useState(currentDate);
@@ -80,15 +117,11 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   };
 
   function handleChangeCategory(value: string): void {
-    if (value === 'headwear') {
-      setType('beanie');
-    } else if (value === 'top') {
-      setType('shirt');
-    } else if (value === 'lowerGarment') {
-      setType('shorts');
-    }
     setCategory(value);
+    // Set a default type when the category changes
+    setType(Object.keys(typeDisplayNames[value])[0]);
   }
+
   const colors = [
     'blue',
     'red',
@@ -103,179 +136,153 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   ];
 
   return (
-    <div className="w-full max-w-md  py-6">
-    <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
-
-      <div className="mb-4">
-        <label
-          htmlFor="season"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Season:{' '}
-        </label>
-        <div className="flex space-x-2">
-          {['winter', 'spring', 'summer', 'autumn'].map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => setSeason(s)}
-              className={`${
-                season === s ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {s}
-            </button>
-          ))}
+    <div className="w-full max-w-md py-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
+        <div className="mb-4">
+          <label
+            htmlFor="season"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Season:{' '}
+          </label>
+          <div className="flex space-x-2">
+            {Object.keys(seasonDisplayNames).map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSeason(s)}
+                className={`${
+                  season === s ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                } py-2 px-4 rounded-full focus:outline-none`}
+              >
+                {seasonDisplayNames[s]}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="category"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Category:{' '}
-        </label>
-        <div className="flex space-x-2">
-          {['headwear', 'top', 'lowerGarment'].map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => handleChangeCategory(c)}
-              className={`${
-                category === c ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {c}
-            </button>
-          ))}
+        <div className="mb-4">
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Category:{' '}
+          </label>
+          <div className="flex space-x-2">
+            {Object.keys(categoryDisplayNames).map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => handleChangeCategory(c)}
+                className={`${
+                  category === c ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                } py-2 px-4 rounded-full focus:outline-none`}
+              >
+                {categoryDisplayNames[c]}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="type"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Type:{' '}
-        </label>
-        <div className="flex space-x-2">
-          {category === 'top' && ['shirt', 'hoodie', 'sweatShirt', 't-shirt'].map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setType(t)}
-              className={`${
-                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {t}
-            </button>
-          ))}
-          {category === 'lowerGarment' && ['shorts', 'sweatPants', 'trousers'].map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setType(t)}
-              className={`${
-                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {t}
-            </button>
-          ))}
-          {category === 'headwear' && ['beanie', 'hat'].map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setType(t)}
-              className={`${
-                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="location"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Location:{' '}
-        </label>
-        <div className="flex space-x-2">
-          {['wardrobe', 'storage', 'lugage'].map((l) => (
-            <button
-              key={l}
-              type="button"
-              onClick={() => setLocation(l)}
-              className={`${
-                location === l ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-              } py-2 px-4 rounded-full focus:outline-none`}
-            >
-              {l}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="mb-4">
+        <div className="mb-4">
   <label
-    htmlFor="color"
+    htmlFor="type"
     className="block text-sm font-medium text-gray-700"
   >
-    Color:{' '}
+    Type:{' '}
   </label>
-  <div className="flex flex-wrap space-x-2">
-    {colors.map((c) => (
-      <button
-        key={c}
-        type="button"
-        onClick={() => setColor(c)}
-        className={`rounded-full m-1 focus:outline-none ${
-          color === c
-            ? `h-11 w-11 ${
-                c === 'black'
-                  ? 'bg-primary-content text-white'
-                  : c === 'white'
-                  ? 'bg-base-100 text-black'
-                  : `bg-${c}-500 text-white`
-              }`
-            : `h-8 w-8 ${
-                c === 'black'
-                  ? 'bg-primary-content text-white opacity-100'
-                  : c === 'white'
-                  ? 'bg-base-100 text-black opacity-100'
-                  : `bg-${c}-500 text-white opacity-100`
-              }`
-        }`}
-      />
+  <div className="flex space-x-2">
+    {Object.keys(typeDisplayNames[category]).map((t) => (
+      <div key={t} className="w-1/3 px-2 mb-2">
+        <button
+          type="button"
+          onClick={() => setType(t)}
+          className={`${
+            type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+          } py-2  rounded-full focus:outline-none w-full`}
+        >
+          {typeDisplayNames[category][t]}
+        </button>
+      </div>
     ))}
   </div>
 </div>
 
-      <div className="mb-4">
-        <input
-          type="file"
-          onChange={handleFileChange}
-          className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
-        />
-      </div>
-      
-      
-      <Button
-        type="submit"
-        className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
-      >
-        Submit
-      </Button>
-    </form>
+        <div className="mb-4">
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Location:{' '}
+          </label>
+          <div className="flex space-x-2">
+            {Object.keys(locationDisplayNames).map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLocation(l)}
+                className={`${
+                  location === l ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                } py-2 px-4 rounded-full focus:outline-none`}
+              >
+                {locationDisplayNames[l]}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="color"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Color:{' '}
+          </label>
+          <div className="flex flex-wrap space-x-2">
+            {colors.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setColor(c)}
+                className={`rounded-full m-1 focus:outline-none ${
+                  color === c
+                    ? `h-11 w-11 ${
+                        c === 'black'
+                          ? 'bg-primary-content text-white'
+                          : c === 'white'
+                          ? 'bg-base-100 text-black'
+                          : `bg-${c}-500 text-white`
+                      }`
+                    : `h-8 w-8 ${
+                        c === 'black'
+                          ? 'bg-primary-content text-white opacity-100'
+                          : c === 'white'
+                          ? 'bg-base-100 text-black opacity-100'
+                          : `bg-${c}-500 text-white opacity-100`
+                      }`
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
+          />
+        </div>
+
+        <Button
+          type="submit"
+          className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
+        >
+          Submit
+        </Button>
+      </form>
     </div>
   );
 };
 
 export default ClothingForm;
-
