@@ -17,7 +17,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
 
-  // Placeholder
   const currentDate = new Date().toISOString().split('T')[0];
   const [dateOfPurchase, setDateOfPurchase] = useState(currentDate);
   const [timeLastUsed, setTimeLastUsed] = useState(currentDate);
