@@ -15,10 +15,13 @@ const UpdateClothesPage: React.FC = () => {
   const imageUrl = clothingItem ? clothingItem.imageUrl : '';
 
   return (
-    <main className="w-full flex-col items-center justify-between">
+    <main className="w-full flex flex-col items-center justify-center">
+    <div className="rounded-lg overflow-hidden shadow-md">
       <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />
-      <ClothingForm id={id} />
-    </main>
+    </div>
+    <ClothingForm id={id} />
+  </main>
+  
   );
 }
 
