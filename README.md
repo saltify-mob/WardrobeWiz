@@ -3,7 +3,13 @@
 ## Overview
 WardrobeWiz is designed to transform the way users choose their daily outfits. By leveraging real-time weather data and current location, it takes the hassle out of dressing appropriately for the day. Say goodbye to wardrobe dilemmas and confidently step out in comfort no matter the weather.
 
-![ww3](https://github.com/saltify-mob/WardrobeWiz/assets/93320021/7a3dee5b-f204-4a78-9fd8-86a1066a5c40)
+## The Features
+
+**1. Smart Outfit Suggestions**
+<p>WardrobeWiz analyzes the current weather conditions at your location. Based on this analysis, the app suggests personalized outfit combinations that matches the temperature </p>
+
+**2. Wardrobe Management**
+<p>Effortlessly manage your wardrobe within the app. Add your clothing items, categorize them, and WardrobeWiz will incorporate them into its outfit suggestions. Keep track and make informed decisions about your clothings.</p>
 
 ## About The Project
 <p>WardrobeWiz ...</p>
