@@ -14,9 +14,23 @@ interface ClothingCardProps {
 
 const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete, onSendTo, onUpdate, sendToLabel }) => {
 
+  const cardRef = useRef<HTMLDivElement>();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [cardRef, onClose]);
+
   return (
     <div className="w-full h-full flex items-center justify-center bg-white bg-opacity-90">
-      <div className="max-w-md p-4 bg-white shadow-md rounded-md">
+      <div ref={cardRef as React.MutableRefObject<HTMLDivElement>} className="max-w-md p-4 bg-white shadow-md rounded-md">
         <Image 
           src={clothing.imageUrl}
           alt={clothing.type} 
