@@ -33,6 +33,7 @@ WardrobeWiz is designed to transform the way users choose their daily outfits. B
 - [Jacob Larsson](https://github.com/jacoblars)
 - [Sami Al-khishali](https://github.com/samimu7)
 
-### Built With
+## 
+##### Built With:
 <img src="https://skillicons.dev/icons?i=java,spring,maven,html,tailwind,ts,next&perline=8" />
 
