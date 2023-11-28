@@ -20,6 +20,12 @@ WardrobeWiz is designed to transform the way users choose their daily outfits. B
 - **Backend:** Building a solid backend infrastructure by using Java and the Spring Framework
 - **Cloud Hosting and Services:** Utilizing Azure for reliable and scalable cloud hosting solutions
 
+## Wanna Reach Out?
+- [Anne Mariel Catapang](https://github.com/annemariel95)
+- [Grim Kalman](https://github.com/grim-kalman)
+- [Jacob Larsson](https://github.com/jacoblars)
+- [Sami Al-khishali](https://github.com/samimu7)
+
 ### Built With
 <img src="https://skillicons.dev/icons?i=java,spring,maven,html,tailwind,ts,next&perline=8" />
 
