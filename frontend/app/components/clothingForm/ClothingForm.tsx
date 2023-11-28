@@ -3,6 +3,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useWardrobe } from '../../contexts/wardrobeContext';
 import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 import { useRouter } from 'next/navigation';
+import { Button } from '@material-tailwind/react';
 
 interface ClothingFormProps {
   id?: string;
@@ -262,13 +263,14 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
         />
       </div>
-
-      <button
+      
+      
+      <Button
         type="submit"
         className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 };
