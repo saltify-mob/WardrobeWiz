@@ -1,7 +1,5 @@
-import React, { useRef } from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import { ClothingItem } from '@/app/types/ClothingItem';
-import { Carousel, IconButton } from '@material-tailwind/react';
 
 interface Props {
   clothingItems: ClothingItem[];
@@ -9,91 +7,106 @@ interface Props {
   categoryTitle: string;
 }
 
+const CarouselArrow = ({
+  direction,
+  onClick,
+}: {
+  direction: 'left' | 'right';
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`absolute top-1/2 transform -translate-y-1/2 ${
+      direction === 'left' ? 'left-4' : 'right-4'
+    } p-2 rounded-full shadow-md cursor-pointer z-10`}
+    style={{
+      background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4))',
+      transition: 'background-color 0.3s',
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.backgroundColor = 'rgba(229, 231, 235, 0.5)'; // Mimics Tailwind's gray-200
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.backgroundColor = 'transparent';
+    }}
+  >
+   
+
+    {direction === 'left' ? (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-chevron-left"
+      >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    ) : (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-chevron-right"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    )}
+  </button>
+);
+
 const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: Props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToPrevSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : clothingItems.length - 1));
+  };
+
+  const goToNextSlide = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % clothingItems.length);
+  };
 
   return (
-    <div className='flex flex-col items-center justify-center'>
-      <h2 className="text-xl font-semibold mb-4 my-4">{categoryTitle}</h2>
-      <Carousel
-        className="w-full md:w-1/3 h-72"
-        navigation={({ setActiveIndex, activeIndex, length }) => (
-          <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
-            {new Array(length).fill("").map((_, i) => (
-              <span
-                key={i}
-                className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-                  activeIndex === i ? "w-8 h-2 bg-primary" : "w-4 bg-base-300"
-                }`}
-                onClick={() => setActiveIndex(i)}
-              />
-            ))}
-          </div>
-        )}
-        prevArrow={({ handlePrev }) => (
-          <IconButton
-            variant="text"
-            color="white"
-            size="lg"
-            onClick={handlePrev}
-            className="!absolute top-2/4 left-4 -translate-y-2/4 bg-base-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-              />
-            </svg>
-          </IconButton>
-        )}
-        nextArrow={({ handleNext }) => (
-          <IconButton
-            variant="text"
-            color="white"
-            size="lg"
-            onClick={handleNext}
-            className="!absolute top-2/4 right-4 -translate-y-2/4 bg-base-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </IconButton>
-        )}
-      >
+    <div className='flex flex-col items-center justify-center bg-opacity-50 backdrop-blur-md bg-white rounded-xl shadow-lg overflow-hidden my-4 p-4 mx-auto max-w-md max-h-xl'>
+      <h2 className="text-2xl font-bold mb-4">{categoryTitle}</h2>
+      <div className='relative w-full h-80 overflow-hidden'>
         {clothingItems.map((item, index) => (
           <div
-            key={index}
+            key={item.id}
+            className={`absolute inset-0 transition-transform duration-300 ease-in-out`}
+            style={{
+              transform: `translateX(${(index - activeIndex) * 100}%)`,
+            }}
             onClick={() => onToggleDetail(item)}
-            className="w-full h-72 flex justify-center"
           >
-            <Image
-              onClick={() => onToggleDetail(item)}
-              src={item.imageUrl}
-              height={288}
-              width={288}
-              alt="image"
-            />
+            <img src={item.imageUrl} alt={`Clothing item ${index}`} className="w-full h-full object-cover cursor-pointer" />
           </div>
         ))}
-      </Carousel>
+        <CarouselArrow direction="left" onClick={goToPrevSlide} />
+        <CarouselArrow direction="right" onClick={goToNextSlide} />
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
+          {clothingItems.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 mx-1 rounded-full ${
+                index === activeIndex ? 'bg-black' : 'bg-gray-300'
+              }`}
+              onClick={() => setActiveIndex(index)}
+            ></div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
