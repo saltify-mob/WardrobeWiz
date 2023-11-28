@@ -31,22 +31,17 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete
   return (
     <div className="w-full h-full flex items-center justify-center bg-white bg-opacity-90">
       <div ref={cardRef as React.MutableRefObject<HTMLDivElement>} className="max-w-md p-4 bg-white shadow-md rounded-md">
-        <Image 
+      <Button onClick={onDelete} className="btn btn-error mt-1 w-full mx-15 px-18 py-2 bg-error text-white font-semibold rounded-lg md:w-20 lg:w-20 md:mx-3 lg:mx-3">Delete</Button>
+        <Image
           src={clothing.imageUrl}
-          alt={clothing.type} 
+          alt={clothing.type}
           layout="responsive"
           width={170}
           height={227}
           objectFit="cover"
         />
-        <div className="mt-4">
-          <div className='flex justify-center'>
-          <Button onClick={onDelete} className="mr-2 bg-red-600 p-2 hover:bg-red-700">Delete</Button>
-          <Button onClick={onSendTo} className='bg-secondary mr-2 p-2'>{sendToLabel}</Button>
-          <Button onClick={onUpdate} className='bg-primary p-2'>Update</Button>
-          </div>
-          <button onClick={onClose} className="absolute top-0 right-0 p-2">X</button>
-        </div>
+          <Button onClick={onSendTo} className="btn btn-secondary mt-4 w-full mx-15 px-20 py-2 bg-secondary text-white font-semibold rounded-lg md:w-20 lg:w-20 md:mx-3 lg:mx-3">{sendToLabel}</Button>
+          <Button onClick={onUpdate} className="btn btn-primary mt-4 w-full mx-15 px-20 py-2 bg-primary text-white font-semibold rounded-lg md:w-20 lg:w-20 md:mx-3 lg:mx-3">Update</Button>
       </div>
     </div>
   );

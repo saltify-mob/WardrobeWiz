@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { fetchOutfitData } from '@/app/hooks/fetchOutfitData';
+import { Button } from '@material-tailwind/react';
 
 const SuggestionCard = () => {
   const [outfit, setOutfit] = useState({
@@ -52,11 +53,11 @@ const SuggestionCard = () => {
             className="rounded-md shadow-2xl"
         />
       </div>
-      <button
+      <Button
         onClick={loadNewOutfit}
         className="btn btn-primary mt-4 w-full mx-15 px-24 py-2 bg-primary text-white font-semibold rounded-lg md:w-80 lg:w-80">
         Generate New
-      </button>
+      </Button>
     </div>
   );
 };
