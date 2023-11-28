@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-
-interface ClothingItem {
-  id: string;
-  imageUrl: string;
-  // other properties as needed
-}
+import { ClothingItem } from '@/app/types/ClothingItem';
 
 interface Props {
   clothingItems: ClothingItem[];
