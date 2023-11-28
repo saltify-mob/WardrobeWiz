@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ClothingItem } from '@/app/types/ClothingItem';
+import { Button } from '@material-tailwind/react';
 
 interface ClothingCardProps {
   clothing: ClothingItem;
@@ -12,6 +13,7 @@ interface ClothingCardProps {
 }
 
 const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete, onSendTo, onUpdate, sendToLabel }) => {
+
   return (
     <div className="w-full h-full flex items-center justify-center bg-white bg-opacity-90">
       <div className="max-w-md p-4 bg-white shadow-md rounded-md">
@@ -24,9 +26,11 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete
           objectFit="cover"
         />
         <div className="mt-4">
-          <button onClick={onDelete} className="mr-2">Delete</button>
-          <button onClick={onSendTo}>{sendToLabel}</button>
-          <button onClick={onUpdate}>Update</button>
+          <div className='flex justify-center'>
+          <Button onClick={onDelete} className="mr-2 bg-red-600 p-2 hover:bg-red-700">Delete</Button>
+          <Button onClick={onSendTo} className='bg-secondary mr-2 p-2'>{sendToLabel}</Button>
+          <Button onClick={onUpdate} className='bg-primary p-2'>Update</Button>
+          </div>
           <button onClick={onClose} className="absolute top-0 right-0 p-2">X</button>
         </div>
       </div>
