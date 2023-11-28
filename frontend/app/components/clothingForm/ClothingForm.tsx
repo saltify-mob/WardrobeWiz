@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useWardrobe } from '../../contexts/wardrobeContext';
 import { UpdateClothingData } from '@/app/types/UpdateClothingData';
@@ -26,7 +26,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
   useEffect(() => {
     if (id) {
-      const clothingItem = wardrobe.find(item => item.id === id);
+      const clothingItem = wardrobe.find((item) => item.id === id);
       if (clothingItem) {
         setSeason(clothingItem.season);
         setType(clothingItem.type);
@@ -79,11 +79,26 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
     }
   };
 
+  function handleChangeCategory(value: string): void {
+    if (value === 'headwear') {
+      setType('beanie');
+    } else if (value === 'top') {
+      setType('shirt');
+    } else if (value === 'lowerGarment') {
+      setType('shorts');
+    }
+    setCategory(value);
+  }
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md px-4 py-6">
       <div className="mb-4">
-        <label htmlFor="season" className="block text-sm font-medium text-gray-700">Season: </label>
+        <label
+          htmlFor="season"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Season:{' '}
+        </label>
         <select
           id="season"
           required
@@ -97,14 +112,18 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <option value="autumn">Autumn</option>
         </select>
       </div>
-
       <div className="mb-4">
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category: </label>
+        <label
+          htmlFor="category"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Category:{' '}
+        </label>
         <select
           id="category"
           required
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => handleChangeCategory(e.target.value)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
           <option value="headwear">Headwear</option>
@@ -112,9 +131,13 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <option value="lowerGarment">Lower Garment</option>
         </select>
       </div>
-
       <div className="mb-4">
-        <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type: </label>
+        <label
+          htmlFor="type"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Type:{' '}
+        </label>
         <select
           id="type"
           required
@@ -122,15 +145,36 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           onChange={(e) => setType(e.target.value)}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         >
-          <option value="shirt">Shirt</option>
-          <option value="hoodie">Hoodie</option>
-          <option value="sweatShirt">Sweat Shirt</option>
-          <option value="t-shirt">T-shirt</option>
+          {category === 'top' && (
+            <>
+              <option value="shirt">Shirt</option>
+              <option value="hoodie">Hoodie</option>
+              <option value="sweatShirt">Sweat Shirt</option>
+              <option value="t-shirt">T-shirt</option>
+            </>
+          )}
+          {category === 'lowerGarment' && (
+            <>
+              <option value="shorts">Shorts</option>
+              <option value="sweatPants">Sweat Pants</option>
+              <option value="trousers">Trousers</option>
+            </>
+          )}
+          {category === 'headwear' && (
+            <>
+              <option value="beanie">Beanie</option>
+              <option value="hat">Hat</option>
+            </>
+          )}{' '}
         </select>
       </div>
-
       <div className="mb-4">
-        <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location: </label>
+        <label
+          htmlFor="location"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Location:{' '}
+        </label>
         <select
           id="location"
           required
@@ -143,9 +187,13 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <option value="storage">Lugage</option>
         </select>
       </div>
-
       <div className="mb-4">
-        <label htmlFor="color" className="block text-sm font-medium text-gray-700">Color: </label>
+        <label
+          htmlFor="color"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Color:{' '}
+        </label>
         <select
           id="color"
           required
@@ -165,7 +213,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <option value="white">White</option>
         </select>
       </div>
-
       <div className="mb-4">
         <input
           type="file"
@@ -173,10 +220,10 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           className="block w-full text-sm text-gray-500 file:btn btn-secondary file:rounded-full file:border-0 file:text-sm file:font-semibold file:text-white"
         />
       </div>
-
       <button
         type="submit"
-        className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg">
+        className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
+      >
         Submit
       </button>
     </form>
