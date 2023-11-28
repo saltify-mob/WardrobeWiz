@@ -19,7 +19,7 @@ const DeleteButton = () => {
   };
 
   return (
-    <Button color="red" onClick={handleDeleteUser}>
+    <Button className="btn btn-error mt-4 w-full mx-15 px-24 py-2 bg-error text-white font-semibold rounded-lg md:w-80 lg:w-80" onClick={handleDeleteUser}>
       Delete My Account
     </Button>
   );
