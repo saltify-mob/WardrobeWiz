@@ -90,7 +90,7 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
             }}
             onClick={() => onToggleDetail(item)}
           >
-            <img src={item.imageUrl} alt={`Clothing item ${index}`} className="w-full h-full object-cover" />
+            <img src={item.imageUrl} alt={`Clothing item ${index}`} className="w-full h-full object-cover cursor-pointer" />
           </div>
         ))}
         <CarouselArrow direction="left" onClick={goToPrevSlide} />
