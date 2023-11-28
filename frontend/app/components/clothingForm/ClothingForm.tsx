@@ -103,7 +103,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md px-4 py-6">
+    <div className="w-full max-w-md  py-6">
+    <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
 
       <div className="mb-4">
         <label
@@ -272,6 +273,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         Submit
       </Button>
     </form>
+    </div>
   );
 };
 
