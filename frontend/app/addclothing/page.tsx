@@ -4,8 +4,8 @@ import HamburgerMenu from '../components/hamburgerMenu/HamburgerMenu';
 
 const AddClothesPage: React.FC = () => {
   return (
-    <main className="flex flex-col items-center w-full">
-      <h1 className="text-2xl font-bold my-4 text-center">Add Clothes</h1>
+    <main className="flex flex-col items-center w-full p-10">
+    <h1 className="text-2xl font-bold text-primary-content text-center">Add Clothes</h1>
       <ClothingForm />
     </main>
   );

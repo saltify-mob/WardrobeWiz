@@ -88,9 +88,22 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
     }
     setCategory(value);
   }
+  const colors = [
+    'blue',
+    'red',
+    'yellow',
+    'green',
+    'orange',
+    'pink',
+    'purple',
+    'brown',
+    'black',
+    'white',
+  ];
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md px-4 py-6">
+
       <div className="mb-4">
         <label
           htmlFor="season"
@@ -98,19 +111,22 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         >
           Season:{' '}
         </label>
-        <select
-          id="season"
-          required
-          value={season}
-          onChange={(e) => setSeason(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          <option value="winter">Winter</option>
-          <option value="spring">Spring</option>
-          <option value="summer">Summer</option>
-          <option value="autumn">Autumn</option>
-        </select>
+        <div className="flex space-x-2">
+          {['winter', 'spring', 'summer', 'autumn'].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setSeason(s)}
+              className={`${
+                season === s ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className="mb-4">
         <label
           htmlFor="category"
@@ -118,18 +134,22 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         >
           Category:{' '}
         </label>
-        <select
-          id="category"
-          required
-          value={category}
-          onChange={(e) => handleChangeCategory(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          <option value="headwear">Headwear</option>
-          <option value="top">Top</option>
-          <option value="lowerGarment">Lower Garment</option>
-        </select>
+        <div className="flex space-x-2">
+          {['headwear', 'top', 'lowerGarment'].map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => handleChangeCategory(c)}
+              className={`${
+                category === c ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className="mb-4">
         <label
           htmlFor="type"
@@ -137,36 +157,46 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         >
           Type:{' '}
         </label>
-        <select
-          id="type"
-          required
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          {category === 'top' && (
-            <>
-              <option value="shirt">Shirt</option>
-              <option value="hoodie">Hoodie</option>
-              <option value="sweatShirt">Sweat Shirt</option>
-              <option value="t-shirt">T-shirt</option>
-            </>
-          )}
-          {category === 'lowerGarment' && (
-            <>
-              <option value="shorts">Shorts</option>
-              <option value="sweatPants">Sweat Pants</option>
-              <option value="trousers">Trousers</option>
-            </>
-          )}
-          {category === 'headwear' && (
-            <>
-              <option value="beanie">Beanie</option>
-              <option value="hat">Hat</option>
-            </>
-          )}{' '}
-        </select>
+        <div className="flex space-x-2">
+          {category === 'top' && ['shirt', 'hoodie', 'sweatShirt', 't-shirt'].map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setType(t)}
+              className={`${
+                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {t}
+            </button>
+          ))}
+          {category === 'lowerGarment' && ['shorts', 'sweatPants', 'trousers'].map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setType(t)}
+              className={`${
+                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {t}
+            </button>
+          ))}
+          {category === 'headwear' && ['beanie', 'hat'].map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setType(t)}
+              className={`${
+                type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className="mb-4">
         <label
           htmlFor="location"
@@ -174,51 +204,65 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         >
           Location:{' '}
         </label>
-        <select
-          id="location"
-          required
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          <option value="wardrobe">Wardrobe</option>
-          <option value="storage">Storage</option>
-          <option value="storage">Lugage</option>
-        </select>
+        <div className="flex space-x-2">
+          {['wardrobe', 'storage', 'lugage'].map((l) => (
+            <button
+              key={l}
+              type="button"
+              onClick={() => setLocation(l)}
+              className={`${
+                location === l ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+              } py-2 px-4 rounded-full focus:outline-none`}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className="mb-4">
-        <label
-          htmlFor="color"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Color:{' '}
-        </label>
-        <select
-          id="color"
-          required
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        >
-          <option value="blue">Blue</option>
-          <option value="red">Red</option>
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="orange">Orange</option>
-          <option value="pink">Pink</option>
-          <option value="purple">Purple</option>
-          <option value="brown">Brown</option>
-          <option value="black">Black</option>
-          <option value="white">White</option>
-        </select>
-      </div>
+  <label
+    htmlFor="color"
+    className="block text-sm font-medium text-gray-700"
+  >
+    Color:{' '}
+  </label>
+  <div className="flex flex-wrap space-x-2">
+    {colors.map((c) => (
+      <button
+        key={c}
+        type="button"
+        onClick={() => setColor(c)}
+        className={`rounded-full m-1 focus:outline-none ${
+          color === c
+            ? `h-11 w-11 ${
+                c === 'black'
+                  ? 'bg-primary-content text-white'
+                  : c === 'white'
+                  ? 'bg-base-100 text-black'
+                  : `bg-${c}-500 text-white`
+              }`
+            : `h-8 w-8 ${
+                c === 'black'
+                  ? 'bg-primary-content text-white opacity-100'
+                  : c === 'white'
+                  ? 'bg-base-100 text-black opacity-100'
+                  : `bg-${c}-500 text-white opacity-100`
+              }`
+        }`}
+      />
+    ))}
+  </div>
+</div>
+
       <div className="mb-4">
         <input
           type="file"
           onChange={handleFileChange}
-          className="block w-full text-sm text-gray-500 file:btn btn-secondary file:rounded-full file:border-0 file:text-sm file:font-semibold file:text-white"
+          className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
         />
       </div>
+
       <button
         type="submit"
         className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
@@ -230,3 +274,4 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 };
 
 export default ClothingForm;
+
