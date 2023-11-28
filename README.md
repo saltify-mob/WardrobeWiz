@@ -16,9 +16,16 @@ WardrobeWiz is designed to transform the way users choose their daily outfits. B
 - **Azure Blob Storage:** WardrobeWiz utilizes Azure Storage as its primary image repository.
 
 ## Technologies Used:
-- **Frontend Development:** Leveraging NextJS, TypeScript and Tailwind for creating a responsive and interactive user interface
+- **Frontend:** Leveraging NextJS, TypeScript and Tailwind for creating a responsive and interactive user interface
 - **Backend:** Building a solid backend infrastructure by using Java and the Spring Framework
 - **Cloud Hosting and Services:** Utilizing Azure for reliable and scalable cloud hosting solutions
+
+## What's Next:
+- WardrobeWiz is set to enhance its outfit recommendations to generate even more stylish outfits.
+- In the pipeline is the option for users to share their curated wardrobes with friends or the community. Empower your social circles with fashion inspiration and explore a collaborative approach to styling.
+
+ ## Acknowledgments
+<p>With all heartfelt sincerity, we extend our gratitude to the open-source community, and the developers who have contributed to the frameworks, libraries, and tools used in WardrobeWiz.</p>
 
 ## Wanna Reach Out?
 - [Anne Mariel Catapang](https://github.com/annemariel95)
