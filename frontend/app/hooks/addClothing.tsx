@@ -17,6 +17,8 @@ export const addClothing = async (formData: FormData): Promise<ClothingItem | nu
     return newClothingItem;
   } catch (error) {
     console.error('Error adding clothing:', error);
+    alert('An error has occured. Try using an image below 1Mb.');
+
     return null;
   }
 };

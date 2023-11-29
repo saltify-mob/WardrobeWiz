@@ -16,7 +16,7 @@ const UpdateClothesPage: React.FC = () => {
 
   return (
     <main className="w-full flex flex-col items-center justify-center">
-    <div className="rounded-lg overflow-hidden shadow-md">
+    <div className="rounded-lg overflow-hidden shadow-md mt-8 sm:mt-0">
       <Image src={imageUrl} alt="Clothing Image" height={100} width={100} />
     </div>
     <ClothingForm id={id} />

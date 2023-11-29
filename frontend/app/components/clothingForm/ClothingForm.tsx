@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useWardrobe } from '../../contexts/wardrobeContext';
 import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 import { useRouter } from 'next/navigation';
@@ -49,6 +49,8 @@ interface ClothingFormProps {
 const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const [season, setSeason] = useState('winter');
   const [category, setCategory] = useState('headwear');
   const [type, setType] = useState('beanie');
@@ -57,6 +59,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const currentDate = new Date().toISOString().split('T')[0];
   const [dateOfPurchase, setDateOfPurchase] = useState(currentDate);
   const [timeLastUsed, setTimeLastUsed] = useState(currentDate);
+
+  const [isSuccessVisible, setIsSuccessVisible] = useState(false);
 
   const router = useRouter();
 
@@ -96,7 +100,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       };
 
       await handleUpdateClothing(id, updateData);
-      router.push('/addclothing');
+      router.push('/wardrobe');
     } else {
       const formData = new FormData();
       formData.append('season', season);
@@ -111,7 +115,14 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       }
 
       await handleAddClothing(formData);
-      router.push('/addclothing');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+
+      setIsSuccessVisible(true);
+      setTimeout(() => {
+        setIsSuccessVisible(false);
+      }, 2000);
     }
   };
 
@@ -131,7 +142,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
     'brown',
     'white',
     'black',
-    
   ];
 
   return (
@@ -239,48 +249,55 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         </div>
 
         <div className="mb-4">
-  <label htmlFor="color" className="block text-sm font-medium text-gray-700">
-    Color:{' '}
-  </label>
-  <div className="flex flex-wrap space-x-2">
-    {colors.map((c) => (
-      <button
-        key={c}
-        type="button"
-        onClick={() => setColor(c)}
-        className={`rounded-full m-1 focus:outline-secondary-content border-secondary-content ${
-          color === c
-            ? `h-11 w-11 ${
-                c === 'black'
-                  ? 'bg-secondary-content text-white border-secondary-content shadow-xl'
-                  : c === 'white'
-                  ? 'bg-base-100 text-black border-black shadow-xl'
-                  : `bg-${c}-500 text-white border-black shadow-xl`
-              }`
-            : `h-8 w-8 ${
-                c === 'black'
-                  ? 'bg-secondary-content text-white opacity-100 border-secondary-content shadow-xl'
-                  : c === 'white'
-                  ? 'bg-base-100 text-black opacity-100 border-black shadow-xl'
-                  : `bg-${c}-500 text-white opacity-100 border-black shadow-xl`
-                  
-              }`
-        }`}
-      />
-    ))}
-  </div>
-</div>
-        <div className="mb-4">
+          <label
+            htmlFor="color"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Color:{' '}
+          </label>
+          <div className="flex flex-wrap space-x-2">
+            {colors.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setColor(c)}
+                className={`rounded-full m-1 focus:outline-secondary-content border-secondary-content ${
+                  color === c
+                    ? `h-11 w-11 ${
+                        c === 'black'
+                          ? 'bg-secondary-content text-white border-secondary-content shadow-xl'
+                          : c === 'white'
+                          ? 'bg-base-100 text-black border-black shadow-xl'
+                          : `bg-${c}-500 text-white border-black shadow-xl`
+                      }`
+                    : `h-8 w-8 ${
+                        c === 'black'
+                          ? 'bg-secondary-content text-white opacity-100 border-secondary-content shadow-xl'
+                          : c === 'white'
+                          ? 'bg-base-100 text-black opacity-100 border-black shadow-xl'
+                          : `bg-${c}-500 text-white opacity-100 border-black shadow-xl`
+                      }`
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={id ? 'hidden' : 'block'}>
           <input
             type="file"
+            required={!id}
+            ref={fileInputRef}
             onChange={handleFileChange}
             className="block w-full text-sm text-gray-500 
                        file:bg-primary-content file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content "
           />
         </div>
+        {isSuccessVisible && (
+          <div className="text-green-600 text-center">Successful!</div>
+        )}
         <Button
           type="submit"
-          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
+          className="mt-4 btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
         >
           {id ? 'Edit' : 'Add'}
         </Button>
