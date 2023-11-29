@@ -28,7 +28,7 @@ const typeDisplayNames: Record<string, Record<string, string>> = {
   },
   lowerGarment: {
     shorts: 'Shorts',
-    sweatPants: 'Sweat Pants',
+    sweatPants: 'Sweatpants',
     trousers: 'Trousers',
   },
   headwear: {
@@ -136,7 +136,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   ];
 
   return (
-    <div className="w-full max-w-md py-6">
+    <div className="w-full max-w-md">
       <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
         <div className="mb-4">
           <label
@@ -193,13 +193,13 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   </label>
   <div className="flex space-x-2">
     {Object.keys(typeDisplayNames[category]).map((t) => (
-      <div key={t} className="w-1/3 px-2 mb-2">
+      <div key={t} className=" px-2 mb-2">
         <button
           type="button"
           onClick={() => setType(t)}
           className={`${
             type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-          } py-2  rounded-full focus:outline-none w-full`}
+          } py-2 px-2 rounded-full focus:outline-none`}
         >
           {typeDisplayNames[category][t]}
         </button>
