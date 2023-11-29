@@ -9,7 +9,7 @@ export default function Storage() {
   return (
     <main>
       <div className="flex flex-col items-center w-full p-3">
-    <h1 className="text-2xl font-bold text-primary-content text-center">My Storage</h1>
+
     <StorageCard/>
     </div>
     <footer className="bg-neutral py-10 text-center text-sm text-base-100">
