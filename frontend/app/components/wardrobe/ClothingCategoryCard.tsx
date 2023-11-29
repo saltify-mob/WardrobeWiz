@@ -93,8 +93,12 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
             <img src={item.imageUrl} alt={`Clothing item ${index}`} className="w-full h-full object-cover cursor-pointer" />
           </div>
         ))}
-        <CarouselArrow direction="left" onClick={goToPrevSlide} />
-        <CarouselArrow direction="right" onClick={goToNextSlide} />
+        {clothingItems.length > 1 && (
+          <>
+            <CarouselArrow direction="left" onClick={goToPrevSlide} />
+            <CarouselArrow direction="right" onClick={goToNextSlide} />
+          </>
+        )}
         <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10">
           {clothingItems.map((_, index) => (
             <div

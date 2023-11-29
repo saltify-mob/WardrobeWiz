@@ -128,7 +128,7 @@ const WeatherCard: React.FC = () => {
           </div>
           <div className="text-xl sm:text-3xl font-bold">
             {location.weather.main?.temp
-              ? `${location.weather.main.temp} °C`
+              ? `${Math.round(location.weather.main.temp)} °C`
               : '-- °C'}
           </div>
           <div className="text-base sm:text-xl">{location.weather.name}</div>

@@ -49,25 +49,26 @@ const WardrobeCard = () => {
   const tops = wardrobe.filter((clothing) => clothing.category === "top" && clothing.location === "wardrobe");
   const lowerGarments = wardrobe.filter(clothing => clothing.category === 'lowerGarment' && clothing.location === "wardrobe");
 
+  const renderCategoryCard = (clothingItems: ClothingItem[], categoryTitle: string) => {
+    return clothingItems.length > 0 ? (
+      <ClothingCategoryCard
+        clothingItems={clothingItems}
+        onToggleDetail={toggleDetail}
+        categoryTitle={categoryTitle}
+      />
+    ) : (
+      <div className='flex flex-col items-center justify-center bg-opacity-100 backdrop-blur-md bg-white rounded-xl shadow-lg overflow-hidden my-4 p-4 mx-auto max-w-md max-h-xl'>
+      <h2 className="text-2xl font-bold mb-4">{categoryTitle}</h2>
+      <p className="text-center my-4">No items in this category</p>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full flex-col items-center justify-between">
-      <ClothingCategoryCard
-        clothingItems={headWears}
-        onToggleDetail={toggleDetail}
-        categoryTitle="Head Garment"
-      />
-
-      <ClothingCategoryCard
-        clothingItems={tops}
-        onToggleDetail={toggleDetail}
-        categoryTitle="Body Garment"
-      />
-
-      <ClothingCategoryCard
-        clothingItems={lowerGarments}
-        onToggleDetail={toggleDetail}
-        categoryTitle="Lower Garment"
-      />
+      {renderCategoryCard(headWears, "Head Garment")}
+      {renderCategoryCard(tops, "Body Garment")}
+      {renderCategoryCard(lowerGarments, "Lower Garment")}
 
       {selectedClothing && (
         <div className="fixed inset-0 flex items-center justify-center z-50">

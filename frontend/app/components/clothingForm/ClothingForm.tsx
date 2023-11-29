@@ -50,8 +50,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
-  const [category, setCategory] = useState('top');
-  const [type, setType] = useState('shirt');
+  const [category, setCategory] = useState('headwear');
+  const [type, setType] = useState('beanie');
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
   const currentDate = new Date().toISOString().split('T')[0];
@@ -96,7 +96,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       };
 
       await handleUpdateClothing(id, updateData);
-      router.push('/wardrobe');
+      router.push('/addclothing');
     } else {
       const formData = new FormData();
       formData.append('season', season);
@@ -111,7 +111,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       }
 
       await handleAddClothing(formData);
-      router.push('/wardrobe');
+      router.push('/addclothing');
     }
   };
 
@@ -137,7 +137,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   return (
     <div className="w-full max-w-md">
       <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6">
-
         <div className="mb-4">
           <label
             htmlFor="season"
@@ -283,7 +282,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           type="submit"
           className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
         >
-          Submit
+          {id ? 'Edit' : 'Add'}
         </Button>
       </form>
     </div>
