@@ -4,6 +4,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const HamburgerMenu = () => {
   const { user } = useUser();
@@ -30,8 +31,14 @@ const HamburgerMenu = () => {
     };
   }, [dropdownOpen]);
 
+  const pathname = usePathname();
+
+  const addIndicator = (path: string) => {
+    return path === pathname ? ' bg-neutral-200 font-bold' : '';
+  };
+
   return (
-    <div className="fixed top-0 z-50 w-full">
+    <div className="fixed top-0 z-50 w-full bg-[oklch(0.191629 0 0 / 0.1)]">
       <div className="drawer lg:hidden">
         <input
           id="my-drawer"
@@ -59,27 +66,39 @@ const HamburgerMenu = () => {
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="w-full menu flex-row justify-evenly bg-base-100">
             <li className="text-sm">
-              <Link href="/" className="p-3">
+              <Link href="/" className={'p-3' + addIndicator('/')}>
                 Home
               </Link>
             </li>
             <li className="text-sm">
-              <Link href="/addclothing" className="p-3">
+              <Link
+                href="/addclothing"
+                className={'p-3' + addIndicator('/addclothing')}
+              >
                 Add
               </Link>
             </li>
             <li className="text-sm">
-              <Link href="/wardrobe" className="p-3">
+              <Link
+                href="/wardrobe"
+                className={'p-3' + addIndicator('/wardrobe')}
+              >
                 Wardrobe
               </Link>
             </li>
             <li className="text-sm">
-              <Link href="/storage" className="p-3">
+              <Link
+                href="/storage"
+                className={'p-3' + addIndicator('/storage')}
+              >
                 Storage
               </Link>
             </li>
             <li className="text-sm">
-              <Link href="/settings" className="p-3">
+              <Link
+                href="/settings"
+                className={'p-3' + addIndicator('/settings')}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -135,22 +154,31 @@ const HamburgerMenu = () => {
           <div className="navbar-center">
             <ul className="menu menu-horizontal p-0">
               <li className="text-sm">
-                <Link href="/" className="p-3">
+                <Link href="/" className={'p-3' + addIndicator('/')}>
                   Home
                 </Link>
               </li>
               <li className="text-sm">
-                <Link href="/addclothing" className="p-3">
+                <Link
+                  href="/addclothing"
+                  className={'p-3' + addIndicator('/addclothing')}
+                >
                   Add Clothing
                 </Link>
               </li>
               <li className="text-sm">
-                <Link href="/wardrobe" className="p-3">
+                <Link
+                  href="/wardrobe"
+                  className={'p-3' + addIndicator('/wardrobe')}
+                >
                   Wardrobe
                 </Link>
               </li>
               <li className="text-sm">
-                <Link href="/storage" className="p-3">
+                <Link
+                  href="/storage"
+                  className={'p-3' + addIndicator('/storage')}
+                >
                   Storage
                 </Link>
               </li>

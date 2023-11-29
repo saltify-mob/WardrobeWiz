@@ -137,7 +137,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   return (
     <div className="w-full max-w-md">
       <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6">
-
         <div className="mb-4">
           <label
             htmlFor="season"
@@ -283,7 +282,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           type="submit"
           className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
         >
-          Submit
+          {id ? 'Edit' : 'Add'}
         </Button>
       </form>
     </div>
