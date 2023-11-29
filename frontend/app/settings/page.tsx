@@ -120,7 +120,7 @@ export default function Settings() {
   
           if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
             const latitude = weatherData.coord.lat;
-            console.log(latitude)
+            console.log(getSeasonFromCoords(latitude))
             return getSeasonFromCoords(latitude);
           }
         } catch (error) {
