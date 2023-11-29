@@ -211,7 +211,7 @@ export default function Settings() {
         {clothesToSendToWardrobe.length > 0 ? (
           <ul>
             {clothesToSendToWardrobe.map(item => (
-              <li key={item.id}>{item.color} {item.season} {item.type}</li>
+              <li className='cursor-pointer' key={item.id}>{item.color} {item.season} {item.type}</li>
             ))}
           </ul>
         ) : (
