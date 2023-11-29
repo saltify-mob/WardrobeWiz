@@ -31,7 +31,7 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ clothing, onClose, onDelete
   return (
     <div className="flex items-center justify-center bg-white bg-opacity-90 h-screen w-screen">
       <div ref={cardRef as React.MutableRefObject<HTMLDivElement>} className="w-5/6 sm:w-5/6 md:max-w-md p-4 bg-white shadow-md rounded-md">
-              <Button onClick={onDelete} className="btn btn-error mt-1 w-full mx-15 px-18 py-2 bg-error text-white font-semibold rounded-lg md:w-20 lg:w-20 md:mx-3 lg:mx-3">Delete</Button>
+              <Button onClick={onDelete} className="btn btn-error mt-1 w-full my-4 mx-15 px-18 py-2 bg-error text-white font-semibold rounded-lg md:w-20 lg:w-20 md:mx-3 lg:mx-3">Delete</Button>
         <Image
           src={clothing.imageUrl}
           alt={clothing.type}

@@ -100,7 +100,7 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
             <div
               key={index}
               className={`w-3 h-3 mx-1 rounded-full ${
-                index === activeIndex ? 'bg-black' : 'bg-gray-300'
+                index === activeIndex ? 'bg-neutral' : 'bg-gray-300'
               }`}
               onClick={() => setActiveIndex(index)}
             ></div>
