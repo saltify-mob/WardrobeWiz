@@ -137,7 +137,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
   return (
     <div className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6">
+
         <div className="mb-4">
           <label
             htmlFor="season"
@@ -155,7 +156,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                   season === s
                     ? 'bg-accent text-secondary-content'
                     : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                } py-2 px-3 rounded-full focus:outline-none`}
               >
                 {seasonDisplayNames[s]}
               </button>
@@ -180,7 +181,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                   category === c
                     ? 'bg-accent text-secondary-content'
                     : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                } py-2 px-3 rounded-full focus:outline-none`}
               >
                 {categoryDisplayNames[c]}
               </button>
@@ -197,7 +198,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           </label>
           <div className="flex space-x-2">
             {Object.keys(typeDisplayNames[category]).map((t) => (
-              <div key={t} className=" px-2 mb-2">
+              <div key={t} className=" px-0">
                 <button
                   type="button"
                   onClick={() => setType(t)}
@@ -231,7 +232,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                   location === l
                     ? 'bg-accent text-secondary-content'
                     : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                } py-2 px-2 rounded-full focus:outline-none`}
               >
                 {locationDisplayNames[l]}
               </button>
@@ -261,7 +262,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                           ? 'bg-base-100 text-black'
                           : `bg-${c}-500 text-white`
                       }`
-                    : `h-8 w-8 ${
+                    : `h-7 w-7 ${
                         c === 'black'
                           ? 'bg-primary-content text-white opacity-100'
                           : c === 'white'
