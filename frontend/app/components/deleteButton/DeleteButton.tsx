@@ -19,7 +19,7 @@ const DeleteButton = () => {
   };
 
   return (
-    <Button className="btn btn-primary bg-primary w-full my-2 flex-grow" onClick={handleDeleteUser}>
+    <Button className="btn btn-error bg-error w-full my-2 flex-grow" onClick={handleDeleteUser}>
       Delete My Account
     </Button>
   );
