@@ -113,7 +113,7 @@ export default function Wardrobe() {
               onDelete={() => handleDelete(selectedClothing.id)}
               onSendTo={() => handleSendToStorage(selectedClothing)}
               onUpdate={() => handleUpdate(selectedClothing.id)}
-              sendToLabel={'Send to Storage'}
+              sendToLabel={'Storage'}
             />
           </div>
         )
