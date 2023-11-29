@@ -40,7 +40,7 @@ const SuggestionCard = () => {
             <span className='text-lg'>Looks like your wardrobe is empty! Get started by adding clothes.</span>
         </div>
           :
-          <h2 className="text-base sm:text-2xl font-semibold my-2 sm:my-4">Today's Outfit</h2>
+          <h2 className="text-base sm:text-2xl font-semibold my-2 sm:my-4">Today&rsquo;s Outfit</h2>
         }
 
         <div className="flex flex-col items-center mb-6 space-y-4">
