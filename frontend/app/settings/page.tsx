@@ -114,13 +114,13 @@ export default function Settings() {
   function getCurrentSeasonFromLocalStorage() {
     if (typeof window !== "undefined") {
       const weatherDataString = localStorage.getItem('weatherData');
-      console.log(weatherDataString)
       if (weatherDataString) {
         try {
           const weatherData = JSON.parse(weatherDataString);
   
           if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
             const latitude = weatherData.coord.lat;
+            console.log(latitude)
             return getSeasonFromCoords(latitude);
           }
         } catch (error) {
