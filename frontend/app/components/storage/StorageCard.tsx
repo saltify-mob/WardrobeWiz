@@ -47,11 +47,11 @@ const StorageCard: React.FC = () => {
   }
 
   const filteredClothes = wardrobe.filter((clothing) =>
-    clothing.location === 'storage' &&
-    (clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clothing.color.toLowerCase().includes(searchTerm.toLowerCase())||
-      clothing.season.toLowerCase().includes(searchTerm.toLowerCase())
+      clothing.location === 'storage' &&
+      (clothing.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        clothing.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        clothing.color.toLowerCase().includes(searchTerm.toLowerCase())||
+        clothing.season.toLowerCase().includes(searchTerm.toLowerCase())
       )
   );
 
@@ -84,17 +84,15 @@ const StorageCard: React.FC = () => {
       </div>
       {selectedClothing && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-
-            <ClothingCard
-              clothing={selectedClothing}
-              onClose={closeDetail}
-              onDelete={() => handleDelete(selectedClothing.id)}
-              onSendTo={() => handleSendToWardrobe(selectedClothing)}
-              onUpdate={() => handleUpdate(selectedClothing.id)}
-              sendToLabel='Send to Wardrobe'
-            />
-          </div>
-       
+          <ClothingCard
+            clothing={selectedClothing}
+            onClose={closeDetail}
+            onDelete={() => handleDelete(selectedClothing.id)}
+            onSendTo={() => handleSendToWardrobe(selectedClothing)}
+            onUpdate={() => handleUpdate(selectedClothing.id)}
+            sendToLabel="Wardrobe"
+          />
+        </div>
       )}
     </div>
   );
