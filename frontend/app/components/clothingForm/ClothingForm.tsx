@@ -137,7 +137,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
   return (
     <div className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="w-full max-w-m px-4 py-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-m px-1 py-6">
+
         <div className="mb-4">
           <label
             htmlFor="season"
@@ -152,8 +153,10 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => setSeason(s)}
                 className={`${
-                  season === s ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                  season === s
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
+                } py-2 px-3 rounded-full focus:outline-none`}
               >
                 {seasonDisplayNames[s]}
               </button>
@@ -175,8 +178,10 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => handleChangeCategory(c)}
                 className={`${
-                  category === c ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                  category === c
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
+                } py-2 px-3 rounded-full focus:outline-none`}
               >
                 {categoryDisplayNames[c]}
               </button>
@@ -185,28 +190,30 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         </div>
 
         <div className="mb-4">
-  <label
-    htmlFor="type"
-    className="block text-sm font-medium text-gray-700"
-  >
-    Type:{' '}
-  </label>
-  <div className="flex space-x-2">
-    {Object.keys(typeDisplayNames[category]).map((t) => (
-      <div key={t} className=" px-2 mb-2">
-        <button
-          type="button"
-          onClick={() => setType(t)}
-          className={`${
-            type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-          } py-2 px-2 rounded-full focus:outline-none`}
-        >
-          {typeDisplayNames[category][t]}
-        </button>
-      </div>
-    ))}
-  </div>
-</div>
+          <label
+            htmlFor="type"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Type:{' '}
+          </label>
+          <div className="flex space-x-2">
+            {Object.keys(typeDisplayNames[category]).map((t) => (
+              <div key={t} className=" px-0">
+                <button
+                  type="button"
+                  onClick={() => setType(t)}
+                  className={`truncate ${
+                    type === t
+                      ? 'bg-accent text-secondary-content'
+                      : 'bg-gray-300 text-secondary-content'
+                  } py-2 px-2 rounded-full focus:outline-none`}
+                >
+                  {typeDisplayNames[category][t]}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="mb-4">
           <label
@@ -222,8 +229,10 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => setLocation(l)}
                 className={`${
-                  location === l ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-                } py-2 px-4 rounded-full focus:outline-none`}
+                  location === l
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
+                } py-2 px-2 rounded-full focus:outline-none`}
               >
                 {locationDisplayNames[l]}
               </button>
@@ -253,7 +262,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                           ? 'bg-base-100 text-black'
                           : `bg-${c}-500 text-white`
                       }`
-                    : `h-8 w-8 ${
+                    : `h-7 w-7 ${
                         c === 'black'
                           ? 'bg-primary-content text-white opacity-100'
                           : c === 'white'
@@ -270,13 +279,14 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
+            className="block w-full text-sm text-gray-500 
+                       file:bg-primary-content file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content "
           />
         </div>
 
         <Button
           type="submit"
-          className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
+          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
         >
           Submit
         </Button>

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 import se.saltify.backend.user.UserRequestDto;
-import se.saltify.backend.user.UserResponseDto;
 
 import java.util.List;
 import java.util.Optional;

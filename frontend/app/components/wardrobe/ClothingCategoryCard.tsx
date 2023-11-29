@@ -78,7 +78,7 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
   };
 
   return (
-    <div className='flex flex-col items-center justify-center bg-opacity-100 backdrop-blur-md bg-white rounded-xl shadow-lg overflow-hidden  p-4 mx-auto max-w-md max-h-xl'>
+    <div className='flex flex-col items-center justify-center bg-opacity-100 backdrop-blur-md bg-white rounded-xl shadow-lg overflow-hidden my-4 p-4 mx-auto max-w-md max-h-xl'>
       <h2 className="text-2xl font-bold mb-4">{categoryTitle}</h2>
       <div className='relative w-full h-80 overflow-hidden'>
         {clothingItems.map((item, index) => (
@@ -100,7 +100,7 @@ const ClothingCategoryCard = ({ clothingItems, onToggleDetail, categoryTitle }: 
             <div
               key={index}
               className={`w-3 h-3 mx-1 rounded-full ${
-                index === activeIndex ? 'bg-black' : 'bg-gray-300'
+                index === activeIndex ? 'bg-neutral' : 'bg-gray-300'
               }`}
               onClick={() => setActiveIndex(index)}
             ></div>

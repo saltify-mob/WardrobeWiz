@@ -1,14 +1,12 @@
 package se.saltify.backend.clothing.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import se.saltify.backend.clothing.Clothing;
 import se.saltify.backend.clothing.ClothingRepository;
 import se.saltify.backend.clothing.dto.*;
 import se.saltify.backend.user.User;
 import se.saltify.backend.user.UserRepository;
 
-import java.lang.annotation.ElementType;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
