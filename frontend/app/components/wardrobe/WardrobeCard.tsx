@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 import { ClothingItem } from '@/app/types/ClothingItem';
 import ClothingCard from '../clothingCard/ClothingCard';
@@ -58,8 +58,8 @@ const WardrobeCard = () => {
       />
     ) : (
       <div className='flex flex-col items-center justify-center bg-opacity-100 backdrop-blur-md bg-white rounded-xl shadow-lg overflow-hidden my-4 p-4 mx-auto max-w-md max-h-xl'>
-      <h2 className="text-2xl font-bold mb-4">{categoryTitle}</h2>
-      <p className="text-center my-4">No items in this category</p>
+        <h2 className="text-2xl font-bold mb-4">{categoryTitle}</h2>
+        <p className="text-center my-4">No items in this category</p>
       </div>
     );
   };
@@ -78,7 +78,7 @@ const WardrobeCard = () => {
             onDelete={() => handleDelete(selectedClothing.id)}
             onSendTo={() => handleSendToStorage(selectedClothing)}
             onUpdate={() => handleUpdate(selectedClothing.id)}
-            sendToLabel='Send to Storage'
+            sendToLabel="Storage"
           />
         </div>
       )}
