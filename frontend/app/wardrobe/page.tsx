@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import WardrobeCard from '../components/wardrobe/WardrobeCard';
-import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
 import { useWardrobe } from '../contexts/wardrobeContext';
 import { ClothingItem } from '../types/ClothingItem';

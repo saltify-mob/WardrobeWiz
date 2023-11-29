@@ -80,7 +80,6 @@ const StorageCard: React.FC = () => {
   }
 
   const currentSeason = getCurrentSeasonFromLocalStorage();
-  console.log(currentSeason);
   const clothesToSendToWardrobe = wardrobe.filter(item => item.season === currentSeason && item.location === "storage");
 
   const filteredClothes = wardrobe.filter((clothing) =>

@@ -48,10 +48,10 @@ const ClothingCard: React.FC<ClothingCardProps> = ({
           height={227}
           objectFit="cover"
         />
-        <div className="flex gap-4 px-4">
+        <div className="flex flex-row gap-1 md:gap-4 mt-8">
           <Button
             onClick={onDelete}
-            className="btn btn-error mt-1 w-full my-4  px-18 py-2 bg-error text-white font-semibold rounded-lg md:w-20 lg:w-20"
+            className="btn btn-error py-2 bg-error text-white font-semibold rounded-lg md:w-20 lg:w-20"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const ClothingCard: React.FC<ClothingCardProps> = ({
 
           <Button
             onClick={onUpdate}
-            className="btn bg-teal-900 text-white mt-4 w-full  py-2  font-semibold rounded-lg md:w-20 lg:w-20"
+            className="btn bg-teal-900 text-white py-2  font-semibold rounded-lg md:w-20 lg:w-20"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -90,9 +90,23 @@ const ClothingCard: React.FC<ClothingCardProps> = ({
           </Button>
           <Button
             onClick={onSendTo}
-            className="btn mt-4 ml-auto w-full px-20 py-2 bg-neutral text-white font-semibold rounded-lg md:w-20 lg:w-20"
+            className="flex btn bg-teal-900 ml-auto  text-white py-2  font-semibold rounded-lg "
           >
-            {sendToLabel}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+              />
+            </svg>
+            <div>{sendToLabel}</div>
           </Button>
         </div>
       </div>
