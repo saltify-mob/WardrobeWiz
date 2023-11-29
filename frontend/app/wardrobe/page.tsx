@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WardrobeCard from '../components/wardrobe/WardrobeCard';
 import { useRouter } from 'next/navigation';
 import { useWardrobe } from '../contexts/wardrobeContext';
@@ -11,41 +11,42 @@ export default function Wardrobe() {
 
   const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
   const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
+  const [currentSeason, setCurrentSeason] = useState<string>('');
 
   const router = useRouter();
 
-  function getSeasonFromCoords(latitude: number) {
-    const currentDate = new Date();
-    const month = currentDate.getMonth();
-    const isNorthernHemisphere = latitude >= 0;
-
-    return (isNorthernHemisphere) ?
-      ((month >= 2 && month <= 4) ? 'spring' :
-        (month >= 5 && month <= 7) ? 'summer' :
-          (month >= 8 && month <= 10) ? 'autumn' : 'winter') :
-      ((month >= 2 && month <= 4) ? 'autumn' :
-        (month >= 5 && month <= 7) ? 'winter' :
-          (month >= 8 && month <= 10) ? 'spring' : 'summer');
-  }
-
-  function getCurrentSeasonFromLocalStorage() {
-    if (typeof window !== "undefined") {
-      const weatherDataString = localStorage.getItem('weatherData');
-      if (weatherDataString) {
-        try {
-          const weatherData = JSON.parse(weatherDataString);
-
-          if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
-            const latitude = weatherData.coord.lat;
-            return getSeasonFromCoords(latitude);
-          }
-        } catch (error) {
-          console.error('Error parsing weatherData from local storage:', error);
-        }
+  useEffect(() => {
+    const storedWeatherData = localStorage.getItem('weatherData');
+    if (storedWeatherData) {
+      const weatherData = JSON.parse(storedWeatherData);
+  
+      if (weatherData && weatherData.main) {
+        const currentTemp = weatherData.main.temp;
+        const season = determineSeason(currentTemp);
+        setCurrentSeason(season);
+      } else {
+        console.log("The structure of weather data is not as expected.");
       }
+    } else {
+      console.log("No weather data found in local storage.");
     }
-    return null;
-  }
+  }, []);
+
+  function determineSeason(temp: number): string {
+    const currentMonth = new Date().getMonth();
+
+    if (temp >= 25) {
+        return "summer";
+    } else if (temp >= 10) {
+        if (currentMonth >= 0 && currentMonth <= 5) {
+            return "spring";
+        } else {
+            return "autumn";
+        }
+    } else {
+        return "winter";
+    }
+}
 
   const handleItemClick = (item: ClothingItem) => {
     setSelectedClothing(item);
@@ -81,7 +82,6 @@ export default function Wardrobe() {
     router.push(`/updateclothing/${id}`);
   }
 
-  const currentSeason = getCurrentSeasonFromLocalStorage();
   const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
 
   return (
