@@ -146,7 +146,7 @@ const StorageCard: React.FC = () => {
               onDelete={() => handleDelete(selectedClothing.id)}
               onSendTo={() => handleSendToWardrobe(selectedClothing)}
               onUpdate={() => handleUpdate(selectedClothing.id)}
-              sendToLabel={'Send to Wardrobe'}
+              sendToLabel={'Wardrobe'}
             />
           </div>
        

@@ -90,7 +90,7 @@ const ClothingCard: React.FC<ClothingCardProps> = ({
           </Button>
           <Button
             onClick={onSendTo}
-            className="flex btn bg-teal-900 ml-auto  text-white py-2  font-semibold rounded-lg "
+            className="flex btn bg-teal-900 ml-auto  text-white py-2 px-2  font-semibold rounded-lg "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
