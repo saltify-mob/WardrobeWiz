@@ -270,14 +270,15 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-500 file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content"
+            className="block w-full text-sm text-gray-500 
+                       file:bg-primary-content file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content "
           />
         </div>
 
         <Button
           type="submit"
-          className="btn btn-primary mt-4 w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg"
-        >
+          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-80 lg:w-80">
+        
           Submit
         </Button>
       </form>
