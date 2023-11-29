@@ -31,10 +31,10 @@ const HamburgerMenu = () => {
   }, [dropdownOpen]);
 
   return (
-    <div>
+    <div className='sticky top-0 z-50'>
       <div className="drawer lg:hidden">
         <input id="my-drawer" type="checkbox" className="drawer-toggle lg:hidden" />
-        <div className="drawer-content m-1">
+        <div className="drawer-content m-4">
           <label htmlFor="my-drawer" className="lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-7 h-7 stroke-current">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>

@@ -6,7 +6,6 @@ import WardrobeCard from '../components/wardrobe/WardrobeCard';
 export default function Wardrobe() {
   return (
     <main className="flex flex-col items-center w-full p-10">
-    <h1 className="text-2xl font-bold text-primary-content text-center">My Wardrobe</h1>
       <WardrobeCard />
     </main>
   );
