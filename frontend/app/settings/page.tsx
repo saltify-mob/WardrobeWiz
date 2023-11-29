@@ -190,7 +190,7 @@ export default function Settings() {
                 {user.picture && <img src={user.picture} alt="Profile" className="w-16 h-16 rounded-full mr-4" />}
                 <div>
                   <p className="text-lg">{user.name}</p>
-                  <p className="text-sm md:text-base truncate">{user.email}</p>
+                  <p className="truncate text-sm md:text-base sm: text-overflow">{user.email}</p>
                 </div>
               </div>
             </div>
