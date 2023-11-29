@@ -112,7 +112,9 @@ export default function Settings() {
   }
 
   function getCurrentSeasonFromLocalStorage() {
+    if (typeof window !== "undefined") {
       const weatherDataString = localStorage.getItem('weatherData');
+      console.log(weatherDataString)
       if (weatherDataString) {
         try {
           const weatherData = JSON.parse(weatherDataString);
@@ -125,7 +127,8 @@ export default function Settings() {
           console.error('Error parsing weatherData from local storage:', error);
         }
       }
-    
+    }
+    return null;
   }
 
   const handleItemClick = (item: ClothingItem) => {
@@ -178,9 +181,7 @@ export default function Settings() {
   }
 
   const currentSeason = getCurrentSeasonFromLocalStorage();
-  console.log(currentSeason);
   const clothesToSendToWardrobe = wardrobe.filter(item => item.season === currentSeason && item.location === "storage");
-  console.log(clothesToSendToWardrobe);
   const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
 
   return (
