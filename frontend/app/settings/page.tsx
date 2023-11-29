@@ -8,6 +8,9 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import DeleteButton from '../components/deleteButton/DeleteButton';
 import Link from 'next/link';
 import { Button } from '@material-tailwind/react';
+import { ClothingItem } from '../types/ClothingItem';
+import { useRouter } from 'next/navigation';
+import ClothingCard from '../components/clothingCard/ClothingCard';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,12 +28,14 @@ interface ChartDataType {
 
 export default function Settings() {
   const { user } = useUser();
-  const { wardrobe } = useWardrobe();
+  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
+  const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [chartData, setChartData] = useState<ChartDataType>({
     labels: [],
     datasets: [{ data: [], backgroundColor: [] }]
   });
+  const router = useRouter();
 
   const totalCount = wardrobe.length;
 
@@ -124,8 +129,58 @@ export default function Settings() {
     return null;
   }
 
+  const handleItemClick = (item: ClothingItem) => {
+    setSelectedClothing(item);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await handleDeleteClothing(id);
+      if (selectedClothing?.id === id) {
+        setSelectedClothing(null);
+      }
+    } catch (error) {
+      console.error('Error deleting clothing item:', error);
+    }
+  };
+
+  const handleSendToStorage = async (clothing: ClothingItem) => {
+    const updatedData = { ...clothing, location: 'storage' };
+    const success = await handleUpdateClothing(clothing.id, updatedData);
+    if (success) {
+      console.log('Item sent to storage');
+      setSelectedClothing(null);
+    } else {
+      console.error('Failed to send clothing item to storage');
+    }
+  };
+
+  const handleSendToWardrobe = async (clothing: ClothingItem) => {
+    const updatedData = { ...clothing, location: 'wardrobe' };
+    const success = await handleUpdateClothing(clothing.id, updatedData);
+    if (success) {
+      console.log('Item sent to wardrobe');
+      setSelectedClothing(null);
+    } else {
+      console.error('Failed to send clothing item to wardrobe');
+    }
+  };
+
+  const toggleDetail = (clothing: ClothingItem) => {
+    setSelectedClothing(clothing);
+  };
+
+  const closeDetail = () => {
+    setSelectedClothing(null);
+  };
+
+  function handleUpdate(id: string): void {
+    router.push(`/updateclothing/${id}`);
+  }
+
   const currentSeason = getCurrentSeasonFromLocalStorage();
   const clothesToSendToWardrobe = wardrobe.filter(item => item.season === currentSeason && item.location === "storage");
+  console.log(clothesToSendToWardrobe);
   const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
 
   return (
@@ -160,7 +215,7 @@ export default function Settings() {
         {clothesToSendToWardrobe.length > 0 ? (
           <ul>
             {clothesToSendToWardrobe.map(item => (
-              <li key={item.id}>{item.type}</li>
+              <li key={item.id}>{item.color} {item.season} {item.type}</li>
             ))}
           </ul>
         ) : (
@@ -168,19 +223,33 @@ export default function Settings() {
         )}
       </div>
 
-      {/* Suggestions for clothes to send to storage */}
       <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
         <h2 className="text-xl font-semibold">Send to Storage</h2>
         {clothesToSendToStorage.length > 0 ? (
           <ul>
             {clothesToSendToStorage.map(item => (
-              <li key={item.id}>{item.type}</li>
+              <li onClick={() => handleItemClick(item)} key={item.id}>{item.color} {item.season} {item.type}</li>
             ))}
           </ul>
         ) : (
           <p>All out-of-season items are already in storage.</p>
         )}
       </div>
+
+      {
+  selectedClothing && (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <ClothingCard
+      clothing={selectedClothing}
+      onClose={closeDetail}
+      onDelete={() => handleDelete(selectedClothing.id)}
+      onSendTo={selectedClothing.location === 'wardrobe' ? () => handleSendToStorage(selectedClothing) : () => handleSendToWardrobe(selectedClothing)}
+      onUpdate={() => handleUpdate(selectedClothing.id)}
+      sendToLabel={selectedClothing.location === 'wardrobe' ? 'Send to Storage' : 'Bring to Wardrobe'}
+    />
+    </div>
+  )
+}
       <div className="grid mt-4 grid-cols-1 gap-4">
         <div className="p-4 bg-white shadow rounded w-full md:w-3/4 mx-auto">
           <h2 className="text-xl font-semibold">Wardrobe Breakdown</h2>
