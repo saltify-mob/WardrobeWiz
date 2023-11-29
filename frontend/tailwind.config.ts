@@ -18,7 +18,7 @@ const config: Config = withMT( {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["nord"],
+    themes: ["autumn"],
   },
 })
 export default config
