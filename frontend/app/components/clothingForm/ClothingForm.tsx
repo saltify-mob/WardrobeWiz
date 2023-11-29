@@ -5,7 +5,6 @@ import { UpdateClothingData } from '@/app/types/UpdateClothingData';
 import { useRouter } from 'next/navigation';
 import { Button } from '@material-tailwind/react';
 
-// Define mapping objects
 const seasonDisplayNames: Record<string, string> = {
   winter: 'Winter',
   spring: 'Spring',
@@ -52,7 +51,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
   const [category, setCategory] = useState('top');
-  const [type, setType] = useState('shirt'); // Initialize with a default type
+  const [type, setType] = useState('shirt');
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
   const currentDate = new Date().toISOString().split('T')[0];
@@ -118,7 +117,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
   function handleChangeCategory(value: string): void {
     setCategory(value);
-    // Set a default type when the category changes
     setType(Object.keys(typeDisplayNames[value])[0]);
   }
 
@@ -131,8 +129,9 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
     'pink',
     'purple',
     'brown',
-    'black',
     'white',
+    'black',
+    
   ];
 
   return (
@@ -241,40 +240,37 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="color"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Color:{' '}
-          </label>
-          <div className="flex flex-wrap space-x-2">
-            {colors.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setColor(c)}
-                className={`rounded-full m-1 focus:outline-none ${
-                  color === c
-                    ? `h-11 w-11 ${
-                        c === 'black'
-                          ? 'bg-primary-content text-white'
-                          : c === 'white'
-                          ? 'bg-base-100 text-black'
-                          : `bg-${c}-500 text-white`
-                      }`
-                    : `h-7 w-7 ${
-                        c === 'black'
-                          ? 'bg-primary-content text-white opacity-100'
-                          : c === 'white'
-                          ? 'bg-base-100 text-black opacity-100'
-                          : `bg-${c}-500 text-white opacity-100`
-                      }`
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
+  <label htmlFor="color" className="block text-sm font-medium text-gray-700">
+    Color:{' '}
+  </label>
+  <div className="flex flex-wrap space-x-2">
+    {colors.map((c) => (
+      <button
+        key={c}
+        type="button"
+        onClick={() => setColor(c)}
+        className={`rounded-full m-1 focus:outline-secondary-content border-secondary-content ${
+          color === c
+            ? `h-11 w-11 ${
+                c === 'black'
+                  ? 'bg-secondary-content text-white border-secondary-content shadow-xl'
+                  : c === 'white'
+                  ? 'bg-base-100 text-black border-black shadow-xl'
+                  : `bg-${c}-500 text-white border-black shadow-xl`
+              }`
+            : `h-8 w-8 ${
+                c === 'black'
+                  ? 'bg-secondary-content text-white opacity-100 border-secondary-content shadow-xl'
+                  : c === 'white'
+                  ? 'bg-base-100 text-black opacity-100 border-black shadow-xl'
+                  : `bg-${c}-500 text-white opacity-100 border-black shadow-xl`
+                  
+              }`
+        }`}
+      />
+    ))}
+  </div>
+</div>
         <div className="mb-4">
           <input
             type="file"
@@ -283,7 +279,6 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                        file:bg-primary-content file:btn btn-accent file:rounded-full file:border-0 file:text-sm file:font-normal file:text-secondary-content "
           />
         </div>
-
         <Button
           type="submit"
           className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
