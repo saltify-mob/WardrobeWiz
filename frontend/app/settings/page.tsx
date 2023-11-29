@@ -103,12 +103,12 @@ export default function Settings() {
     const isNorthernHemisphere = latitude >= 0;
 
     return (isNorthernHemisphere) ?
-      ((month >= 2 && month <= 4) ? 'Spring' :
-        (month >= 5 && month <= 7) ? 'Summer' :
-          (month >= 8 && month <= 10) ? 'Autumn' : 'Winter') :
-      ((month >= 2 && month <= 4) ? 'Autumn' :
-        (month >= 5 && month <= 7) ? 'Winter' :
-          (month >= 8 && month <= 10) ? 'Spring' : 'Summer');
+      ((month >= 2 && month <= 4) ? 'spring' :
+        (month >= 5 && month <= 7) ? 'summer' :
+          (month >= 8 && month <= 10) ? 'autumn' : 'winter') :
+      ((month >= 2 && month <= 4) ? 'autumn' :
+        (month >= 5 && month <= 7) ? 'winter' :
+          (month >= 8 && month <= 10) ? 'spring' : 'summer');
   }
 
   function getCurrentSeasonFromLocalStorage() {
@@ -120,7 +120,6 @@ export default function Settings() {
   
           if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
             const latitude = weatherData.coord.lat;
-            console.log(getSeasonFromCoords(latitude))
             return getSeasonFromCoords(latitude);
           }
         } catch (error) {
@@ -166,10 +165,6 @@ export default function Settings() {
     } else {
       console.error('Failed to send clothing item to wardrobe');
     }
-  };
-
-  const toggleDetail = (clothing: ClothingItem) => {
-    setSelectedClothing(clothing);
   };
 
   const closeDetail = () => {
