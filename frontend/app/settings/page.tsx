@@ -1,19 +1,198 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useWardrobe } from '../contexts/wardrobeContext';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import DeleteButton from '../components/deleteButton/DeleteButton';
-import { Button, Card, CardBody } from '@material-tailwind/react';
+import Link from 'next/link';
+import { Button } from '@material-tailwind/react';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+interface CategoryCount {
+  [key: string]: number;
+}
+
+interface ChartDataType {
+  labels: string[];
+  datasets: {
+    data: number[];
+    backgroundColor: string[];
+  }[];
+}
 
 export default function Settings() {
+  const { user } = useUser();
+  const { wardrobe } = useWardrobe();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [chartData, setChartData] = useState<ChartDataType>({
+    labels: [],
+    datasets: [{ data: [], backgroundColor: [] }]
+  });
+
+  const totalCount = wardrobe.length;
+
+  const categories: CategoryCount = useMemo(() => wardrobe.reduce((acc: CategoryCount, item) => {
+    acc[item.category] = (acc[item.category] || 0) + 1;
+    return acc;
+  }, {}), [wardrobe]);
+
+  const pieData: ChartDataType = useMemo(() => ({
+    labels: Object.keys(categories),
+    datasets: [
+      {
+        data: Object.values(categories),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#C9CBCF'],
+      },
+    ],
+  }), [categories]);
+
+  useEffect(() => {
+    setChartData(pieData);
+  }, [pieData]);
+
+  const handlePieChartClick = (event: any) => {
+    const canvas = event.currentTarget;
+    const chart = ChartJS.getChart(canvas);
+    if (!chart) return;
+
+    const activePoints = chart.getElementsAtEventForMode(event.nativeEvent, 'nearest', { intersect: true }, false);
+    if (activePoints.length === 0) {
+      setChartData(pieData);
+      setSelectedCategory(null);
+      return;
+    }
+
+    const clickedElementIndex = activePoints[0].index;
+    const clickedCategory = pieData.labels[clickedElementIndex];
+
+    if (clickedCategory === selectedCategory) {
+      setChartData(pieData);
+      setSelectedCategory(null);
+    } else {
+      const typesData = wardrobe.filter(item => item.category === clickedCategory).reduce((acc: CategoryCount, item) => {
+        acc[item.type] = (acc[item.type] || 0) + 1;
+        return acc;
+      }, {});
+
+      const updatedChartData = {
+        labels: Object.keys(typesData),
+        datasets: [
+          {
+            data: Object.values(typesData),
+            backgroundColor: pieData.datasets[0].backgroundColor,
+          },
+        ],
+      };
+      setChartData(updatedChartData);
+      setSelectedCategory(clickedCategory);
+    }
+  };
+
+  function getSeasonFromCoords(latitude: number) {
+    const currentDate = new Date();
+    const month = currentDate.getMonth();
+    const isNorthernHemisphere = latitude >= 0;
+
+    return (isNorthernHemisphere) ?
+      ((month >= 2 && month <= 4) ? 'Spring' :
+        (month >= 5 && month <= 7) ? 'Summer' :
+          (month >= 8 && month <= 10) ? 'Autumn' : 'Winter') :
+      ((month >= 2 && month <= 4) ? 'Autumn' :
+        (month >= 5 && month <= 7) ? 'Winter' :
+          (month >= 8 && month <= 10) ? 'Spring' : 'Summer');
+  }
+
+  function getCurrentSeasonFromLocalStorage() {
+    if (typeof window !== "undefined") {
+      const weatherDataString = localStorage.getItem('weatherData');
+      if (weatherDataString) {
+        try {
+          const weatherData = JSON.parse(weatherDataString);
+  
+          if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
+            const latitude = weatherData.coord.lat;
+            return getSeasonFromCoords(latitude);
+          }
+        } catch (error) {
+          console.error('Error parsing weatherData from local storage:', error);
+        }
+      }
+    }
+    return null;
+  }
+
+  const currentSeason = getCurrentSeasonFromLocalStorage();
+  const clothesToSendToWardrobe = wardrobe.filter(item => item.season === currentSeason && item.location === "storage");
+  const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
+
   return (
-    <main className="w-full h-full">
-          <h1 className="text-2xl font-bold mb-4 text-center">Settings</h1>
-          <div className="flex flex-col items-center px-2 gap-2">
-            <Button className="btn btn-primary mt-4 w-full mx-15 px-24 py-2 bg-primary text-white font-semibold rounded-lg md:w-80 lg:w-80">
-              <Link href="/api/auth/logout">Logout</Link>
-            </Button>
-            <DeleteButton />
+    <div className="container mx-auto p-4">
+      {user && (
+        <div className="mb-4 p-4 bg-white shadow rounded md:w-3/4 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            <div className="md:col-span-3">
+              <h2 className="text-2xl font-bold mb-2">User Profile</h2>
+              <div className="flex items-center">
+                {user.picture && <img src={user.picture} alt="Profile" className="w-16 h-16 rounded-full mr-4" />}
+                <div>
+                  <p className="text-lg">{user.name}</p>
+                  <p className="text-sm md:text-base truncate">{user.email}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="md:col-span-1 flex flex-col items-stretch">
+              <Button className="btn btn-primary bg-primary w-full my-2 flex-grow">
+                <Link href="/api/auth/logout">
+                  Logout
+                </Link>
+              </Button>
+              <DeleteButton />
+            </div>
           </div>
-    </main>
+        </div>
+      )}
+       <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
+        <h2 className="text-xl font-semibold">Bring to Wardrobe</h2>
+        {clothesToSendToWardrobe.length > 0 ? (
+          <ul>
+            {clothesToSendToWardrobe.map(item => (
+              <li key={item.id}>{item.type}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>All suitable items are already in the wardrobe.</p>
+        )}
+      </div>
+
+      {/* Suggestions for clothes to send to storage */}
+      <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
+        <h2 className="text-xl font-semibold">Send to Storage</h2>
+        {clothesToSendToStorage.length > 0 ? (
+          <ul>
+            {clothesToSendToStorage.map(item => (
+              <li key={item.id}>{item.type}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>All out-of-season items are already in storage.</p>
+        )}
+      </div>
+      <div className="grid mt-4 grid-cols-1 gap-4">
+        <div className="p-4 bg-white shadow rounded w-full md:w-3/4 mx-auto">
+          <h2 className="text-xl font-semibold">Wardrobe Breakdown</h2>
+          <div className="w-full md:w-2/3 mx-auto">
+            <Pie data={chartData} onClick={handlePieChartClick} />
+          </div>
+        </div>
+        <div className="p-4 bg-white shadow rounded w-full md:w-3/4 mx-auto">
+          <h2 className="text-2xl font-bold mb-2">Wardrobe Statistics</h2>
+          <p>Total items: {totalCount}</p>
+        </div>
+      </div>
+    </div>
   );
 }
