@@ -21,10 +21,6 @@ export default function RootLayout({
         <WardrobeProvider>
           <body
             className="h-screen w-screen"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(77, 157, 219, 0.7) 0%, rgba(213, 232, 246, 0) 100%)',
-            }}
           >
             <HamburgerMenu />
             {children}
