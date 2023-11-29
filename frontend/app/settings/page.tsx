@@ -196,7 +196,7 @@ export default function Settings() {
             </div>
 
             <div className="md:col-span-1 flex flex-col items-stretch">
-              <Button className="btn btn-primary bg-primary w-full my-2 flex-grow">
+              <Button className="btn btn-teal-900 bg-teal-900 w-full my-2 flex-grow">
                 <Link href="/api/auth/logout">
                   Logout
                 </Link>
