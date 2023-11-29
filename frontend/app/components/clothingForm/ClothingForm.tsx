@@ -152,7 +152,9 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => setSeason(s)}
                 className={`${
-                  season === s ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                  season === s
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
                 } py-2 px-4 rounded-full focus:outline-none`}
               >
                 {seasonDisplayNames[s]}
@@ -175,7 +177,9 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => handleChangeCategory(c)}
                 className={`${
-                  category === c ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                  category === c
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
                 } py-2 px-4 rounded-full focus:outline-none`}
               >
                 {categoryDisplayNames[c]}
@@ -185,28 +189,30 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
         </div>
 
         <div className="mb-4">
-  <label
-    htmlFor="type"
-    className="block text-sm font-medium text-gray-700"
-  >
-    Type:{' '}
-  </label>
-  <div className="flex space-x-2">
-    {Object.keys(typeDisplayNames[category]).map((t) => (
-      <div key={t} className=" px-2 mb-2">
-        <button
-          type="button"
-          onClick={() => setType(t)}
-          className={`${
-            type === t ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
-          } py-2 px-2 rounded-full focus:outline-none`}
-        >
-          {typeDisplayNames[category][t]}
-        </button>
-      </div>
-    ))}
-  </div>
-</div>
+          <label
+            htmlFor="type"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Type:{' '}
+          </label>
+          <div className="flex space-x-2">
+            {Object.keys(typeDisplayNames[category]).map((t) => (
+              <div key={t} className=" px-2 mb-2">
+                <button
+                  type="button"
+                  onClick={() => setType(t)}
+                  className={`truncate ${
+                    type === t
+                      ? 'bg-accent text-secondary-content'
+                      : 'bg-gray-300 text-secondary-content'
+                  } py-2 px-2 rounded-full focus:outline-none`}
+                >
+                  {typeDisplayNames[category][t]}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="mb-4">
           <label
@@ -222,7 +228,9 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
                 type="button"
                 onClick={() => setLocation(l)}
                 className={`${
-                  location === l ? 'bg-accent text-secondary-content' : 'bg-gray-300 text-secondary-content'
+                  location === l
+                    ? 'bg-accent text-secondary-content'
+                    : 'bg-gray-300 text-secondary-content'
                 } py-2 px-4 rounded-full focus:outline-none`}
               >
                 {locationDisplayNames[l]}
@@ -277,8 +285,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
         <Button
           type="submit"
-          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-80 lg:w-80">
-        
+          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-80 lg:w-80"
+        >
           Submit
         </Button>
       </form>

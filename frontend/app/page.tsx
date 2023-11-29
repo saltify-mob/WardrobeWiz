@@ -28,20 +28,28 @@ export default function Home() {
   }, [user, isLoading]);
 
   if (isLoading) {
-    return <div className="text-center text-2B8BD4 font-semibold mt-10">Loading...</div>;
+    return (
+      <div className="text-center text-2B8BD4 font-semibold mt-10">
+        Loading...
+      </div>
+    );
   }
 
   if (!user) {
-    return <div className="text-center text-2B8BD4 font-semibold mt-10">Redirecting to login...</div>;
+    return (
+      <div className="text-center text-2B8BD4 font-semibold mt-10">
+        Redirecting to login...
+      </div>
+    );
   }
 
   return (
     <main className="w-full flex flex-col justify-between bg-EEF6FC ">
       <div className="w-full flex flex-col items-center justify-between bg-EEF6FC ">
-      <WeatherCard />
+        <WeatherCard />
       </div>
       <div className="w-full flex flex-col items-center justify-between bg-EEF6FC   px-4">
-      <SuggestionCard />
+        <SuggestionCard />
       </div>
     </main>
   );

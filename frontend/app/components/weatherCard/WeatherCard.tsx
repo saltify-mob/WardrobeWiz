@@ -46,7 +46,7 @@ const WeatherCard: React.FC = () => {
       localStorage.setItem('weatherData', JSON.stringify(data));
       localStorage.setItem('weatherDataTimestamp', Date.now().toString());
     } catch (error) {
-      console.error("Error fetching weather data", error);
+      console.error('Error fetching weather data', error);
     }
   };
 
@@ -77,7 +77,11 @@ const WeatherCard: React.FC = () => {
     const storedTimestamp = localStorage.getItem('weatherDataTimestamp');
     const expiryTime = 3600000;
 
-    if (storedWeatherData && storedTimestamp && (Date.now() - parseInt(storedTimestamp) < expiryTime)) {
+    if (
+      storedWeatherData &&
+      storedTimestamp &&
+      Date.now() - parseInt(storedTimestamp) < expiryTime
+    ) {
       setLocation({ weather: JSON.parse(storedWeatherData) });
     } else {
       if (!('geolocation' in navigator)) {
@@ -86,13 +90,13 @@ const WeatherCard: React.FC = () => {
           message: 'Geolocation not supported',
           PERMISSION_DENIED: 1,
           POSITION_UNAVAILABLE: 2,
-          TIMEOUT: 3
+          TIMEOUT: 3,
         });
         return;
       }
-  
+
       navigator.geolocation.getCurrentPosition(onSuccess, onError, {
-        enableHighAccuracy: false
+        enableHighAccuracy: false,
       });
     }
   }, []);
@@ -113,18 +117,21 @@ const WeatherCard: React.FC = () => {
   };
 
   return (
-    <div className="w-full text-center p-4">
+    <div className="w-full text-center sm:p-4">
       {location.weather ? (
         <div>
-
-         <div className="text-3xl font-bold"> 
-          {location.weather.weather && location.weather.weather.length > 0 && (
-            <WeatherIcon code={location.weather.weather[0].icon} />
-          )}
+          <div className="text-3xl font-bold">
+            {location.weather.weather &&
+              location.weather.weather.length > 0 && (
+                <WeatherIcon code={location.weather.weather[0].icon} />
+              )}
           </div>
-          <div className="text-3xl font-bold">{location.weather.main?.temp ? `${location.weather.main.temp} °C` : '-- °C'}</div>
-          <div className="text-xl">{location.weather.name}</div>
-          
+          <div className="text-xl sm:text-3xl font-bold">
+            {location.weather.main?.temp
+              ? `${location.weather.main.temp} °C`
+              : '-- °C'}
+          </div>
+          <div className="text-base sm:text-xl">{location.weather.name}</div>
         </div>
       ) : location.error ? (
         <div className="text-red-600">{location.error.message}</div>

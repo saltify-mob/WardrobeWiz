@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" data-theme="nord">
       <UserProvider>
         <WardrobeProvider>
-          <body className="h-screen w-screen flex flex-col">
+          <body className="h-screen w-screen flex flex-col sm:pt-16">
             <HamburgerMenu />
             <div className="flex-1  pb-4">{children}</div>
 
