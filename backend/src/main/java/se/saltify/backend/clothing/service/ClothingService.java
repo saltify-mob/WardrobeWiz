@@ -55,9 +55,21 @@ public class ClothingService {
 
     public ClothingGenerateResponseDto generateClothing(String userId, double temp) {
         List<Clothing> clothing = clothingRepository.findClothingsForUserAndSeason(userId, determineSeason(temp));
-        List<Clothing> headWears = clothing.stream().filter(c -> c.getCategory().equals("headwear")).toList();
-        List<Clothing> tops = clothing.stream().filter(c -> c.getCategory().equals("top")).toList();
-        List<Clothing> lowerGarments = clothing.stream().filter(c -> c.getCategory().equals("lowerGarment")).toList();
+
+        List<Clothing> headWears = clothing.stream()
+                .filter(c -> c.getCategory().equals("headwear"))
+                .filter(c -> c.getLocation().equals("wardrobe"))
+                .toList();
+
+        List<Clothing> tops = clothing.stream()
+                .filter(c -> c.getCategory().equals("top"))
+                .filter(c -> c.getLocation().equals("wardrobe"))
+                .toList();
+
+        List<Clothing> lowerGarments = clothing.stream()
+                .filter(c -> c.getCategory().equals("lowerGarment"))
+                .filter(c -> c.getLocation().equals("wardrobe"))
+                .toList();
 
         Random r = new Random();
         Clothing randomHeadwear = headWears.stream().skip(r.nextInt(headWears.size())).findFirst().orElseThrow();
