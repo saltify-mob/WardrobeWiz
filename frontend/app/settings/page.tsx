@@ -180,7 +180,7 @@ export default function Settings() {
   const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-8 sm:mt-0">
       {user && (
         <div className="mb-4 p-4 bg-white shadow rounded md:w-3/4 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
@@ -190,7 +190,12 @@ export default function Settings() {
                 {user.picture && <img src={user.picture} alt="Profile" className="w-16 h-16 rounded-full mr-4" />}
                 <div>
                   <p className="text-lg">{user.name}</p>
-                  <p className="truncate text-sm md:text-base sm: text-overflow">{user.email}</p>
+                  <p
+                    className="truncate text-sm md:text-base sm: text-overflow w-64 lg:w-96"
+                    title={user.email as string}
+                  >
+                    {user.email}
+                  </p>
                 </div>
               </div>
             </div>
