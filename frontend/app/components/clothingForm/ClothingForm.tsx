@@ -96,7 +96,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       };
 
       await handleUpdateClothing(id, updateData);
-      router.push('/wardrobe');
+      router.push('/addclothing');
     } else {
       const formData = new FormData();
       formData.append('season', season);
