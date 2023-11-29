@@ -50,8 +50,8 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
   const { wardrobe, handleAddClothing, handleUpdateClothing } = useWardrobe();
   const [file, setFile] = useState<Blob | null>(null);
   const [season, setSeason] = useState('winter');
-  const [category, setCategory] = useState('top');
-  const [type, setType] = useState('shirt');
+  const [category, setCategory] = useState('headwear');
+  const [type, setType] = useState('beanie');
   const [location, setLocation] = useState('wardrobe');
   const [color, setColor] = useState('red');
   const currentDate = new Date().toISOString().split('T')[0];
@@ -111,7 +111,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
       }
 
       await handleAddClothing(formData);
-      router.push('/wardrobe');
+      router.push('/addclothing');
     }
   };
 
