@@ -1,8 +1,6 @@
 package se.saltify.backend.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import org.hibernate.annotations.UuidGenerator;
 import se.saltify.backend.clothing.Clothing;
 
 import java.util.ArrayList;
