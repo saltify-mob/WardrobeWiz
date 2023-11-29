@@ -31,26 +31,26 @@ const SuggestionCard = () => {
         <Image 
           src={outfit.headwearUrl} 
           alt="Headwear" 
-          width={100}
+          width={170}
           height={100}
           objectFit="cover"
-          className="rounded-md shadow-2xl"
+          className="rounded-md shadow-2xl h-36 lg:h-52 lg:w-60"
         />
         <Image 
             src={outfit.topUrl} 
             alt="Top" 
-            width={150}
+            width={170}
             height={150}
             objectFit="cover"
-            className="rounded-md shadow-2xl"
+            className="rounded-md shadow-2xl h-52 lg:h-72 lg:w-60"
         />
         <Image 
             src={outfit.trousersUrl} 
             alt="Trousers" 
-            width={120}
+            width={170}
             height={180}
             objectFit="cover"
-            className="rounded-md shadow-2xl"
+            className="rounded-md shadow-2xl h-52 lg:h-72 lg:w-60"
         />
       </div>
       <Button
