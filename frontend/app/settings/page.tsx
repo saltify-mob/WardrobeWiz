@@ -117,7 +117,7 @@ export default function Settings() {
       if (weatherDataString) {
         try {
           const weatherData = JSON.parse(weatherDataString);
-  
+
           if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
             const latitude = weatherData.coord.lat;
             return getSeasonFromCoords(latitude);
@@ -206,14 +206,18 @@ export default function Settings() {
           </div>
         </div>
       )}
-       <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
+      <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
         <h2 className="text-xl font-semibold">Bring to Wardrobe</h2>
         {clothesToSendToWardrobe.length > 0 ? (
-          <ul>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
             {clothesToSendToWardrobe.map(item => (
-              <li className='cursor-pointer' key={item.id}>{item.color} {item.season} {item.type}</li>
+              <div key={item.id} className='card bg-gray-100 rounded-lg p-4 shadow hover:shadow-md transition duration-300 cursor-pointer' onClick={() => handleItemClick(item)}>
+                <img src={item.imageUrl} alt={`${item.type}`} className="w-full h-32 object-cover rounded-md" />
+                <h3 className="text-lg mt-2">{item.color} {item.type}</h3>
+                <p className="text-sm text-gray-600">{item.season}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>All suitable items are already in the wardrobe.</p>
         )}
@@ -222,30 +226,34 @@ export default function Settings() {
       <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
         <h2 className="text-xl font-semibold">Send to Storage</h2>
         {clothesToSendToStorage.length > 0 ? (
-          <ul>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
             {clothesToSendToStorage.map(item => (
-              <li onClick={() => handleItemClick(item)} key={item.id}>{item.color} {item.season} {item.type}</li>
+              <div key={item.id} className='card bg-gray-100 rounded-lg p-4 shadow hover:shadow-md transition duration-300 cursor-pointer' onClick={() => handleItemClick(item)}>
+                <img src={item.imageUrl} alt={`${item.type}`} className="w-full h-32 object-cover rounded-md" />
+                <h3 className="text-lg mt-2">{item.color} {item.type}</h3>
+                <p className="text-sm text-gray-600">{item.season}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>All out-of-season items are already in storage.</p>
         )}
       </div>
 
       {
-  selectedClothing && (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-    <ClothingCard
-      clothing={selectedClothing}
-      onClose={closeDetail}
-      onDelete={() => handleDelete(selectedClothing.id)}
-      onSendTo={selectedClothing.location === 'wardrobe' ? () => handleSendToStorage(selectedClothing) : () => handleSendToWardrobe(selectedClothing)}
-      onUpdate={() => handleUpdate(selectedClothing.id)}
-      sendToLabel={selectedClothing.location === 'wardrobe' ? 'Send to Storage' : 'Bring to Wardrobe'}
-    />
-    </div>
-  )
-}
+        selectedClothing && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <ClothingCard
+              clothing={selectedClothing}
+              onClose={closeDetail}
+              onDelete={() => handleDelete(selectedClothing.id)}
+              onSendTo={selectedClothing.location === 'wardrobe' ? () => handleSendToStorage(selectedClothing) : () => handleSendToWardrobe(selectedClothing)}
+              onUpdate={() => handleUpdate(selectedClothing.id)}
+              sendToLabel={selectedClothing.location === 'wardrobe' ? 'Send to Storage' : 'Bring to Wardrobe'}
+            />
+          </div>
+        )
+      }
       <div className="grid mt-4 grid-cols-1 gap-4">
         <div className="p-4 bg-white shadow rounded w-full md:w-3/4 mx-auto">
           <h2 className="text-xl font-semibold">Wardrobe Breakdown</h2>
