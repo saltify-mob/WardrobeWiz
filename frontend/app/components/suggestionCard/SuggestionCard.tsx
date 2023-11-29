@@ -8,9 +8,8 @@ const SuggestionCard = () => {
     topUrl: 'https://via.placeholder.com/150?text=Top',
     trousersUrl: 'https://via.placeholder.com/120x180?text=Trousers',
   });
-  
-  const [isEmptyMessage, setIsEmptyMessage] = useState<string>("Today's Outfit");
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+
   const loadNewOutfit = async () => {
     try {
       const outfitData = await fetchOutfitData();
@@ -18,7 +17,6 @@ const SuggestionCard = () => {
       setOutfit(outfitData);
       
     } catch (error) {
-      setIsEmptyMessage('Looks like your wardrobe is empty! Get started by adding clothes.');
       setIsEmpty(true);
     }
    
@@ -33,7 +31,7 @@ const SuggestionCard = () => {
       <div className="w-full flex flex-col items-center rounded-l">
 
         {isEmpty ?
-        <div role="alert" className="alert alert-info w-full mb-5 my-5 md:w-1/4">
+        <div role="alert" className="alert alert-info w-full mb-5 my-5 md:w-1/2 lg:w-1/4">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
           </svg>
