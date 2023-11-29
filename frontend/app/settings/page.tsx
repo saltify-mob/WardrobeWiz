@@ -28,8 +28,7 @@ interface ChartDataType {
 
 export default function Settings() {
   const { user } = useUser();
-  const { wardrobe, handleDeleteClothing, handleUpdateClothing } = useWardrobe();
-  const [selectedClothing, setSelectedClothing] = useState<ClothingItem | null>(null);
+  const { wardrobe } = useWardrobe();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [chartData, setChartData] = useState<ChartDataType>({
     labels: [],
@@ -97,88 +96,6 @@ export default function Settings() {
     }
   };
 
-  function getSeasonFromCoords(latitude: number) {
-    const currentDate = new Date();
-    const month = currentDate.getMonth();
-    const isNorthernHemisphere = latitude >= 0;
-
-    return (isNorthernHemisphere) ?
-      ((month >= 2 && month <= 4) ? 'spring' :
-        (month >= 5 && month <= 7) ? 'summer' :
-          (month >= 8 && month <= 10) ? 'autumn' : 'winter') :
-      ((month >= 2 && month <= 4) ? 'autumn' :
-        (month >= 5 && month <= 7) ? 'winter' :
-          (month >= 8 && month <= 10) ? 'spring' : 'summer');
-  }
-
-  function getCurrentSeasonFromLocalStorage() {
-    if (typeof window !== "undefined") {
-      const weatherDataString = localStorage.getItem('weatherData');
-      if (weatherDataString) {
-        try {
-          const weatherData = JSON.parse(weatherDataString);
-
-          if (weatherData && weatherData.coord && typeof weatherData.coord.lat === 'number') {
-            const latitude = weatherData.coord.lat;
-            return getSeasonFromCoords(latitude);
-          }
-        } catch (error) {
-          console.error('Error parsing weatherData from local storage:', error);
-        }
-      }
-    }
-    return null;
-  }
-
-  const handleItemClick = (item: ClothingItem) => {
-    setSelectedClothing(item);
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await handleDeleteClothing(id);
-      if (selectedClothing?.id === id) {
-        setSelectedClothing(null);
-      }
-    } catch (error) {
-      console.error('Error deleting clothing item:', error);
-    }
-  };
-
-  const handleSendToStorage = async (clothing: ClothingItem) => {
-    const updatedData = { ...clothing, location: 'storage' };
-    const success = await handleUpdateClothing(clothing.id, updatedData);
-    if (success) {
-      console.log('Item sent to storage');
-      setSelectedClothing(null);
-    } else {
-      console.error('Failed to send clothing item to storage');
-    }
-  };
-
-  const handleSendToWardrobe = async (clothing: ClothingItem) => {
-    const updatedData = { ...clothing, location: 'wardrobe' };
-    const success = await handleUpdateClothing(clothing.id, updatedData);
-    if (success) {
-      console.log('Item sent to wardrobe');
-      setSelectedClothing(null);
-    } else {
-      console.error('Failed to send clothing item to wardrobe');
-    }
-  };
-
-  const closeDetail = () => {
-    setSelectedClothing(null);
-  };
-
-  function handleUpdate(id: string): void {
-    router.push(`/updateclothing/${id}`);
-  }
-
-  const currentSeason = getCurrentSeasonFromLocalStorage();
-  const clothesToSendToWardrobe = wardrobe.filter(item => item.season === currentSeason && item.location === "storage");
-  const clothesToSendToStorage = wardrobe.filter(item => item.season !== currentSeason && item.location === "wardrobe");
-
   return (
     <div className="container mx-auto p-4">
       {user && (
@@ -206,54 +123,7 @@ export default function Settings() {
           </div>
         </div>
       )}
-      <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
-        <h2 className="text-xl font-semibold">Bring to Wardrobe</h2>
-        {clothesToSendToWardrobe.length > 0 ? (
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-            {clothesToSendToWardrobe.map(item => (
-              <div key={item.id} className='card bg-gray-100 rounded-lg p-4 shadow hover:shadow-md transition duration-300 cursor-pointer' onClick={() => handleItemClick(item)}>
-                <img src={item.imageUrl} alt={`${item.type}`} className="w-full h-32 object-cover rounded-md" />
-                <h3 className="text-lg mt-2">{item.color} {item.type}</h3>
-                <p className="text-sm text-gray-600">{item.season}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>All suitable items are already in the wardrobe.</p>
-        )}
-      </div>
 
-      <div className="p-4 bg-white shadow rounded mt-4 w-full md:w-3/4 mx-auto">
-        <h2 className="text-xl font-semibold">Send to Storage</h2>
-        {clothesToSendToStorage.length > 0 ? (
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-            {clothesToSendToStorage.map(item => (
-              <div key={item.id} className='card bg-gray-100 rounded-lg p-4 shadow hover:shadow-md transition duration-300 cursor-pointer' onClick={() => handleItemClick(item)}>
-                <img src={item.imageUrl} alt={`${item.type}`} className="w-full h-32 object-cover rounded-md" />
-                <h3 className="text-lg mt-2">{item.color} {item.type}</h3>
-                <p className="text-sm text-gray-600">{item.season}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>All out-of-season items are already in storage.</p>
-        )}
-      </div>
-
-      {
-        selectedClothing && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <ClothingCard
-              clothing={selectedClothing}
-              onClose={closeDetail}
-              onDelete={() => handleDelete(selectedClothing.id)}
-              onSendTo={selectedClothing.location === 'wardrobe' ? () => handleSendToStorage(selectedClothing) : () => handleSendToWardrobe(selectedClothing)}
-              onUpdate={() => handleUpdate(selectedClothing.id)}
-              sendToLabel={selectedClothing.location === 'wardrobe' ? 'Send to Storage' : 'Bring to Wardrobe'}
-            />
-          </div>
-        )
-      }
       <div className="grid mt-4 grid-cols-1 gap-4">
         <div className="p-4 bg-white shadow rounded w-full md:w-3/4 mx-auto">
           <h2 className="text-xl font-semibold">Wardrobe Breakdown</h2>
