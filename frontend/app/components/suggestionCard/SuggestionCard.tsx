@@ -55,7 +55,7 @@ const SuggestionCard = () => {
       </div>
       <Button
         onClick={loadNewOutfit}
-        className="btn btn-primary mt-4 w-full mx-15 px-24 py-2 bg-primary text-white font-semibold rounded-lg md:w-80 lg:w-80">
+        className="btn  w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-80 lg:w-80">
         Generate New
       </Button>
     </div>
