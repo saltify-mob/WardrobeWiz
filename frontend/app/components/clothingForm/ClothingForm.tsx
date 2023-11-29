@@ -285,7 +285,7 @@ const ClothingForm: React.FC<ClothingFormProps> = ({ id }) => {
 
         <Button
           type="submit"
-          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-80 lg:w-80"
+          className="btn w-full mx-15 px-24 py-2 bg-teal-900 text-white font-semibold rounded-lg md:w-100 lg:w-100"
         >
           Submit
         </Button>
