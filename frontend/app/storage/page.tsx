@@ -3,7 +3,6 @@
 import React from 'react';
 
 import StorageCard from '../components/storage/StorageCard';
-import Link from 'next/link';
 
 export default function Storage() {
   return (
