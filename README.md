@@ -16,7 +16,7 @@ WardrobeWiz is designed to transform the way users choose their daily outfits. B
 - **Azure Blob Storage:** WardrobeWiz utilizes Azure Storage as its primary image repository.
 
 ## Demo:
-[![Demo Video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=9SEmK6X6xzQ&t=25s)
+[![Demo Video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=9SEmK6X6xzQ)
 
 ## Technologies Used:
 - **Frontend:** Leveraging NextJS, TypeScript and Tailwind for creating a responsive and interactive user interface
